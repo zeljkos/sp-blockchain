@@ -1,0 +1,13 @@
+Phase 1 - Core Blockchain:
+  1. P2P Networking - Connect the 5 nodes
+  2. Simple Consensus - Basic voting mechanism
+  3. Block Synchronization - Shared chain state
+
+  Phase 2 - Settlement Logic:
+  4. ZKP Integration - Privacy-preserving proofs
+  5. Smart Contracts - Programmable settlement rules
+  6. MDBX Storage - High-performance database
+
+  Phase 3 - Production:
+  7. Security Hardening - Signatures, authentication
+  8. Monitoring - Metrics and observability

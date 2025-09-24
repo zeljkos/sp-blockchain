@@ -1,0 +1,29 @@
+FROM rust:1.83 as builder
+
+WORKDIR /app
+
+# Copy the entire Albatross workspace
+COPY . .
+
+# Build test client
+RUN cargo build --release --bin sp-bce-test-client || echo "Test client not built - will use curl for testing"
+
+# Runtime image
+FROM debian:bookworm-slim
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    curl \
+    jq \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy test scripts
+COPY docker/scripts/ /app/
+
+# Make scripts executable
+RUN chmod +x /app/*.sh
+
+WORKDIR /app
+
+CMD ["./run_consortium_tests.sh"]

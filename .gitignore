@@ -1,0 +1,91 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+
+# Cargo
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+data/
+rocksdb/
+
+# Docker
+.dockerignore
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Node modules (if any frontend)
+node_modules/
+npm-debug.log*
+
+# Build artifacts
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# ZKP setup files (these are usually large)
+*.ptau
+setup_*.bin
+proving_key_*
+verifying_key_*
+
+# Blockchain data
+blockchain_data/
+chain_data/
+
+# Test artifacts
+test-results/
+coverage/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+*.exe
+*.msi
+*.msm
+*.msp
+
+# Linux
+*.AppImage
+
+# Editor backups
+*~
+*.bak
+*.orig
+
+# Compiled binaries
+sp-blockchain
+target/

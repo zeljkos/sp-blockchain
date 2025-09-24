@@ -1,0 +1,79 @@
+  🎯 IMPLEMENTATION PLAN - CODEBASE TOUCH POINTS
+
+  📁 SP BLOCKCHAIN ZKP INTEGRATION ROADMAP
+  ════════════════════════════════════════════════════════════════════════════════
+
+  🔧 PHASE 1: ZKP SYSTEM INITIALIZATION
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  📍 FILES TO MODIFY:                                                        │
+  │     ├── src/main.rs                  - Add ZKP system to AppState           │
+  │     ├── src/simple_blockchain.rs     - Integrate ZKP into blockchain        │
+  │     └── Cargo.toml                   - Add ZKP dependencies (if missing)    │
+  │                                                                             │
+  │  🔨 CHANGES:                                                                │
+  │     ├── Initialize SettlementProofSystem on startup                        │
+  │     ├── Add ZKP system to shared application state                         │
+  │     └── Handle ZKP initialization errors gracefully                        │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          ▼
+  🧱 PHASE 2: BLOCKCHAIN INTEGRATION
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  📍 FILES TO MODIFY:                                                        │
+  │     ├── src/simple_blockchain.rs     - Add proof generation to BCE submit   │
+  │     ├── src/storage/mod.rs           - Store ZKP proofs in RocksDB         │
+  │     └── src/api_server.rs            - Update BceRecord struct             │
+  │                                                                             │
+  │  🔨 CHANGES:                                                                │
+  │     ├── Generate ZKP proof during BCE record processing                    │
+  │     ├── Verify proofs before adding blocks to chain                       │
+  │     ├── Store proofs with settlement blocks                               │
+  │     └── Update proof_verified field based on verification                 │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          ▼
+  🌐 PHASE 3: API ENDPOINT EXPANSION
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  📍 FILES TO MODIFY:                                                        │
+  │     ├── src/main.rs                  - Add new ZKP API routes              │
+  │     ├── src/security/middleware.rs   - Auth for ZKP endpoints              │
+  │     └── scripts/generate_bce_record.sh - Add --with-zkp-proof flag        │
+  │                                                                             │
+  │  🆕 NEW API ENDPOINTS:                                                      │
+  │     ├── POST /api/v1/zkp/generate     - Generate proof for data           │
+  │     ├── POST /api/v1/zkp/verify       - Verify submitted proof            │
+  │     ├── GET  /api/v1/zkp/stats        - ZKP system statistics             │
+  │     └── GET  /api/v1/zkp/setup        - Get verifying key for validators  │
+  └─────────────────────────────────────────────────────────────────────────────┘
+                                          │
+                                          ▼
+  📊 PHASE 4: METRICS & MONITORING
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  📍 FILES TO MODIFY:                                                        │
+  │     ├── src/main.rs                  - ZKP stats handler                   │
+  │     ├── scripts/read_blockchain_data_docker.sh - ZKP proof display        │
+  │     └── docker/docker-compose.yml    - ENV vars for ZKP config            │
+  │                                                                             │
+  │  📈 METRICS TO TRACK:                                                       │
+  │     ├── Total proofs generated                                             │
+  │     ├── Proof verification success rate                                    │
+  │     ├── Average proof generation time                                      │
+  │     └── ZKP circuit constraint count                                       │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  🔄 PHASE 5: ENHANCED PRIVACY FEATURES
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │  📍 FILES TO ENHANCE:                                                       │
+  │     ├── src/zkp/circuit.rs           - Add BCE-specific constraints        │
+  │     ├── src/zkp/settlement_proofs.rs - Rate validation circuits            │
+  │     └── src/api_server.rs            - Private field filtering             │
+  │                                                                             │
+  │  🔒 PRIVACY ENHANCEMENTS:                                                   │
+  │     ├── Hide individual usage amounts from blockchain                      │
+  │     ├── Prove billing calculations without revealing rates                 │
+  │     ├── Validate IMSI ranges without exposing customer IDs                │
+  │     └── Zero-knowledge operator balance proofs                             │
+  └─────────────────────────────────────────────────────────────────────────────┘
+
+  ---
+  🔧 DETAILED INTEGRATION POINTS

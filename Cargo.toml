@@ -1,0 +1,67 @@
+[package]
+name = "sp-blockchain"
+version = "1.1.1"
+edition = "2021"
+license = "MIT"
+
+[[bin]]
+name = "sp-bce-node"
+path = "src/main.rs"
+
+[[bin]]
+name = "simple-sp-node"
+path = "src/simple_main.rs"
+
+[[bin]]
+name = "trusted-setup-demo"
+path = "src/bin/trusted_setup_demo.rs"
+
+
+
+
+[dependencies]
+tokio = { version = "1.47", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+log = "0.4"
+env_logger = "0.10"
+thiserror = "2.0"
+hex = "0.4"
+clap = { version = "4.0", features = ["derive"] }
+axum = "0.7"
+tower = "0.5"
+tracing-subscriber = "0.3"
+chrono = { version = "0.4", features = ["serde"] }
+md5 = "0.7"
+rand = "0.8"
+tempfile = "3.0"
+# Using Blake2bHash from nimiq-hash instead
+
+# Core dependencies - extracted from Albatross
+blake2-rfc = "0.2.18"
+sha2 = "0.10"
+ed25519-dalek = "2.0"
+curve25519-dalek = "4.0"
+rocksdb = "0.21"
+
+# P2P Networking for real blockchain
+libp2p = { version = "0.54", features = ["tcp", "mdns", "noise", "yamux", "gossipsub", "identify", "kad", "tokio", "macros"] }
+futures = "0.3"
+async-trait = "0.1"
+
+# ZKP and Smart Contract dependencies
+ark-ff = "0.5"
+ark-ec = "0.5"
+ark-bn254 = "0.5"
+ark-groth16 = "0.5"
+ark-snark = "0.5"
+ark-serialize = "0.5"
+ark-std = "0.5"
+ark-r1cs-std = "0.5"
+ark-relations = "0.5"
+ark-crypto-primitives = "0.5"
+blst = "0.3"
+blstrs = "0.7"
+group = "0.13"
+pairing = "0.23"
+wasmtime = "28.0"
