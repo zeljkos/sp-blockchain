@@ -197,7 +197,7 @@ async fn get_blocks(
             "block_number": block.block_number,
             "block_hash": format!("{}", block.block_hash),
             "timestamp": block.timestamp,
-            "records_count": block.records.len(),
+            "records_count": block.record_count,
             "total_amount_cents": block.settlement_summary.total_amount_cents,
             "total_amount_eur": block.settlement_summary.total_amount_cents as f64 / 100.0,
             "operator_balances": block.settlement_summary.operator_balances,

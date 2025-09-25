@@ -209,16 +209,16 @@ impl SpAuthentication {
         sp.permissions.contains(permission)
     }
 
-    /// Authorize SP to submit records for specific network
-    pub fn authorize_bce_submission(&self, sp: &AuthenticatedSp, home_network: &str) -> Result<(), AuthenticationError> {
+    /// Authorize SP to submit records for specific network (realistic telecom roaming)
+    pub fn authorize_bce_submission(&self, sp: &AuthenticatedSp, visited_network: &str) -> Result<(), AuthenticationError> {
         if !self.check_permission(sp, &SpPermission::SubmitBceRecords) {
             return Err(AuthenticationError::AuthorizationDenied(
                 format!("SP {} lacks SubmitBceRecords permission", sp.provider_id)
             ));
         }
 
-        // SP can only submit records where they are the home network
-        let expected_home_network = match sp.provider_id.as_str() {
+        // SP can only submit records where they are the visited network (provider of service)
+        let expected_visited_network = match sp.provider_id.as_str() {
             "tmobile-de" => "T-Mobile-DE",
             "vodafone-uk" => "Vodafone-UK",
             "orange-fr" => "Orange-FR",
@@ -227,15 +227,15 @@ impl SpAuthentication {
             _ => return Err(AuthenticationError::UnknownProvider(sp.provider_id.clone())),
         };
 
-        if home_network != expected_home_network {
-            warn!("⚠️  SP {} attempted to submit records for {}, but can only submit for {}",
-                  sp.provider_id, home_network, expected_home_network);
+        if visited_network != expected_visited_network {
+            warn!("⚠️  SP {} attempted to submit records for visited network {}, but can only submit for {}",
+                  sp.provider_id, visited_network, expected_visited_network);
             return Err(AuthenticationError::AuthorizationDenied(
-                format!("SP {} can only submit records for {}", sp.provider_id, expected_home_network)
+                format!("SP {} can only submit records where they are the visited network: {}", sp.provider_id, expected_visited_network)
             ));
         }
 
-        info!("✅ Authorized {} to submit BCE records for {}", sp.provider_id, home_network);
+        info!("✅ Authorized {} to submit BCE records as visited network {}", sp.provider_id, visited_network);
         Ok(())
     }
 
@@ -320,11 +320,11 @@ mod tests {
         let auth = SpAuthentication::new_consortium();
         let sp = auth.authenticate_by_api_key("tmobile_api_key_2024_secure").unwrap();
 
-        // Should authorize T-Mobile to submit for T-Mobile-DE
+        // Should authorize T-Mobile to submit for T-Mobile-DE as visited network
         let result = auth.authorize_bce_submission(&sp, "T-Mobile-DE");
         assert!(result.is_ok());
 
-        // Should deny T-Mobile submitting for Vodafone
+        // Should deny T-Mobile submitting for Vodafone as visited network
         let result = auth.authorize_bce_submission(&sp, "Vodafone-UK");
         assert!(matches!(result, Err(AuthenticationError::AuthorizationDenied(_))));
     }

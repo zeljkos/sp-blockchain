@@ -71,6 +71,7 @@ pub enum SignatureType {
 }
 
 /// Cryptographic verifier for 5-party consortium operations
+#[derive(Clone)]
 pub struct CryptoVerifier {
     /// Valid consortium member IDs
     consortium_members: Vec<String>,
@@ -140,35 +141,35 @@ impl CryptoVerifier {
         }
     }
     
-    /// Verify ZKP CDR privacy proof
-    pub fn verify_cdr_privacy_proof(
+    /// Verify ZKP BCE privacy proof
+    pub fn verify_bce_privacy_proof(
         &self,
         proof_data: &[u8],
         public_inputs: &BCEPrivacyInputs,
     ) -> Result<bool> {
         if !self.zkp_enabled {
-            info!("⚠️  ZKP verification disabled - skipping CDR privacy proof check");
+            info!("⚠️  ZKP verification disabled - skipping BCE privacy proof check");
             return Ok(true);
         }
         
-        info!("🔒 Verifying CDR privacy ZKP proof...");
+        info!("🔒 Verifying BCE privacy ZKP proof...");
         
         // Validate input constraints
         self.validate_cdr_inputs(public_inputs)?;
         
-        // Simulate proof verification
-        if proof_data.len() < 192 {
-            error!("❌ CDR privacy proof too short: {} bytes", proof_data.len());
+        // Validate proof length for real Groth16 proofs
+        if proof_data.len() < 96 { // Real Groth16 proofs are ~96-128 bytes for BN254
+            error!("❌ BCE privacy proof too short: {} bytes", proof_data.len());
             return Err(CryptoError::InvalidProofFormat);
         }
         
         let verification_result = self.simulate_cdr_verification(public_inputs);
         
         if verification_result {
-            info!("✅ CDR privacy proof verified successfully");
+            info!("✅ BCE privacy proof verified successfully");
             Ok(true)
         } else {
-            error!("❌ CDR privacy proof verification failed");
+            error!("❌ BCE privacy proof verification failed");
             Err(CryptoError::ProofVerificationFailed)
         }
     }
@@ -295,7 +296,7 @@ impl CryptoVerifier {
         Ok(())
     }
     
-    /// Validate CDR privacy proof inputs
+    /// Validate BCE privacy proof inputs
     fn validate_cdr_inputs(&self, inputs: &BCEPrivacyInputs) -> Result<()> {
         // Validate usage amounts are reasonable
         if inputs.raw_call_minutes > 150_000 {
@@ -319,7 +320,7 @@ impl CryptoVerifier {
             return Err(CryptoError::ProofVerificationFailed);
         }
         
-        info!("✅ CDR privacy proof inputs validated");
+        info!("✅ BCE privacy proof inputs validated");
         Ok(())
     }
     
@@ -342,17 +343,15 @@ impl CryptoVerifier {
         actual_vs_expected_diff <= tolerance
     }
     
-    /// Simulate CDR privacy proof verification (replace with real ZKP verification)
+    /// Simulate BCE privacy proof verification (replace with real ZKP verification)
     fn simulate_cdr_verification(&self, inputs: &BCEPrivacyInputs) -> bool {
-        // Simulate verification of CDR calculation
-        let domestic_charges = inputs.raw_call_minutes * inputs.call_rate_cents +
-                              inputs.raw_data_mb * inputs.data_rate_cents +
-                              inputs.raw_sms_count * inputs.sms_rate_cents;
-        
-        let roaming_charges = inputs.roaming_minutes * inputs.roaming_rate_cents +
-                             inputs.roaming_data_mb * inputs.roaming_data_rate_cents;
-        
-        let calculated_total = domestic_charges + roaming_charges;
+        // Simulate verification of realistic roaming CDR calculation
+        // In real roaming: subscriber uses foreign network, pays roaming rates for ALL usage
+        let roaming_call_charges = inputs.raw_call_minutes * inputs.call_rate_cents;
+        let roaming_data_charges = inputs.raw_data_mb * inputs.data_rate_cents;
+        let roaming_sms_charges = inputs.raw_sms_count * inputs.sms_rate_cents;
+
+        let calculated_total = roaming_call_charges + roaming_data_charges + roaming_sms_charges;
         
         // Verify total charges match calculation
         calculated_total == inputs.total_charges_cents

@@ -208,6 +208,26 @@ pub async fn authorization_middleware(
             // Health endpoint is public
             true
         }
+        path if path.contains("/dashboard") => {
+            // All authenticated SPs can access dashboard
+            true
+        }
+        path if path.contains("/api/v1/contracts/deploy") => {
+            // All authenticated SPs can deploy smart contracts
+            true
+        }
+        path if path.contains("/api/v1/contracts/list") => {
+            // All authenticated SPs can list smart contracts
+            true
+        }
+        path if path.contains("/api/v1/contracts/execute") => {
+            // All authenticated SPs can execute smart contracts
+            true
+        }
+        path if path.contains("/api/v1/contracts/stats") => {
+            // All authenticated SPs can view smart contract stats
+            true
+        }
         _ => {
             // Unknown endpoint - deny by default
             false

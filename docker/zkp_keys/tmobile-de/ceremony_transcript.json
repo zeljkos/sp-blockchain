@@ -1,7 +1,7 @@
 {
-  "ceremony_id": "sp-5node-consortium-1758715078",
-  "start_time": 1758715078,
-  "end_time": 1758715078,
+  "ceremony_id": "sp-5node-consortium-1758813970",
+  "start_time": 1758813970,
+  "end_time": 1758813970,
   "participants": [
     "T-Mobile-DE",
     "Vodafone-UK",
@@ -13,17 +13,17 @@
     {
       "participant_id": "5Node-Bootstrap-Coordinator",
       "circuit_id": "cdr_privacy",
-      "contribution_hash": "b4716d6d727d86d5aabc0d06795f280b9d74d0bcf70d081ff15338007c568868",
+      "contribution_hash": "915bf574e6f17b626574080c6ecc134585b20462cb2d914d38bf690592a8abfa",
       "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-      "timestamp": 1758715078,
+      "timestamp": 1758813970,
       "signature": []
     },
     {
       "participant_id": "5Node-Bootstrap-Coordinator",
       "circuit_id": "settlement_calculation",
-      "contribution_hash": "2233790a156726c6e0eab1b3921343665d4180e7ed356f79c71175c5c08c830c",
+      "contribution_hash": "4a947a5d757c116d0df117ce146c4308636218336f2e102dcd7fdee7348bdcd9",
       "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
-      "timestamp": 1758715078,
+      "timestamp": 1758813970,
       "signature": []
     }
   ],

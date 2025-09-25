@@ -1,0 +1,29 @@
+> is too big of a change?
+
+● You're absolutely right! That's a pretty big structural change that would require updating:
+
+  1. Database schema - RocksDB storage format changes
+  2. API endpoints - Request/response formats
+  3. Existing data - Migration of current records
+  4. Serialization - All JSON parsing would need updates
+  5. Smart contracts - Settlement logic updates
+  6. Tests - All existing tests would break
+
+  💡 Simpler Alternative Approach:
+
+  Instead of changing the core BceRecord structure, we could add a separate settlement tracking table/collection:
+
+  // Separate settlement tracking - no changes to BceRecord
+  pub struct SettlementRecord {
+      pub settlement_id: String,
+      pub bce_record_ids: Vec<String>,  // Which BCE records were settled
+      pub settlement_block: String,
+      pub timestamp: u64,
+      pub status: SettlementStatus,
+  }
+
+  This way:
+  - ✅ No breaking changes to existing BceRecord structure
+  - ✅ Existing data remains compatible
+  - ✅ APIs don't need updates
+  - ✅ Simple check before settlement: "Has this BCE record ID been settled before?"

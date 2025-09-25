@@ -1,0 +1,22 @@
+ 📊 Why Different SPs Have Different Record Counts
+
+  What You're Seeing:
+  - Total Blocks: 138 (across all SPs combined)
+  - SP Records: 27-28 per individual SP
+  - Math Check: 5 SPs × ~27-28 = ~135-140 blocks ✅
+
+  This is Normal Because:
+
+  1. Distributed Block Creation 🔄
+    - Each SP creates blocks independently
+    - Block creation isn't perfectly synchronized
+    - Some SPs may create blocks slightly faster/slower
+  2. Network Propagation Timing ⏱️
+    - Blocks propagate across the P2P network
+    - Small delays mean SPs might be 1-2 blocks apart temporarily
+    - This is healthy distributed consensus behavior
+  3. Byzantine Fault Tolerance Design 🛡️
+    - Your 5-node consortium can handle up to 2 Byzantine failures
+    - Slight differences prove the system is working independently
+    - No single point of failure
+

@@ -1,0 +1,16 @@
+
+  How It Works:
+  - Global View: Available to all users (health data only)
+  - Individual SP View: Requires API key authentication
+  - Protected Endpoints: BCE records, settlement blocks, smart contracts
+  - Authentication Flow: Modal → API key → Node validation → Access granted
+
+  API Key Storage:
+  - Keys stored only in memory during session
+  - No persistent storage in browser/localStorage
+  - Keys cleared when page refreshed
+
+  Access Control:
+  - Follows same pattern as scripts/read_blockchain_data_docker.sh:243,273
+  - Uses Bearer token authentication with SP-specific keys
+  - Validates against actual SP node endpoints

@@ -112,7 +112,7 @@ impl SPBlockchain {
         println!("⚖️  Consensus system initialized with {} validators", validators.len());
 
         // Initialize ZKP system
-        let zkp_system = SettlementProofSystem::new()?;
+        let zkp_system = SettlementProofSystem::new(&node_id)?;
         println!("🛡️  ZKP system initialized");
 
         // Initialize smart contracts
@@ -159,9 +159,9 @@ impl SPBlockchain {
             pending.insert(record.record_id.clone(), record.clone());
         }
 
-        // Broadcast to other validators via P2P
-        self.broadcast_bce_record(record).await?;
-        println!("📡 Record broadcasted to validator network");
+        // BCE records are local ingestion data - do NOT broadcast
+        // Only settlement blocks should be broadcast to the consortium
+        println!("💾 Record stored locally (BCE records are not broadcast)");
 
         Ok(record.record_id)
     }

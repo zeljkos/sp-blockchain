@@ -1,25 +1,25 @@
 services:
-  # Deutsche Telekom (T-Mobile DE) - Primary Bootstrap Node
+  # T-Mobile DE (Bootstrap Node - Leader)
   sp-tmobile-de:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     container_name: sp-tmobile-de
-    hostname: tmobile-de.sp-consortium.local
     ports:
       - "8081:8080"  # API port
-      - "30301:30303"  # P2P port (using default 30303 internally)
+      - "30301:30303"  # P2P port
     environment:
       - NODE_ID=tmobile-de
       - SETTLEMENT_THRESHOLD_EUR=100.0
       - API_HOST=0.0.0.0
       - API_PORT=8080
       - P2P_PORT=30303
+      - BOOTSTRAP_PEERS=""
     volumes:
       - ./persistent_data/tmobile-de:/app/data
       - ./zkp_keys/tmobile-de:/app/zkp_keys:ro
     networks:
-      - sp_consortium
+      - sp_network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -27,13 +27,12 @@ services:
       retries: 3
       start_period: 40s
 
-  # Vodafone UK - Secondary Bootstrap Node
+  # Vodafone UK
   sp-vodafone-uk:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     container_name: sp-vodafone-uk
-    hostname: vodafone-uk.sp-consortium.local
     ports:
       - "8082:8080"  # API port
       - "30302:30303"  # P2P port
@@ -48,7 +47,7 @@ services:
       - ./persistent_data/vodafone-uk:/app/data
       - ./zkp_keys/vodafone-uk:/app/zkp_keys:ro
     networks:
-      - sp_consortium
+      - sp_network
     depends_on:
       - sp-tmobile-de
     healthcheck:
@@ -58,13 +57,12 @@ services:
       retries: 3
       start_period: 40s
 
-  # Orange France
+  # Orange FR
   sp-orange-fr:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     container_name: sp-orange-fr
-    hostname: orange-fr.sp-consortium.local
     ports:
       - "8083:8080"  # API port
       - "30303:30303"  # P2P port
@@ -79,7 +77,7 @@ services:
       - ./persistent_data/orange-fr:/app/data
       - ./zkp_keys/orange-fr:/app/zkp_keys:ro
     networks:
-      - sp_consortium
+      - sp_network
     depends_on:
       - sp-tmobile-de
       - sp-vodafone-uk
@@ -90,13 +88,12 @@ services:
       retries: 3
       start_period: 40s
 
-  # Telenor Norway
+  # Telenor NO
   sp-telenor-no:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     container_name: sp-telenor-no
-    hostname: telenor-no.sp-consortium.local
     ports:
       - "8084:8080"  # API port
       - "30304:30303"  # P2P port
@@ -106,15 +103,16 @@ services:
       - API_HOST=0.0.0.0
       - API_PORT=8080
       - P2P_PORT=30303
-      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303
+      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303
     volumes:
       - ./persistent_data/telenor-no:/app/data
       - ./zkp_keys/telenor-no:/app/zkp_keys:ro
     networks:
-      - sp_consortium
+      - sp_network
     depends_on:
       - sp-tmobile-de
       - sp-vodafone-uk
+      - sp-orange-fr
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -122,13 +120,12 @@ services:
       retries: 3
       start_period: 40s
 
-  # SFR France (Altice)
+  # SFR FR
   sp-sfr-fr:
     build:
       context: ../
       dockerfile: docker/Dockerfile
     container_name: sp-sfr-fr
-    hostname: sfr-fr.sp-consortium.local
     ports:
       - "8085:8080"  # API port
       - "30305:30303"  # P2P port
@@ -138,16 +135,17 @@ services:
       - API_HOST=0.0.0.0
       - API_PORT=8080
       - P2P_PORT=30303
-      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303
+      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303,sp-telenor-no:30303
     volumes:
       - ./persistent_data/sfr-fr:/app/data
       - ./zkp_keys/sfr-fr:/app/zkp_keys:ro
     networks:
-      - sp_consortium
+      - sp_network
     depends_on:
       - sp-tmobile-de
       - sp-vodafone-uk
       - sp-orange-fr
+      - sp-telenor-no
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -155,55 +153,13 @@ services:
       retries: 3
       start_period: 40s
 
-  # BCE Settlement Test Client
-  sp-bce-test-client:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile.test
-    container_name: sp-bce-test-client
-    depends_on:
-      - sp-tmobile-de
-      - sp-vodafone-uk
-      - sp-orange-fr
-      - sp-telenor-no
-      - sp-sfr-fr
-    networks:
-      - sp_consortium
-    command: |
-      sh -c "
-        echo 'Waiting for SP consortium nodes to be ready...'
-        sleep 60
-        echo 'Running SP BCE consortium settlement tests...'
-        echo 'Testing roaming settlement between:'
-        echo '  - T-Mobile DE (172.25.0.11:8080)'
-        echo '  - Vodafone UK (172.25.0.12:8080)'
-        echo '  - Orange FR (172.25.0.13:8080)'
-        echo '  - Telenor NO (172.25.0.14:8080)'
-        echo '  - SFR FR (172.25.0.15:8080)'
-        ./run_consortium_tests.sh
-      "
-
-  # Network Monitor Dashboard (optional)
-  sp-consortium-monitor:
-    image: nginx:alpine
-    container_name: sp-consortium-monitor
-    ports:
-      - "8080:80"
-    volumes:
-      - ./monitor:/usr/share/nginx/html:ro
-    networks:
-      - sp_consortium
-    depends_on:
-      - sp-tmobile-de
-      - sp-vodafone-uk
-      - sp-orange-fr
-      - sp-telenor-no
-      - sp-sfr-fr
-
-# Host-mounted persistent storage for MDBX blockchain data
-# Each SP operator maintains separate data directory
-# Data survives container restarts and rebuilds
-
 networks:
-  sp_consortium:
+  sp_network:
     driver: bridge
+
+volumes:
+  sp_data_tmobile_de:
+  sp_data_vodafone_uk:
+  sp_data_orange_fr:
+  sp_data_telenor_no:
+  sp_data_sfr_fr:

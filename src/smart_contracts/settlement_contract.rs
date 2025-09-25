@@ -78,7 +78,7 @@ pub enum DisputeStatus {
 }
 
 /// Result of contract execution
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct ContractResult {
     pub success: bool,
     pub message: String,
@@ -89,7 +89,7 @@ pub struct ContractResult {
 }
 
 /// Actions required from contract execution
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub enum ContractAction {
     TransferFunds { from: String, to: String, amount: u64 },
     CreateSettlement { settlement_id: String, amount: u64 },
@@ -210,7 +210,7 @@ impl SettlementContract {
 
         // Validation 4: Verify ZKP proof if provided
         if let Some(proof) = zkp_proof {
-            let zkp_system = SettlementProofSystem::new().expect("ZKP system initialization failed");
+            let zkp_system = SettlementProofSystem::new("settlement-validator").expect("ZKP system initialization failed");
             match zkp_system.verify_proof(&proof) {
                 Ok(true) => println!("✅ ZKP proof verification successful"),
                 Ok(false) => {

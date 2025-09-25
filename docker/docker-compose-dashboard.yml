@@ -1,0 +1,18 @@
+services:
+  # SP Dashboard with reverse proxy to blockchain nodes
+  sp-dashboard:
+    image: nginx:alpine
+    container_name: sp-dashboard
+    ports:
+      - "8080:80"  # Dashboard web interface
+    volumes:
+      - ../dashboard:/usr/share/nginx/html:ro
+      - ./dashboard-nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - sp_network
+    restart: unless-stopped
+
+networks:
+  sp_network:
+    external:
+      name: docker_sp_network

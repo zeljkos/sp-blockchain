@@ -63,6 +63,7 @@ verifying_key_*
 # Blockchain data
 blockchain_data/
 chain_data/
+persistent_data/
 
 # Test artifacts
 test-results/

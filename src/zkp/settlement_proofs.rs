@@ -53,19 +53,28 @@ pub struct ProofParameters {
 }
 
 impl SettlementProofSystem {
-    /// Initialize the proof system with trusted setup
-    pub fn new() -> Result<Self, ZkpError> {
-        println!("🔐 Initializing ZKP settlement proof system...");
+    /// Initialize the proof system with trusted setup keys from disk
+    pub fn new(provider_name: &str) -> Result<Self, ZkpError> {
+        println!("🔐 Initializing ZKP settlement proof system for {}...", provider_name);
 
-        // Create a dummy circuit for setup
-        let circuit = SettlementCircuit::new_dummy();
+        // Load the same trusted setup keys used for proof generation
+        let keys_dir = "/app/zkp_keys";
+        let pk_path = format!("{}/cdr_privacy.pk", keys_dir);
+        let vk_path = format!("{}/cdr_privacy.vk", keys_dir);
 
-        // Generate proving and verifying keys (simplified trusted setup)
-        let rng = &mut ark_std::rand::thread_rng();
-        let (pk, vk) = Groth16::<Bn254>::circuit_specific_setup(circuit, rng)
-            .map_err(|e| ZkpError::SetupFailed(format!("Setup failed: {:?}", e)))?;
+        // Load proving key
+        let pk_bytes = std::fs::read(&pk_path)
+            .map_err(|e| ZkpError::SetupFailed(format!("Failed to load proving key from {}: {}", pk_path, e)))?;
+        let pk = ProvingKey::<Bn254>::deserialize_compressed(&pk_bytes[..])
+            .map_err(|e| ZkpError::SetupFailed(format!("Proving key deserialization failed: {:?}", e)))?;
 
-        println!("✅ ZKP trusted setup completed");
+        // Load verifying key
+        let vk_bytes = std::fs::read(&vk_path)
+            .map_err(|e| ZkpError::SetupFailed(format!("Failed to load verifying key from {}: {}", vk_path, e)))?;
+        let vk = VerifyingKey::<Bn254>::deserialize_compressed(&vk_bytes[..])
+            .map_err(|e| ZkpError::SetupFailed(format!("Verifying key deserialization failed: {:?}", e)))?;
+
+        println!("✅ ZKP trusted setup loaded from {} keys", provider_name);
 
         let mut initial_metrics = ZkpMetrics::default();
         initial_metrics.system_start_time = chrono::Utc::now().timestamp() as u64;
@@ -458,7 +467,7 @@ impl SettlementProofSystem {
 
 impl Default for SettlementProofSystem {
     fn default() -> Self {
-        Self::new().expect("ZKP system initialization failed")
+        Self::new("default").expect("ZKP system initialization failed")
     }
 }
 
@@ -489,7 +498,7 @@ mod tests {
 
     #[test]
     fn test_settlement_proof_system() {
-        let zkp_system = SettlementProofSystem::new().unwrap();
+        let zkp_system = SettlementProofSystem::new("test-provider").unwrap();
 
         let params = ProofParameters {
             total_amount_cents: 10000,

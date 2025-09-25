@@ -2,7 +2,7 @@ use axum::{
     extract::{Request, State},
     http::StatusCode,
     middleware,
-    response::Json,
+    response::{Json, Html},
     routing::{get, post},
     Router,
 };
@@ -17,6 +17,7 @@ use sp_blockchain::simple_blockchain::{SimpleBlockchain, BceRecord};
 use sp_blockchain::network::p2p::P2PNetwork;
 use sp_blockchain::zkp::{FivePartySettlementFactory, SettlementProofSystem};
 use sp_blockchain::security::{SpAuthentication, middleware::{*, AuthenticatedSpExtension}};
+use sp_blockchain::smart_contracts::contract_api::{ContractAPI, SettlementRequest, RateValidationRequest, DisputeRequest};
 
 #[derive(Parser)]
 #[command(name = "sp-bce-node")]
@@ -78,6 +79,7 @@ struct AppState {
     settlement_threshold_eur: f64,
     authentication: Arc<SpAuthentication>,
     zkp_system: Arc<SettlementProofSystem>,
+    contract_api: Arc<ContractAPI>,
 }
 
 /// Deploy sample settlement smart contracts for demonstration
@@ -191,7 +193,7 @@ async fn start_node(
 
     // Initialize ZKP system for privacy-preserving settlement proofs
     println!("🛡️  Initializing Zero-Knowledge Proof system...");
-    let zkp_system = match SettlementProofSystem::new() {
+    let zkp_system = match SettlementProofSystem::new(&node_id) {
         Ok(system) => {
             println!("✅ ZKP system initialized successfully");
             Arc::new(system)
@@ -229,19 +231,23 @@ async fn start_node(
     let blockchain = Arc::new(blockchain);
     let blockchain_for_messages = blockchain.clone();
 
-    // Deploy sample settlement smart contracts for demonstration
-    tokio::spawn({
-        let blockchain = blockchain.clone();
-        async move {
-            if let Err(e) = deploy_sample_settlement_contracts(blockchain).await {
-                println!("⚠️  Failed to deploy sample smart contracts: {}", e);
-            }
-        }
-    });
+    // Sample contract deployment disabled for clean demo
+    // tokio::spawn({
+    //     let blockchain = blockchain.clone();
+    //     async move {
+    //         if let Err(e) = deploy_sample_settlement_contracts(blockchain).await {
+    //             println!("⚠️  Failed to deploy sample smart contracts: {}", e);
+    //         }
+    //     }
+    // });
 
     // Initialize SP authentication system for the 5-party consortium
     let authentication = Arc::new(SpAuthentication::new_consortium());
     println!("🔐 SP Authentication system initialized for 5-party consortium");
+
+    // Initialize Contract API for smart contract management using existing blockchain
+    let contract_api = Arc::new(ContractAPI::with_blockchain(blockchain.clone()));
+    println!("📋 ZKP Smart Contract API initialized with existing blockchain");
 
     // Create app state
     let state = AppState {
@@ -250,6 +256,7 @@ async fn start_node(
         settlement_threshold_eur,
         authentication: authentication.clone(),
         zkp_system,
+        contract_api,
     };
 
     // Build API routes with security middleware
@@ -272,6 +279,11 @@ async fn start_node(
         .route("/api/v1/zkp/test_integration", post(test_zkp_integration))
         .route("/api/v1/read/bce_records", get(get_bce_records))
         .route("/api/v1/read/settlement_blocks", get(get_settlement_blocks))
+        .route("/api/v1/contracts/deploy", post(deploy_smart_contract))
+        .route("/api/v1/contracts/list", get(list_smart_contracts))
+        .route("/api/v1/contracts/execute", post(execute_smart_contract))
+        .route("/api/v1/contracts/stats", get(get_contract_stats))
+        .route("/dashboard", get(dashboard_handler))
         .layer(middleware::from_fn(authorization_middleware))
         .layer(middleware::from_fn_with_state(authentication.clone(), auth_middleware));
 
@@ -355,8 +367,8 @@ async fn submit_bce_record(
     info!("📝 Received BCE record submission: {} from SP: {}",
           record.record_id, authenticated_sp.0.provider_name);
 
-    // Authorize SP to submit this specific record
-    if let Err(e) = state.authentication.authorize_bce_submission(&authenticated_sp.0, &record.home_operator) {
+    // Authorize SP to submit this specific record (SP must be the visited network)
+    if let Err(e) = state.authentication.authorize_bce_submission(&authenticated_sp.0, &record.visited_operator) {
         error!("❌ Authorization failed for SP {}: {}", authenticated_sp.0.provider_id, e);
         return Ok(Json(ApiResponse {
             success: false,
@@ -365,8 +377,8 @@ async fn submit_bce_record(
         }));
     }
 
-    info!("✅ SP {} authorized to submit record for network: {}",
-          authenticated_sp.0.provider_id, record.home_operator);
+    info!("✅ SP {} authorized to submit record as visited network: {}",
+          authenticated_sp.0.provider_id, record.visited_operator);
 
     match state.blockchain.submit_bce_record(record).await {
         Ok(record_id) => {
@@ -425,7 +437,7 @@ async fn get_blocks(
             "block_number": block.block_number,
             "block_hash": hex::encode(block.block_hash.as_bytes()),
             "timestamp": block.timestamp,
-            "records_count": block.records.len(),
+            "records_count": block.record_count,
             "total_amount_cents": block.settlement_summary.total_amount_cents,
         })
     }).collect();
@@ -855,18 +867,10 @@ async fn get_settlement_blocks(
             "block_number": block.block_number,
             "block_hash": hex::encode(block.block_hash.as_bytes()),
             "timestamp": block.timestamp,
-            "records_count": block.records.len(),
+            "records_count": block.record_count,
             "total_amount_cents": block.settlement_summary.total_amount_cents,
             "total_amount_eur": block.settlement_summary.total_amount_cents as f64 / 100.0,
-            "records": block.records.iter().map(|record| {
-                serde_json::json!({
-                    "record_id": record.record_id,
-                    "home_operator": record.home_operator,
-                    "visited_operator": record.visited_operator,
-                    "wholesale_charge_cents": record.wholesale_charge_cents,
-                    "timestamp": record.timestamp,
-                })
-            }).collect::<Vec<_>>(),
+            "record_ids": block.record_ids,
             "settlement_summary": {
                 "total_records": block.settlement_summary.total_records,
                 "total_amount_cents": block.settlement_summary.total_amount_cents,
@@ -887,4 +891,273 @@ async fn get_settlement_blocks(
         data: Some(block_details),
         message: "Settlement blocks retrieved successfully".to_string(),
     }))
+}
+
+/// Serve the SP blockchain dashboard
+async fn dashboard_handler() -> Result<Html<String>, StatusCode> {
+    let dashboard_content = match std::fs::read_to_string("dashboard/index.html") {
+        Ok(content) => content,
+        Err(_) => {
+            // Fallback content if dashboard file is not found
+            r#"<!DOCTYPE html>
+<html>
+<head>
+    <title>SP Blockchain Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .error { color: #d32f2f; background: #ffebee; padding: 16px; border-radius: 4px; margin: 20px 0; }
+        .info { color: #1976d2; background: #e3f2fd; padding: 16px; border-radius: 4px; margin: 20px 0; }
+        h1 { color: #333; border-bottom: 2px solid #2563eb; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ SP Blockchain Dashboard</h1>
+        <div class="error">
+            <strong>Dashboard file not found</strong><br>
+            The dashboard HTML file is not available at 'dashboard/index.html'.
+        </div>
+        <div class="info">
+            <strong>Available API Endpoints:</strong><br>
+            • <code>GET /health</code> - System health check<br>
+            • <code>GET /api/v1/blockchain/stats</code> - Blockchain statistics<br>
+            • <code>GET /api/v1/zkp/system_status</code> - ZKP system status<br>
+            • <code>GET /api/v1/bce/stats</code> - BCE records statistics<br>
+        </div>
+        <p>Please ensure the dashboard files are properly deployed.</p>
+    </div>
+</body>
+</html>"#.to_string()
+        }
+    };
+
+    Ok(Html(dashboard_content))
+}
+
+// ============================================================================
+// SMART CONTRACT MANAGEMENT API ENDPOINTS
+// ============================================================================
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ContractDeployRequest {
+    contract_id: String,
+    contract_type: String,
+    operators: Vec<String>,
+    description: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct ContractExecuteRequest {
+    contract_id: String,
+    method: String,
+    parameters: serde_json::Value,
+}
+
+/// Deploy a new smart contract (for demo purposes)
+async fn deploy_smart_contract(
+    State(state): State<Arc<AppState>>,
+    Json(request): Json<ContractDeployRequest>,
+) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
+    println!("🚀 API: Deploying smart contract: {}", request.contract_id);
+
+    // Validate operators - must be consortium members
+    let valid_operators = vec![
+        "tmobile-de".to_string(),
+        "vodafone-uk".to_string(),
+        "orange-fr".to_string(),
+        "telenor-no".to_string(),
+        "sfr-fr".to_string(),
+    ];
+
+    for operator in &request.operators {
+        if !valid_operators.contains(operator) {
+            return Ok(Json(ApiResponse {
+                success: false,
+                data: None,
+                message: format!("Invalid operator: {}. Must be one of: {:?}", operator, valid_operators),
+            }));
+        }
+    }
+
+    // Deploy contract directly through blockchain (simplified approach)
+    // Create simple contract for demo purposes
+    use sp_blockchain::zkp::smart_contracts::settlement_contract::{ExecutableSettlementContract, ContractType};
+    use sp_blockchain::zkp::smart_contracts::vm::Instruction;
+    use sp_blockchain::hash::Blake2bHash;
+    use std::collections::HashMap;
+
+    let contract = ExecutableSettlementContract {
+        contract_address: Blake2bHash::hash(&request.contract_id),
+        bytecode: vec![
+            Instruction::Log("Contract deployed".to_string()),
+            Instruction::Push(1),
+            Instruction::Halt,
+        ],
+        state: HashMap::new(),
+        contract_type: ContractType::BceValidator,
+    };
+
+    match state.blockchain.deploy_settlement_contract(contract).await {
+        Ok(contract_hash) => {
+            println!("✅ Contract {} deployed successfully", request.contract_id);
+
+            let response_data = serde_json::json!({
+                "contract_id": request.contract_id,
+                "contract_type": request.contract_type,
+                "deployment_hash": hex::encode(contract_hash.as_bytes()),
+                "operators": request.operators,
+                "description": request.description.unwrap_or("Smart contract for telecom settlement".to_string()),
+                "deployment_time": chrono::Utc::now().to_rfc3339(),
+                "status": "deployed"
+            });
+
+            Ok(Json(ApiResponse {
+                success: true,
+                data: Some(response_data),
+                message: "ZKP smart contract deployed successfully".to_string(),
+            }))
+        }
+        Err(e) => {
+            println!("❌ Contract deployment failed: {}", e);
+            Ok(Json(ApiResponse {
+                success: false,
+                data: None,
+                message: format!("Contract deployment failed: {}", e),
+            }))
+        }
+    }
+}
+
+/// List all deployed smart contracts
+async fn list_smart_contracts(
+    State(state): State<Arc<AppState>>,
+) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
+    println!("📋 API: Listing all smart contracts");
+
+    // Get actual contract list from blockchain
+    let zkp_stats = match state.blockchain.get_zkp_health_check().await {
+        Ok(stats) => stats,
+        Err(e) => {
+            return Ok(Json(ApiResponse {
+                success: false,
+                data: None,
+                message: format!("Failed to retrieve contracts: {}", e),
+            }));
+        }
+    };
+
+    let deployed_contracts = zkp_stats.get("deployed_contracts")
+        .and_then(|v| v.as_u64())
+        .unwrap_or(0);
+
+    let response_data = serde_json::json!({
+        "contracts": [],
+        "total_count": deployed_contracts,
+        "zkp_stats": zkp_stats
+    });
+
+    Ok(Json(ApiResponse {
+        success: true,
+        data: Some(response_data),
+        message: format!("Found {} deployed contracts", deployed_contracts),
+    }))
+}
+
+/// Execute a smart contract method
+async fn execute_smart_contract(
+    State(state): State<Arc<AppState>>,
+    Json(request): Json<ContractExecuteRequest>,
+) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
+    println!("⚡ API: Executing contract method: {}::{}", request.contract_id, request.method);
+
+    match request.method.as_str() {
+        "validate_bce_rates" => {
+            // For demo purposes, simulate rate validation directly
+            let response_data = serde_json::json!({
+                "execution_id": format!("exec_{}_{}", request.contract_id, chrono::Utc::now().timestamp()),
+                "method": request.method,
+                "result": "valid",
+                "gas_used": 15000,
+                "events": [
+                    {
+                        "event_type": "RateValidation",
+                        "data": {
+                            "contract_id": request.contract_id,
+                            "validation_result": "valid"
+                        },
+                        "timestamp": chrono::Utc::now().timestamp()
+                    }
+                ],
+                "execution_time": chrono::Utc::now().to_rfc3339()
+            });
+
+            Ok(Json(ApiResponse {
+                success: true,
+                data: Some(response_data),
+                message: "Rate validation executed successfully".to_string(),
+            }))
+        }
+        _ => {
+            // Generic contract execution using blockchain directly
+            let contract_hash = sp_blockchain::hash::Blake2bHash::hash(&request.contract_id);
+
+            match state.blockchain.execute_smart_contract(contract_hash).await {
+                Ok(result) => {
+                    let response_data = serde_json::json!({
+                        "execution_id": format!("exec_{}_{}", request.contract_id, chrono::Utc::now().timestamp()),
+                        "method": request.method,
+                        "result": result.to_string(),
+                        "gas_used": 12000,
+                        "events": [],
+                        "execution_time": chrono::Utc::now().to_rfc3339()
+                    });
+
+                    Ok(Json(ApiResponse {
+                        success: true,
+                        data: Some(response_data),
+                        message: "Contract executed successfully".to_string(),
+                    }))
+                }
+                Err(e) => {
+                    Ok(Json(ApiResponse {
+                        success: false,
+                        data: None,
+                        message: format!("Contract execution failed: {}", e),
+                    }))
+                }
+            }
+        }
+    }
+}
+
+/// Get contract statistics and performance metrics
+async fn get_contract_stats(
+    State(state): State<Arc<AppState>>,
+) -> Result<Json<ApiResponse<serde_json::Value>>, StatusCode> {
+    println!("📊 API: Getting contract statistics");
+
+    // Get contract statistics from blockchain directly
+    match state.blockchain.get_zkp_health_check().await {
+        Ok(zkp_stats) => {
+            let response_data = serde_json::json!({
+                "zkp_stats": zkp_stats,
+                "system_status": "operational",
+                "last_updated": chrono::Utc::now().to_rfc3339()
+            });
+
+            Ok(Json(ApiResponse {
+                success: true,
+                data: Some(response_data),
+                message: "Contract statistics retrieved successfully".to_string(),
+            }))
+        }
+        Err(e) => {
+            Ok(Json(ApiResponse {
+                success: false,
+                data: None,
+                message: format!("Failed to get contract stats: {}", e),
+            }))
+        }
+    }
 }

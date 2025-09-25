@@ -194,28 +194,25 @@ impl<F: PrimeField> ConstraintSynthesizer<F> for BCEPrivacyCircuit<F> {
             self.consortium_id.ok_or(SynthesisError::AssignmentMissing)
         })?;
 
-        // Constraint 1: Calculate total charges from all CDR components (enhanced for 5-party)
-        // total_charges = domestic_charges + roaming_charges
-        let domestic_call_charges = &call_minutes * &call_rate;
-        let domestic_data_charges = &data_mb * &data_rate;
-        let domestic_sms_charges = &sms_count * &sms_rate;
-        let roaming_call_charges = &roaming_minutes * &roaming_rate;
-        let roaming_data_charges = &roaming_data_mb * &roaming_data_rate;
+        // Constraint 1: Calculate total roaming charges (realistic telecom roaming)
+        // In real roaming: subscriber uses foreign network, pays roaming rates for ALL usage
+        let roaming_call_charges = &call_minutes * &call_rate;
+        let roaming_data_charges = &data_mb * &data_rate;
+        let roaming_sms_charges = &sms_count * &sms_rate;
 
-        let total_domestic = &domestic_call_charges + &domestic_data_charges + &domestic_sms_charges;
-        let total_roaming = &roaming_call_charges + &roaming_data_charges;
-        let calculated_total = &total_domestic + &total_roaming;
+        // Total charges = sum of all roaming usage (no domestic charges in roaming scenario)
+        let calculated_total = &roaming_call_charges + &roaming_data_charges + &roaming_sms_charges;
 
         // Enforce that calculated total equals public total
         total_charges.enforce_equal(&calculated_total)?;
 
         // Constraint 2: Enhanced Security Range Checks for 5-Party Consortium
-        // Domestic usage limits
-        enforce_range_check(cs.clone(), &call_minutes, 150_000, 18, "call_minutes")?; // Increased for consortium
-        enforce_range_check(cs.clone(), &data_mb, 2_000_000, 21, "data_mb")?; // Up to 2TB for enterprise
-        enforce_range_check(cs.clone(), &sms_count, 200_000, 18, "sms_count")?;
+        // Roaming usage limits (realistic limits for international roaming)
+        enforce_range_check(cs.clone(), &call_minutes, 50_000, 16, "roaming_call_minutes")?; // Up to 50k minutes roaming
+        enforce_range_check(cs.clone(), &data_mb, 500_000, 19, "roaming_data_mb")?; // Up to 500GB roaming data
+        enforce_range_check(cs.clone(), &sms_count, 10_000, 14, "roaming_sms_count")?; // Up to 10k SMS roaming
 
-        // Roaming usage limits (typically lower but higher rates)
+        // Legacy roaming fields - these should match the main usage fields in roaming scenarios
         enforce_range_check(cs.clone(), &roaming_minutes, 50_000, 16, "roaming_minutes")?;
         enforce_range_check(cs.clone(), &roaming_data_mb, 500_000, 19, "roaming_data_mb")?;
 
@@ -229,12 +226,10 @@ impl<F: PrimeField> ConstraintSynthesizer<F> for BCEPrivacyCircuit<F> {
         // Total charges: Up to €10M for large consortium settlements
         enforce_range_check(cs.clone(), &total_charges, 1_000_000_000, 30, "total_charges")?;
 
-        // Constraint 3: Anti-overflow protection for intermediate results
-        enforce_range_check(cs.clone(), &domestic_call_charges, 50_000_000, 26, "domestic_call_charges")?;
-        enforce_range_check(cs.clone(), &domestic_data_charges, 200_000_000, 28, "domestic_data_charges")?;
-        enforce_range_check(cs.clone(), &domestic_sms_charges, 40_000_000, 26, "domestic_sms_charges")?;
+        // Constraint 3: Anti-overflow protection for roaming charge calculations
         enforce_range_check(cs.clone(), &roaming_call_charges, 25_000_000, 25, "roaming_call_charges")?;
         enforce_range_check(cs.clone(), &roaming_data_charges, 100_000_000, 27, "roaming_data_charges")?;
+        enforce_range_check(cs.clone(), &roaming_sms_charges, 40_000_000, 26, "roaming_sms_charges")?;
 
         // Constraint 4: Consortium-specific validation
         // Validate that consortium_id represents valid 5-party group
