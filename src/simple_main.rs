@@ -91,7 +91,8 @@ async fn start_node(
     let (blockchain, _network_rx) = SimpleBlockchain::new(
         &data_dir.to_string_lossy(),
         node_id.clone(),
-        30303
+        30303,
+        100.0  // Default 100 EUR threshold
     ).await?;
     let blockchain = Arc::new(blockchain);
 

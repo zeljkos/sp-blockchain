@@ -14,7 +14,7 @@ declare -A SP_PROVIDERS=(
     ["tmobile-de"]="T-Mobile-DE"
     ["vodafone-uk"]="Vodafone-UK"
     ["orange-fr"]="Orange-FR"
-    ["telenor-no"]="Telenor-NO"
+    ["telefonica-es"]="Telefónica-NO"
     ["sfr-fr"]="SFR-FR"
 )
 
@@ -23,7 +23,7 @@ declare -A SP_CONTAINERS=(
     ["tmobile-de"]="sp-tmobile-de"
     ["vodafone-uk"]="sp-vodafone-uk"
     ["orange-fr"]="sp-orange-fr"
-    ["telenor-no"]="sp-telenor-no"
+    ["telefonica-es"]="sp-telefonica-es"
     ["sfr-fr"]="sp-sfr-fr"
 )
 
@@ -53,7 +53,7 @@ usage() {
     echo "  tmobile-de      - T-Mobile Germany"
     echo "  vodafone-uk     - Vodafone United Kingdom"
     echo "  orange-fr       - Orange France"
-    echo "  telenor-no      - Telenor Norway"
+    echo "  telefonica-es      - Telefónica Norway"
     echo "  sfr-fr          - SFR France"
     echo ""
     echo "OPTIONS:"
@@ -123,7 +123,7 @@ while [[ $# -gt 0 ]]; do
             fi
             shift
             ;;
-        tmobile-de|vodafone-uk|orange-fr|telenor-no|sfr-fr)
+        tmobile-de|vodafone-uk|orange-fr|telefonica-es|sfr-fr)
             if [[ -z "$SP_FILTER" ]]; then
                 SP_FILTER="$1"
             else

@@ -71,7 +71,7 @@ pub struct DisputeRequest {
 impl ContractAPI {
     /// Create a new contract API with ZKP-enabled blockchain
     pub async fn new() -> Result<Self, ContractAPIError> {
-        let (blockchain, _) = SimpleBlockchain::new("testdata", "api-node".to_string(), 0)
+        let (blockchain, _) = SimpleBlockchain::new("testdata", "api-node".to_string(), 0, 100.0)
             .await
             .map_err(|e| ContractAPIError::InitializationFailed(format!("Blockchain init failed: {}", e)))?;
 
@@ -308,7 +308,7 @@ impl ContractAPI {
                 "contract_id": contract_id,
                 "contract_type": "settlement_contract",
                 "status": "deployed",
-                "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+                "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
                 "created_at": chrono::Utc::now().to_rfc3339(),
                 "zkp_enabled": true
             })))

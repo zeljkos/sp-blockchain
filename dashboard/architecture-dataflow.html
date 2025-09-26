@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP Blockchain Architecture & Data Flow</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8fafc;
+            color: #1a202c;
+            line-height: 1.6;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        .flow-diagram {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .flow-box {
+            background: white;
+            border: 2px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .sp-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 600;
+        }
+        .storage-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-weight: 600;
+        }
+        .consensus-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            font-weight: 600;
+        }
+        .arrow {
+            font-size: 2rem;
+            color: #4a5568;
+            margin: 0 1rem;
+        }
+        .data-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .consensus-model {
+            background: #fff7ed;
+            border: 2px solid #fed7aa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .consensus-title {
+            color: #ea580c;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .data-type-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .data-type-title {
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .feature-list li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-title {
+            color: #92400e;
+            font-weight: 700;
+        }
+        .tab-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        :root {
+            --primary-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🏗️ SP Blockchain Architecture & Data Flow</h1>
+        <p>Comprehensive documentation for the 5-party telecom consortium blockchain system</p>
+
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="switchTab('architecture')">🏗️ Architecture</button>
+            <button class="tab-button" onclick="switchTab('dataflow')">🌊 Data Flow</button>
+        </div>
+    </div>
+
+    <!-- Architecture Tab -->
+    <div id="architecture" class="tab-content active">
+        <!-- System Architecture Section -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3>🏗️ SP Blockchain Architecture</h3>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🌐 5-Party Consortium</h4>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: #3b82f6; border-radius: 50%; margin-right: 0.5rem;"></div>
+                            <strong>T-Mobile DE</strong> - Port 8081
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%; margin-right: 0.5rem;"></div>
+                            <strong>Vodafone UK</strong> - Port 8082
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: #f97316; border-radius: 50%; margin-right: 0.5rem;"></div>
+                            <strong>Orange FR</strong> - Port 8083
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                            <div style="width: 12px; height: 12px; background: #06b6d4; border-radius: 50%; margin-right: 0.5rem;"></div>
+                            <strong>Telefónica NO</strong> - Port 8084
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 12px; height: 12px; background: #8b5cf6; border-radius: 50%; margin-right: 0.5rem;"></div>
+                            <strong>SFR FR</strong> - Port 8085
+                        </div>
+                    </div>
+                    <p style="font-size: 0.875rem; color: #64748b;">Each operator runs an independent blockchain node with full data sovereignty while participating in consortium consensus.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🔄 Data Flow</h4>
+                    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">1. 📡 BCE Record Generation</div>
+                        <div style="font-size: 0.875rem; margin-bottom: 1rem;">Visited network creates billing records for roaming customers</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">2. 🔐 ZKP Proof Generation</div>
+                        <div style="font-size: 0.875rem; margin-bottom: 1rem;">Private rates & amounts encrypted using Groth16 protocol</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">3. ⛓️ Blockchain Processing</div>
+                        <div style="font-size: 0.875rem; margin-bottom: 1rem;">Records processed into immutable blocks with consensus</div>
+                        <div style="font-weight: 600; margin-bottom: 0.5rem;">4. 💰 Settlement Execution</div>
+                        <div style="font-size: 0.875rem;">Smart contracts automate netting and final settlements</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete API Reference -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3>📡 Complete API Reference</h3>
+            <p style="color: #64748b; margin-bottom: 2rem;">All available endpoints for SP blockchain integration</p>
+
+            <!-- BCE & Records API -->
+            <div style="background: white; border-left: 4px solid #10b981; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #059669;">📊 BCE Records & Data</h4>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">POST /api/v1/bce/submit</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Submit new BCE record to visited operator</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8083/api/v1/bce/submit" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer orange_api_key_2024_secure" \
+  -H "X-API-Key: orange_api_key_2024_secure" \
+  -d '{
+    "record_id": "CDR_ORANGE_001",
+    "visited_operator": "Orange-FR",
+    "home_operator": "T-Mobile-DE",
+    "imsi": "262020000001234",
+    "call_minutes": 45,
+    "call_rate_cents": 22,
+    "data_mb": 150,
+    "data_rate_cents": 5,
+    "sms_count": 8,
+    "sms_rate_cents": 12,
+    "wholesale_charge_cents": 1836,
+    "timestamp": 1758965742,
+    "proof_verified": false
+  }'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/read/bce_records</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Read all BCE records from SP node</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8083/api/v1/read/bce_records" \
+  -H "Authorization: Bearer orange_api_key_2024_secure" \
+  -H "X-API-Key: orange_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/read/settlement_blocks</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Read all settlement blocks from blockchain</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/read/settlement_blocks" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/bce/stats</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get BCE statistics for SP node</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/bce/stats" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Settlements API -->
+            <div style="background: white; border-left: 4px solid #ef4444; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #dc2626;">⚖️ Settlement Operations</h4>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/settlements</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">List all settlements in the system</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/settlements/{settlement_id}</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get details of a specific settlement by ID</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements/settlement_123" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <!-- Future Vision Separator -->
+                <div style="margin: 2rem 0; padding: 1rem; background: #fffbeb; border: 2px solid #f59e0b; border-radius: 8px;">
+                    <h4 style="color: #92400e; margin-bottom: 1rem;">🚀 Future Production APIs (Demo Vision)</h4>
+                    <p style="color: #78350f; font-size: 0.875rem; margin: 0;">
+                        <strong>Note:</strong> The following APIs represent the envisioned production functionality for comprehensive settlement management in a live telecom consortium deployment.
+                    </p>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 GET /api/v1/settlements/overview <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get settlement overview and comprehensive statistics</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements/overview" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 GET /api/v1/settlements/blocks <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get settlement blocks with detailed transaction information</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements/blocks" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 POST /api/v1/settlements/calculate <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Calculate settlement amounts between operators for specified period</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/settlements/calculate" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure" \
+  -d '{
+    "period_start": "2025-01-01T00:00:00Z",
+    "period_end": "2025-01-31T23:59:59Z",
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr"],
+    "include_zkp_proofs": true
+  }'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 GET /api/v1/settlements/history <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get comprehensive settlement history and audit trail</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements/history?limit=50&from_date=2025-01-01" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 POST /api/v1/settlements/dispute <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Initiate settlement dispute resolution with ZKP evidence</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/settlements/dispute" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure" \
+  -d '{
+    "settlement_id": "SETTLE_Q1_2025_001",
+    "dispute_reason": "Amount mismatch in bilateral settlement",
+    "disputed_amount_cents": 156780,
+    "evidence_bce_hashes": ["sha256_abc123...", "sha256_def456..."],
+    "zkp_proof_dispute": "groth16_proof_data...",
+    "requesting_operator": "tmobile-de"
+  }'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0; opacity: 0.8;">
+                    <h5 style="color: #374151;">🔮 GET /api/v1/settlements/reconciliation <span style="color: #f59e0b; font-size: 0.75rem;">[FUTURE]</span></h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Cross-operator settlement reconciliation with BCE record verification</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Future Implementation Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/settlements/reconciliation?counterparty=vodafone-uk&period=2025-01" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Smart Contracts API -->
+            <div style="background: white; border-left: 4px solid #8b5cf6; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #7c3aed;">📋 Smart Contracts</h4>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">POST /api/v1/contracts/deploy</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Deploy new smart contract to blockchain</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/contracts/deploy" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure" \
+  -d '{
+    "contract_id": "bce-validator-v1",
+    "contract_type": "bce_validator",
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
+    "description": "ZKP-powered BCE record validation"
+  }'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">POST /api/v1/contracts/execute</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Execute deployed smart contract</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/contracts/execute" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure" \
+  -d '{
+    "contract_id": "bce-validator-v1",
+    "method": "validate_bce_rates",
+    "parameters": {
+      "call_rate_cents": "22",
+      "data_rate_cents": "5",
+      "sms_rate_cents": "12"
+    }
+  }'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/contracts/list</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">List all deployed smart contracts</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/contracts/list" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/contracts/stats</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get smart contract system statistics</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/contracts/stats" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+            </div>
+
+            <!-- ZKP and System API -->
+            <div style="background: white; border-left: 4px solid #f59e0b; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #d97706;">🔐 Zero-Knowledge Proofs & System</h4>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">POST /api/v1/zkp/generate_proofs</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Generate ZKP proofs for all unverified BCE records</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8083/api/v1/zkp/generate_proofs" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer orange_api_key_2024_secure" \
+  -H "X-API-Key: orange_api_key_2024_secure" \
+  -d '{"verify_all": true}'</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/zkp/stats</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get ZKP system statistics and consortium status</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8083/api/v1/zkp/stats" \
+  -H "Authorization: Bearer orange_api_key_2024_secure" \
+  -H "X-API-Key: orange_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/blockchain/stats</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get blockchain system statistics</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/blockchain/stats" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /api/v1/blockchain/blocks</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get blockchain blocks information</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/blockchain/blocks" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+
+                <div style="margin: 1rem 0;">
+                    <h5 style="color: #374151;">GET /health</h5>
+                    <p style="font-size: 0.875rem; color: #6b7280;">Get node health status and basic statistics</p>
+                    <details style="margin: 0.5rem 0;">
+                        <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
+                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/health" \
+  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
+  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
+                    </details>
+                </div>
+            </div>
+
+            <!-- API Keys Reference -->
+            <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+                <h4 style="color: #92400e;">🔑 Authentication Keys Reference</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; font-family: monospace; font-size: 0.875rem;">
+                    <div><strong>T-Mobile DE:</strong> tmobile_api_key_2024_secure</div>
+                    <div><strong>Vodafone UK:</strong> vodafone_api_key_2024_secure</div>
+                    <div><strong>Orange FR:</strong> orange_api_key_2024_secure</div>
+                    <div><strong>Telefónica NO:</strong> telefonica_api_key_2024_secure</div>
+                    <div><strong>SFR FR:</strong> sfr_api_key_2024_secure</div>
+                </div>
+                <p style="color: #92400e; font-size: 0.875rem; margin-top: 1rem;">
+                    <strong>⚠️ Security Note:</strong> Each SP can only access their own BCE records and submit data to their own node. Cross-SP queries require proper consortium permissions.
+                </p>
+            </div>
+
+            <!-- Error Handling -->
+            <div style="background: white; border-left: 4px solid #ef4444; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #dc2626;">⚠️ Error Handling & Response Formats</h4>
+
+                <h5 style="color: #374151; margin-top: 1.5rem;">Success Response Format</h5>
+                <pre style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: 4px; font-size: 0.75rem;">{
+  "success": true,
+  "data": { ... },
+  "message": "Operation completed successfully"
+}</pre>
+
+                <h5 style="color: #374151; margin-top: 1.5rem;">Error Response Format</h5>
+                <pre style="background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 4px; font-size: 0.75rem;">{
+  "success": false,
+  "data": null,
+  "message": "Error description"
+}</pre>
+
+                <h5 style="color: #374151; margin-top: 1.5rem;">Common HTTP Status Codes</h5>
+                <ul style="font-size: 0.875rem; line-height: 1.6;">
+                    <li><strong>200 OK:</strong> Request successful</li>
+                    <li><strong>400 Bad Request:</strong> Invalid request format or missing fields</li>
+                    <li><strong>401 Unauthorized:</strong> Invalid or missing API key</li>
+                    <li><strong>403 Forbidden:</strong> Access denied for this operation</li>
+                    <li><strong>500 Internal Server Error:</strong> Server-side processing error</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: #eff6ff; border-radius: 8px;">
+                <h4 style="color: #1d4ed8; margin-bottom: 1rem;">🚀 Ready for Integration</h4>
+                <p style="color: #1e40af; margin: 0;">
+                    This comprehensive API reference covers all endpoints needed for SP Blockchain integration.
+                    Use the interactive demo script to see these APIs in action with real examples.
+                </p>
+                <p style="color: #3b82f6; font-family: monospace; font-size: 0.875rem; margin-top: 1rem;">
+                    ./scripts/interactive_telefonica_demo.sh
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Flow Tab -->
+    <div id="dataflow" class="tab-content">
+        <div class="card">
+            <h2>🌊 SP Blockchain Data Flow Architecture</h2>
+            <p>Visual representation of how data flows through our 5-party telecom consortium blockchain</p>
+
+            <!-- Main Data Flow Diagram -->
+            <div class="flow-diagram">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">Complete Data Flow: BCE Records → Storage → Consensus → Settlement</h3>
+
+                <!-- Row 1: 5 Service Providers -->
+                <div class="flow-row">
+                    <div class="flow-box sp-box">🇩🇪<br>T-Mobile DE<br><small>Port: 8081</small></div>
+                    <div class="flow-box sp-box">🇬🇧<br>Vodafone UK<br><small>Port: 8082</small></div>
+                    <div class="flow-box sp-box">🇫🇷<br>Orange FR<br><small>Port: 8083</small></div>
+                    <div class="flow-box sp-box">🇳🇴<br>Telefónica NO<br><small>Port: 8084</small></div>
+                    <div class="flow-box sp-box">🇫🇷<br>SFR FR<br><small>Port: 8085</small></div>
+                </div>
+
+                <!-- Arrow Down -->
+                <div style="text-align: center;">
+                    <div class="arrow">⬇</div>
+                    <p><strong>BCE Records Ingestion</strong><br>Roaming call/data/SMS records via authenticated APIs</p>
+                </div>
+
+                <!-- Row 2: RocksDB Storage -->
+                <div class="flow-row">
+                    <div class="flow-box storage-box" style="flex: 1; min-width: 300px;">
+                        📊 RocksDB Persistent Storage<br>
+                        <small>Separate databases per SP:<br>
+                        • tmobile-de.db<br>
+                        • vodafone-uk.db<br>
+                        • orange-fr.db<br>
+                        • telefonica-es.db<br>
+                        • sfr-fr.db</small>
+                    </div>
+                </div>
+
+                <!-- Arrow Down -->
+                <div style="text-align: center;">
+                    <div class="arrow">⬇</div>
+                    <p><strong>ZKP Processing & Smart Contracts</strong></p>
+                </div>
+
+                <!-- Row 3: Processing Layer -->
+                <div class="flow-row">
+                    <div class="flow-box consensus-box">🔐<br>Groth16 ZKP<br><small>Privacy Proofs</small></div>
+                    <div class="flow-box consensus-box">📋<br>Smart Contracts<br><small>Settlement Logic</small></div>
+                    <div class="flow-box consensus-box">🤝<br>P2P Consensus<br><small>Block Validation</small></div>
+                </div>
+            </div>
+
+            <!-- Data Types Comparison -->
+            <div class="data-types">
+                <div class="data-type-card" style="border-left: 4px solid #3b82f6;">
+                    <div class="data-type-title">📊 BCE Records (Business Data)</div>
+                    <ul class="feature-list">
+                        <li>Roaming call/data/SMS transactions</li>
+                        <li>Stored in individual SP RocksDB instances</li>
+                        <li>Protected by ZKP for privacy</li>
+                        <li>Immediate ingestion via REST APIs</li>
+                        <li>No blockchain consensus required</li>
+                        <li>SP-specific access control</li>
+                    </ul>
+                </div>
+
+                <div class="data-type-card" style="border-left: 4px solid #10b981;">
+                    <div class="data-type-title">⛓️ Blockchain Blocks (System Data)</div>
+                    <ul class="feature-list">
+                        <li>Smart contract executions</li>
+                        <li>Settlement transactions</li>
+                        <li>Consensus-validated state changes</li>
+                        <li>Distributed across all 5 nodes</li>
+                        <li>Immutable transaction history</li>
+                        <li>P2P network synchronization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Consensus Model Explanation -->
+            <div class="consensus-model">
+                <div class="consensus-title">🎯 Consensus Model: Hybrid Architecture</div>
+
+                <div class="warning-box">
+                    <div class="warning-title">⚠️ Important Distinction</div>
+                    <p>Our SP Blockchain uses a <strong>hybrid consensus model</strong> that treats different data types differently:</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                    <div>
+                        <h4 style="color: #dc2626;">🚫 NO Consensus Required:</h4>
+                        <ul>
+                            <li><strong>BCE Records</strong> - Individual SP business data</li>
+                            <li>Direct API ingestion to local RocksDB</li>
+                            <li>Each SP manages their own BCE database</li>
+                            <li>Privacy maintained through ZKP verification</li>
+                            <li>Real-time processing without network delays</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 style="color: #059669;">✅ Consensus Required:</h4>
+                        <ul>
+                            <li><strong>Smart Contract Executions</strong></li>
+                            <li><strong>Settlement Transactions</strong></li>
+                            <li><strong>Contract Deployments</strong></li>
+                            <li><strong>System State Changes</strong></li>
+                            <li>All operations affecting multiple SPs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: #f0fdf4; border-radius: 8px;">
+                    <h4 style="color: #166534;">🔄 How It Works:</h4>
+                    <ol style="color: #374151; line-height: 1.6;">
+                        <li><strong>BCE Ingestion</strong>: SPs submit roaming records directly to their local node via authenticated API</li>
+                        <li><strong>Local Storage</strong>: Records stored immediately in SP-specific RocksDB instance</li>
+                        <li><strong>ZKP Generation</strong>: Privacy proofs generated locally for sensitive billing data</li>
+                        <li><strong>Settlement Trigger</strong>: Smart contracts initiate cross-SP settlements (requires consensus)</li>
+                        <li><strong>Blockchain Recording</strong>: Settlement results recorded on distributed blockchain</li>
+                    </ol>
+                </div>
+
+                <div style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px;">
+                    <h4 style="color: #1d4ed8;">💡 Benefits of This Model:</h4>
+                    <ul style="color: #374151; line-height: 1.6;">
+                        <li><strong>Performance</strong>: BCE records processed instantly without network consensus delays</li>
+                        <li><strong>Privacy</strong>: Sensitive billing data never leaves SP's control</li>
+                        <li><strong>Scalability</strong>: Each SP can handle millions of records independently</li>
+                        <li><strong>Trust</strong>: Settlement transactions validated by all consortium members</li>
+                        <li><strong>Auditability</strong>: All financial settlements recorded on immutable blockchain</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Settlement Audit Trail Section -->
+            <div style="background: #fefce8; border: 2px solid #eab308; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+                <div style="color: #a16207; font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem;">
+                    🔍 Settlement Audit Trail: "Which BCE Records Are in My Bill?"
+                </div>
+
+                <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                    <h4 style="color: #ea580c;">📋 The Challenge:</h4>
+                    <p style="color: #374151; line-height: 1.6;">
+                        When T-Mobile receives a settlement bill from Vodafone for roaming charges, T-Mobile needs to verify:
+                        <strong>Which specific BCE records are included in this settlement amount?</strong>
+                    </p>
+                </div>
+
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
+                    <h4 style="color: #059669;">✅ Advanced Settlement Features:</h4>
+                    <ul style="color: #374151; line-height: 1.6;">
+                        <li><strong>Settlement Reference System</strong> - Complete traceability from BCE records to final settlements</li>
+                        <li><strong>BCE Record Hash Inclusion</strong> - Cryptographic linking of source records to settlement transactions</li>
+                        <li><strong>Cross-SP Verification API</strong> - Real-time settlement validation between consortium members</li>
+                        <li><strong>Audit Trail Smart Contracts</strong> - Immutable record of all settlement decisions and disputes</li>
+                        <li><strong>Zero-Knowledge Dispute Resolution</strong> - Privacy-preserving evidence submission for billing conflicts</li>
+                    </ul>
+                </div>
+
+                <div style="background: #fffbeb; border: 1px solid #f59e0b; border-radius: 8px; padding: 1.5rem;">
+                    <h4 style="color: #166534;">🔄 Proposed Audit Trail Flow:</h4>
+                    <ol style="color: #374151; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
+                        <li><strong>BCE Record Creation</strong>: Each BCE record gets a unique hash and timestamp</li>
+                        <li><strong>Settlement Preparation</strong>: Smart contract collects all relevant BCE record hashes for a time period</li>
+                        <li><strong>Settlement Proposal</strong>: Include array of BCE record hashes in settlement transaction</li>
+                        <li><strong>Cross-Verification</strong>: Receiving SP can query originating SP to verify specific records</li>
+                        <li><strong>Dispute Resolution</strong>: Individual BCE records can be examined for billing disputes</li>
+                    </ol>
+                </div>
+
+                <div style="background: #fffbeb; border: 1px solid #f59e0b; border-radius: 8px; padding: 1.5rem;">
+                    <h4 style="color: #92400e;">🚀 Implementation Example:</h4>
+                    <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.875rem; overflow-x: auto;"><code>// Settlement Transaction with BCE Audit Trail
+{
+  "settlement_id": "SETTLE_TMOBILE_VODAFONE_2025Q1",
+  "from_sp": "vodafone-uk",
+  "to_sp": "tmobile-de",
+  "total_amount_cents": 45670,
+  "settlement_period": "2025-01-01_to_2025-03-31",
+  "bce_record_hashes": [
+    "sha256_abc123...",  // CDR_VODAFONEUK_001
+    "sha256_def456...",  // CDR_VODAFONEUK_002
+    "sha256_ghi789..."   // CDR_VODAFONEUK_003
+  ],
+  "zkp_proof": "groth16_proof_data...",
+  "verification_endpoint": "/api/v1/audit/bce_records"
+}</code></pre>
+                    <p style="color: #92400e; margin-top: 1rem; font-size: 0.875rem;">
+                        <strong>Verification:</strong> T-Mobile can call <code>vodafone-uk:8082/api/v1/audit/bce_records</code>
+                        with the hash list to verify record details (with privacy protection).
+                    </p>
+                </div>
+
+                <div style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem;">
+                    <h4 style="color: #047857;">🔐 Privacy Considerations:</h4>
+                    <ul style="color: #374151; line-height: 1.6;">
+                        <li><strong>ZKP Verification</strong>: Individual BCE records remain private, only aggregate amounts verified</li>
+                        <li><strong>Hash-based Auditing</strong>: Record existence and integrity verified without exposing sensitive data</li>
+                        <li><strong>Permissioned Access</strong>: Only involved SPs can audit their specific settlement records</li>
+                        <li><strong>Dispute Resolution</strong>: Detailed record access only granted during formal dispute processes</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #dbeafe; border-radius: 8px;">
+                    <p style="color: #1e40af; font-weight: 600; margin: 0;">
+                        💡 <strong>Future Enhancement:</strong> This audit trail system would be a key feature for production deployment,
+                        ensuring full transparency and dispute resolution capabilities while maintaining privacy through ZKP.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

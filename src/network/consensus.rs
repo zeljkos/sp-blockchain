@@ -66,7 +66,7 @@ impl SimpleConsensus {
             ("tmobile-de", 100),
             ("vodafone-uk", 100),
             ("orange-fr", 100),
-            ("telenor-no", 100),
+            ("telefonica-es", 100),
             ("sfr-fr", 100),
         ];
 

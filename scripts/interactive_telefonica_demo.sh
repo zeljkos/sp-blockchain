@@ -14,12 +14,12 @@ API_KEYS=(
     "tmobile_api_key_2024_secure"
     "vodafone_api_key_2024_secure"
     "orange_api_key_2024_secure"
-    "telenor_api_key_2024_secure"
+    "telefonica_api_key_2024_secure"
     "sfr_api_key_2024_secure"
 )
 
 PORTS=(8081 8082 8083 8084 8085)
-NODES=("tmobile-de" "vodafone-uk" "orange-fr" "telenor-no" "sfr-fr")
+NODES=("tmobile-de" "vodafone-uk" "orange-fr" "telefonica-es" "sfr-fr")
 
 print_header() {
     echo "============================================================================"
@@ -241,7 +241,7 @@ print_step "2.2" "Submit BCE record to Vodafone UK"
 bce_record4='{
     "record_id": "CDR_VODAFONEUK_INTERACTIVE_001",
     "visited_operator": "Vodafone-UK",
-    "home_operator": "Telenor-NO",
+    "home_operator": "Telefónica-NO",
     "imsi": "242010000004321",
     "call_minutes": 56,
     "call_rate_cents": 25,
@@ -254,7 +254,7 @@ bce_record4='{
     "proof_verified": false
 }'
 
-execute_curl 1 "/api/v1/bce/submit" "POST" "$bce_record4" "Submit Telenor NO customer roaming record to Vodafone UK"
+execute_curl 1 "/api/v1/bce/submit" "POST" "$bce_record4" "Submit Telefónica NO customer roaming record to Vodafone UK"
 
 echo "$(echo "$0" | sed -E "s|echo -e "\${[^}]*}||g;s|\${NC}||g;s|[📋🎯✅❌🔍⛓🚀📊💰🔄🎉🏢📅🌐🔐⚠️🇫🇷🇩🇪🇬🇧🇳🇴📝👥⚖️⚡] *||g")"
 wait_for_keypress
@@ -268,7 +268,7 @@ print_step "3.1" "Deploy BCE Validation Smart Contract"
 contract1='{
     "contract_id": "interactive-demo-bce-validator",
     "contract_type": "bce_validator",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "ZKP-powered BCE record validation for interactive demo"
 }'
 
@@ -279,7 +279,7 @@ print_step "3.2" "Deploy Multilateral Netting Contract"
 contract2='{
     "contract_id": "interactive-demo-netting-engine",
     "contract_type": "netting_contract",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "5-party multilateral netting for settlement optimization"
 }'
 
@@ -290,7 +290,7 @@ print_step "3.3" "Deploy Settlement Executor Contract"
 contract3='{
     "contract_id": "interactive-demo-settlement-executor",
     "contract_type": "settlement_executor",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "Multi-party settlement execution with digital signatures"
 }'
 
@@ -338,7 +338,7 @@ echo
 echo -e "${PURPLE}🇫🇷 Orange FR:${NC} 2 records × €60.30 = €60.30 (OWED)"
 echo -e "${PURPLE}🇩🇪 T-Mobile DE:${NC} 1 record × €10.87 = €10.87 (OWED)"
 echo -e "${PURPLE}🇬🇧 Vodafone UK:${NC} 1 record × €32.12 = €32.12 (OWED)"
-echo -e "${PURPLE}🇳🇴 Telenor NO:${NC} 0 records = €0.00"
+echo -e "${PURPLE}🇳🇴 Telefónica NO:${NC} 0 records = €0.00"
 echo -e "${PURPLE}🇫🇷 SFR FR:${NC} 0 records = €0.00"
 echo
 echo "$(echo "$0" | sed -E "s|echo -e "\${[^}]*}||g;s|\${NC}||g;s|[📋🎯✅❌🔍⛓🚀📊💰🔄🎉🏢📅🌐🔐⚠️🇫🇷🇩🇪🇬🇧🇳🇴📝👥⚖️⚡] *||g")"

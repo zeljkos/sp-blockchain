@@ -90,7 +90,7 @@ impl CryptoVerifier {
             "T-Mobile-DE".to_string(),
             "Vodafone-UK".to_string(),
             "Orange-FR".to_string(),
-            "Telenor-NO".to_string(),
+            "Telefónica-ES".to_string(),
             "SFR-FR".to_string(),
         ];
         

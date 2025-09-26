@@ -246,7 +246,7 @@ impl<F: PrimeField> ConstraintSynthesizer<F> for BCEPrivacyCircuit<F> {
 #[derive(Clone)]
 pub struct SettlementCalculationCircuit<F: PrimeField> {
     // Private inputs: all bilateral settlement amounts for 5 parties
-    // T-Mobile, Vodafone, Orange, Telenor, SFR
+    // T-Mobile, Vodafone, Orange, Telefónica, SFR
     pub tmobile_to_vodafone: Option<F>,
     pub tmobile_to_orange: Option<F>,
     pub tmobile_to_telenor: Option<F>,
@@ -318,7 +318,7 @@ impl<F: PrimeField> SettlementCalculationCircuit<F> {
             orange_to_telenor: Some(F::from(bilateral_amounts[10])),
             orange_to_sfr: Some(F::from(bilateral_amounts[11])),
             
-            // Telenor outgoing (indices 12-15)
+            // Telefónica outgoing (indices 12-15)
             telenor_to_tmobile: Some(F::from(bilateral_amounts[12])),
             telenor_to_vodafone: Some(F::from(bilateral_amounts[13])),
             telenor_to_orange: Some(F::from(bilateral_amounts[14])),
@@ -506,7 +506,7 @@ impl<F: PrimeField> ConstraintSynthesizer<F> for SettlementCalculationCircuit<F>
         let org_net_calculated = &org_outgoing - &org_incoming + &offset;
         org_pos.enforce_equal(&org_net_calculated)?;
 
-        // Telenor net
+        // Telefónica net
         let tel_outgoing = &tel_tmo + &tel_vod + &tel_org + &tel_sfr;
         let tel_incoming = &tmo_tel + &vod_tel + &org_tel + &sfr_tel;
         let tel_net_calculated = &tel_outgoing - &tel_incoming + &offset;
@@ -602,15 +602,15 @@ mod tests {
 
         // Sample 5-party netting scenario with 20 bilateral amounts
         let bilateral = [
-            // T-Mobile outgoing: to Vodafone, Orange, Telenor, SFR
+            // T-Mobile outgoing: to Vodafone, Orange, Telefónica, SFR
             50000, 75000, 25000, 30000,
-            // Vodafone outgoing: to T-Mobile, Orange, Telenor, SFR
+            // Vodafone outgoing: to T-Mobile, Orange, Telefónica, SFR
             40000, 60000, 20000, 25000,
-            // Orange outgoing: to T-Mobile, Vodafone, Telenor, SFR
+            // Orange outgoing: to T-Mobile, Vodafone, Telefónica, SFR
             35000, 45000, 15000, 20000,
-            // Telenor outgoing: to T-Mobile, Vodafone, Orange, SFR
+            // Telefónica outgoing: to T-Mobile, Vodafone, Orange, SFR
             30000, 40000, 18000, 22000,
-            // SFR outgoing: to T-Mobile, Vodafone, Orange, Telenor
+            // SFR outgoing: to T-Mobile, Vodafone, Orange, Telefónica
             28000, 38000, 16000, 18000,
         ];
         
@@ -619,7 +619,7 @@ mod tests {
             (50000 + 75000 + 25000 + 30000) - (40000 + 35000 + 30000 + 28000), // T-Mobile: 180000 - 133000 = 47000
             (40000 + 60000 + 20000 + 25000) - (50000 + 45000 + 40000 + 38000), // Vodafone: 145000 - 173000 = -28000
             (35000 + 45000 + 15000 + 20000) - (75000 + 60000 + 18000 + 16000), // Orange: 115000 - 169000 = -54000
-            (30000 + 40000 + 18000 + 22000) - (25000 + 20000 + 15000 + 18000), // Telenor: 110000 - 78000 = 32000
+            (30000 + 40000 + 18000 + 22000) - (25000 + 20000 + 15000 + 18000), // Telefónica: 110000 - 78000 = 32000
             (28000 + 38000 + 16000 + 18000) - (30000 + 25000 + 20000 + 22000), // SFR: 100000 - 97000 = 3000
         ];
 

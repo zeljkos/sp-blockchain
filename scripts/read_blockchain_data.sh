@@ -15,7 +15,7 @@ declare -A SP_PROVIDERS=(
     ["tmobile-de"]="T-Mobile-DE"
     ["vodafone-uk"]="Vodafone-UK"
     ["orange-fr"]="Orange-FR"
-    ["telenor-no"]="Telenor-NO"
+    ["telefonica-es"]="Telefónica-NO"
     ["sfr-fr"]="SFR-FR"
 )
 
@@ -24,7 +24,7 @@ declare -A SP_DATA_PATHS=(
     ["tmobile-de"]="$PROJECT_ROOT/docker/persistent_data/tmobile-de"
     ["vodafone-uk"]="$PROJECT_ROOT/docker/persistent_data/vodafone-uk"
     ["orange-fr"]="$PROJECT_ROOT/docker/persistent_data/orange-fr"
-    ["telenor-no"]="$PROJECT_ROOT/docker/persistent_data/telenor-no"
+    ["telefonica-es"]="$PROJECT_ROOT/docker/persistent_data/telefonica-es"
     ["sfr-fr"]="$PROJECT_ROOT/docker/persistent_data/sfr-fr"
 )
 
@@ -54,7 +54,7 @@ usage() {
     echo "  tmobile-de      - Filter for T-Mobile Germany"
     echo "  vodafone-uk     - Filter for Vodafone United Kingdom"
     echo "  orange-fr       - Filter for Orange France"
-    echo "  telenor-no      - Filter for Telenor Norway"
+    echo "  telefonica-es      - Filter for Telefónica Norway"
     echo "  sfr-fr          - Filter for SFR France"
     echo ""
     echo "OPTIONS:"
@@ -131,7 +131,7 @@ while [[ $# -gt 0 ]]; do
             fi
             shift
             ;;
-        tmobile-de|vodafone-uk|orange-fr|telenor-no|sfr-fr)
+        tmobile-de|vodafone-uk|orange-fr|telefonica-es|sfr-fr)
             if [[ -z "$SP_FILTER" ]]; then
                 SP_FILTER="$1"
             else

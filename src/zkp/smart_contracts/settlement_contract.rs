@@ -96,32 +96,32 @@ impl SettlementContractCompiler {
             // T-Mobile outgoing
             Instruction::Load(Blake2bHash::from_bytes([10; 32])), // T-Mobile->Vodafone
             Instruction::Load(Blake2bHash::from_bytes([11; 32])), // T-Mobile->Orange
-            Instruction::Load(Blake2bHash::from_bytes([12; 32])), // T-Mobile->Telenor
+            Instruction::Load(Blake2bHash::from_bytes([12; 32])), // T-Mobile->Telefónica
             Instruction::Load(Blake2bHash::from_bytes([13; 32])), // T-Mobile->SFR
 
             // Vodafone outgoing
             Instruction::Load(Blake2bHash::from_bytes([14; 32])), // Vodafone->T-Mobile
             Instruction::Load(Blake2bHash::from_bytes([15; 32])), // Vodafone->Orange
-            Instruction::Load(Blake2bHash::from_bytes([16; 32])), // Vodafone->Telenor
+            Instruction::Load(Blake2bHash::from_bytes([16; 32])), // Vodafone->Telefónica
             Instruction::Load(Blake2bHash::from_bytes([17; 32])), // Vodafone->SFR
 
             // Orange outgoing
             Instruction::Load(Blake2bHash::from_bytes([18; 32])), // Orange->T-Mobile
             Instruction::Load(Blake2bHash::from_bytes([19; 32])), // Orange->Vodafone
-            Instruction::Load(Blake2bHash::from_bytes([20; 32])), // Orange->Telenor
+            Instruction::Load(Blake2bHash::from_bytes([20; 32])), // Orange->Telefónica
             Instruction::Load(Blake2bHash::from_bytes([21; 32])), // Orange->SFR
 
-            // Telenor outgoing
-            Instruction::Load(Blake2bHash::from_bytes([22; 32])), // Telenor->T-Mobile
-            Instruction::Load(Blake2bHash::from_bytes([23; 32])), // Telenor->Vodafone
-            Instruction::Load(Blake2bHash::from_bytes([24; 32])), // Telenor->Orange
-            Instruction::Load(Blake2bHash::from_bytes([25; 32])), // Telenor->SFR
+            // Telefónica outgoing
+            Instruction::Load(Blake2bHash::from_bytes([22; 32])), // Telefónica->T-Mobile
+            Instruction::Load(Blake2bHash::from_bytes([23; 32])), // Telefónica->Vodafone
+            Instruction::Load(Blake2bHash::from_bytes([24; 32])), // Telefónica->Orange
+            Instruction::Load(Blake2bHash::from_bytes([25; 32])), // Telefónica->SFR
 
             // SFR outgoing
             Instruction::Load(Blake2bHash::from_bytes([26; 32])), // SFR->T-Mobile
             Instruction::Load(Blake2bHash::from_bytes([27; 32])), // SFR->Vodafone
             Instruction::Load(Blake2bHash::from_bytes([28; 32])), // SFR->Orange
-            Instruction::Load(Blake2bHash::from_bytes([29; 32])), // SFR->Telenor
+            Instruction::Load(Blake2bHash::from_bytes([29; 32])), // SFR->Telefónica
 
             // Calculate total bilateral amount (sum all 20 amounts)
             // This is simplified - in practice would be a loop
@@ -178,7 +178,7 @@ impl SettlementContractCompiler {
             Instruction::Load(Blake2bHash::zero()),
             Instruction::CheckSignature,
             
-            Instruction::Push(4), // Telenor signature
+            Instruction::Push(4), // Telefónica signature
             Instruction::Load(Blake2bHash::zero()),
             Instruction::CheckSignature,
             
@@ -257,7 +257,7 @@ impl ExecutableSettlementContract {
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "T-Mobile-DE" && t == "Orange-FR") {
             state.insert(Blake2bHash::from_bytes([11; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "T-Mobile-DE" && t == "Telenor-NO") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "T-Mobile-DE" && t == "Telefónica-ES") {
             state.insert(Blake2bHash::from_bytes([12; 32]), amount.2);
         }
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "T-Mobile-DE" && t == "SFR-FR") {
@@ -271,7 +271,7 @@ impl ExecutableSettlementContract {
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Vodafone-UK" && t == "Orange-FR") {
             state.insert(Blake2bHash::from_bytes([15; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Vodafone-UK" && t == "Telenor-NO") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Vodafone-UK" && t == "Telefónica-ES") {
             state.insert(Blake2bHash::from_bytes([16; 32]), amount.2);
         }
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Vodafone-UK" && t == "SFR-FR") {
@@ -285,24 +285,24 @@ impl ExecutableSettlementContract {
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Orange-FR" && t == "Vodafone-UK") {
             state.insert(Blake2bHash::from_bytes([19; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Orange-FR" && t == "Telenor-NO") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Orange-FR" && t == "Telefónica-ES") {
             state.insert(Blake2bHash::from_bytes([20; 32]), amount.2);
         }
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Orange-FR" && t == "SFR-FR") {
             state.insert(Blake2bHash::from_bytes([21; 32]), amount.2);
         }
 
-        // Telenor outgoing
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telenor-NO" && t == "T-Mobile-DE") {
+        // Telefónica outgoing
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telefónica-ES" && t == "T-Mobile-DE") {
             state.insert(Blake2bHash::from_bytes([22; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telenor-NO" && t == "Vodafone-UK") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telefónica-ES" && t == "Vodafone-UK") {
             state.insert(Blake2bHash::from_bytes([23; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telenor-NO" && t == "Orange-FR") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telefónica-ES" && t == "Orange-FR") {
             state.insert(Blake2bHash::from_bytes([24; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telenor-NO" && t == "SFR-FR") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "Telefónica-ES" && t == "SFR-FR") {
             state.insert(Blake2bHash::from_bytes([25; 32]), amount.2);
         }
 
@@ -316,7 +316,7 @@ impl ExecutableSettlementContract {
         if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "SFR-FR" && t == "Orange-FR") {
             state.insert(Blake2bHash::from_bytes([28; 32]), amount.2);
         }
-        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "SFR-FR" && t == "Telenor-NO") {
+        if let Some(amount) = bilateral_amounts.iter().find(|(f, t, _)| f == "SFR-FR" && t == "Telefónica-ES") {
             state.insert(Blake2bHash::from_bytes([29; 32]), amount.2);
         }
 
@@ -396,7 +396,7 @@ impl FivePartySettlementFactory {
             "T-Mobile-DE".to_string(),
             "Vodafone-UK".to_string(),
             "Orange-FR".to_string(),
-            "Telenor-NO".to_string(),
+            "Telefónica-ES".to_string(),
             "SFR-FR".to_string(),
         ];
 
@@ -418,32 +418,32 @@ impl FivePartySettlementFactory {
             // T-Mobile outgoing
             ("T-Mobile-DE".to_string(), "Vodafone-UK".to_string(), 150000), // €1500
             ("T-Mobile-DE".to_string(), "Orange-FR".to_string(), 120000),    // €1200
-            ("T-Mobile-DE".to_string(), "Telenor-NO".to_string(), 80000),     // €800
+            ("T-Mobile-DE".to_string(), "Telefónica-ES".to_string(), 80000),     // €800
             ("T-Mobile-DE".to_string(), "SFR-FR".to_string(), 90000),        // €900
 
             // Vodafone outgoing
             ("Vodafone-UK".to_string(), "T-Mobile-DE".to_string(), 180000),  // €1800
             ("Vodafone-UK".to_string(), "Orange-FR".to_string(), 200000),    // €2000
-            ("Vodafone-UK".to_string(), "Telenor-NO".to_string(), 110000),   // €1100
+            ("Vodafone-UK".to_string(), "Telefónica-ES".to_string(), 110000),   // €1100
             ("Vodafone-UK".to_string(), "SFR-FR".to_string(), 75000),       // €750
 
             // Orange outgoing
             ("Orange-FR".to_string(), "T-Mobile-DE".to_string(), 95000),     // €950
             ("Orange-FR".to_string(), "Vodafone-UK".to_string(), 85000),     // €850
-            ("Orange-FR".to_string(), "Telenor-NO".to_string(), 60000),      // €600
+            ("Orange-FR".to_string(), "Telefónica-ES".to_string(), 60000),      // €600
             ("Orange-FR".to_string(), "SFR-FR".to_string(), 70000),         // €700
 
-            // Telenor outgoing
-            ("Telenor-NO".to_string(), "T-Mobile-DE".to_string(), 125000),   // €1250
-            ("Telenor-NO".to_string(), "Vodafone-UK".to_string(), 140000),   // €1400
-            ("Telenor-NO".to_string(), "Orange-FR".to_string(), 55000),      // €550
-            ("Telenor-NO".to_string(), "SFR-FR".to_string(), 45000),        // €450
+            // Telefónica outgoing
+            ("Telefónica-ES".to_string(), "T-Mobile-DE".to_string(), 125000),   // €1250
+            ("Telefónica-ES".to_string(), "Vodafone-UK".to_string(), 140000),   // €1400
+            ("Telefónica-ES".to_string(), "Orange-FR".to_string(), 55000),      // €550
+            ("Telefónica-ES".to_string(), "SFR-FR".to_string(), 45000),        // €450
 
             // SFR outgoing
             ("SFR-FR".to_string(), "T-Mobile-DE".to_string(), 100000),       // €1000
             ("SFR-FR".to_string(), "Vodafone-UK".to_string(), 65000),       // €650
             ("SFR-FR".to_string(), "Orange-FR".to_string(), 50000),         // €500
-            ("SFR-FR".to_string(), "Telenor-NO".to_string(), 40000),        // €400
+            ("SFR-FR".to_string(), "Telefónica-ES".to_string(), 40000),        // €400
         ]
     }
 }
@@ -498,7 +498,7 @@ mod tests {
         assert_eq!(pairs.len(), 20); // 5 parties * 4 targets each = 20 pairs
         
         // Verify all members are represented
-        let members = ["T-Mobile-DE", "Vodafone-UK", "Orange-FR", "Telenor-NO", "SFR-FR"];
+        let members = ["T-Mobile-DE", "Vodafone-UK", "Orange-FR", "Telefónica-ES", "SFR-FR"];
         for member in &members {
             let outgoing_count = pairs.iter().filter(|(from, _)| from == member).count();
             assert_eq!(outgoing_count, 4); // Each member should have 4 outgoing relationships

@@ -173,6 +173,7 @@ async fn start_node(
         &data_dir.to_string_lossy(),
         node_id.clone(),
         p2p_port,
+        settlement_threshold_eur,
     ).await?;
 
     // Load pre-generated ZKP keys for 5-party consortium
@@ -966,7 +967,7 @@ async fn deploy_smart_contract(
         "tmobile-de".to_string(),
         "vodafone-uk".to_string(),
         "orange-fr".to_string(),
-        "telenor-no".to_string(),
+        "telefonica-es".to_string(),
         "sfr-fr".to_string(),
     ];
 

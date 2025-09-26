@@ -14,7 +14,7 @@ declare -A SP_PROVIDERS=(
     ["tmobile-de"]="8081:tmobile_api_key_2024_secure:T-Mobile-DE:262"
     ["vodafone-uk"]="8082:vodafone_api_key_2024_secure:Vodafone-UK:234"
     ["orange-fr"]="8083:orange_api_key_2024_secure:Orange-FR:208"
-    ["telenor-no"]="8084:telenor_api_key_2024_secure:Telenor-NO:242"
+    ["telefonica-es"]="8084:telefonica_api_key_2024_secure:Telefónica-NO:242"
     ["sfr-fr"]="8085:sfr_api_key_2024_secure:SFR-FR:208"
 )
 
@@ -28,7 +28,7 @@ usage() {
     echo "  tmobile-de    - T-Mobile Germany"
     echo "  vodafone-uk   - Vodafone United Kingdom"
     echo "  orange-fr     - Orange France"
-    echo "  telenor-no    - Telenor Norway"
+    echo "  telefonica-es    - Telefónica Norway"
     echo "  sfr-fr        - SFR France"
     echo ""
     echo "OPTIONS:"
@@ -45,7 +45,7 @@ usage() {
     echo "  $0 tmobile-de                          # Generate T-Mobile record"
     echo "  $0 vodafone-uk -v orange-fr           # Vodafone→Orange roaming"
     echo "  $0 orange-fr -c 45 -d 1200 -s 8      # Custom usage amounts"
-    echo "  $0 telenor-no --with-signature        # Include signature"
+    echo "  $0 telefonica-es --with-signature        # Include signature"
     echo "  $0 sfr-fr --dry-run                   # Preview without submit"
 }
 

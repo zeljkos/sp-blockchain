@@ -1,9 +1,11 @@
+5-Party Consortium API Keys:
 
-  The nginx configuration has been updated with the correct API keys:
+  | SP Provider | Country | API Key | Port |
+  |---|---|---|---|---|
+  | T-Mobile DE | 🇩🇪 | tmobile_api_key_2024_secure | 8081 |
+  | Vodafone UK | 🇬🇧 | vodafone_api_key_2024_secure | 8082 |
+  | Orange FR | 🇫🇷 | orange_api_key_2024_secure | 8083 |
+  | Telefónica ES | 🇪🇸 | telefonica_api_key_2024_secure | 8084 |
+  | SFR FR | 🇫🇷 | sfr_api_key_2024_secure | 8085 |
 
-  - T-Mobile DE: tmobile_api_key_2024_secure
-  - Vodafone UK: vodafone_api_key_2024_secure
-  - Orange FR: orange_api_key_2024_secure
-  - Telenor NO: telenor_api_key_2024_secure
-  - SFR FR: sfr_api_key_2024_secure
-
+  Usage Examples:

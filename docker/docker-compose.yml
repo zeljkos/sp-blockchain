@@ -88,25 +88,25 @@ services:
       retries: 3
       start_period: 40s
 
-  # Telenor NO
-  sp-telenor-no:
+  # Telefónica ES
+  sp-telefonica-es:
     build:
       context: ../
       dockerfile: docker/Dockerfile
-    container_name: sp-telenor-no
+    container_name: sp-telefonica-es
     ports:
       - "8084:8080"  # API port
       - "30304:30303"  # P2P port
     environment:
-      - NODE_ID=telenor-no
+      - NODE_ID=telefonica-es
       - SETTLEMENT_THRESHOLD_EUR=100.0
       - API_HOST=0.0.0.0
       - API_PORT=8080
       - P2P_PORT=30303
       - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303
     volumes:
-      - ./persistent_data/telenor-no:/app/data
-      - ./zkp_keys/telenor-no:/app/zkp_keys:ro
+      - ./persistent_data/telefonica-es:/app/data
+      - ./zkp_keys/telefonica-es:/app/zkp_keys:ro
     networks:
       - sp_network
     depends_on:
@@ -135,7 +135,7 @@ services:
       - API_HOST=0.0.0.0
       - API_PORT=8080
       - P2P_PORT=30303
-      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303,sp-telenor-no:30303
+      - BOOTSTRAP_PEERS=sp-tmobile-de:30303,sp-vodafone-uk:30303,sp-orange-fr:30303,sp-telefonica-es:30303
     volumes:
       - ./persistent_data/sfr-fr:/app/data
       - ./zkp_keys/sfr-fr:/app/zkp_keys:ro
@@ -145,7 +145,7 @@ services:
       - sp-tmobile-de
       - sp-vodafone-uk
       - sp-orange-fr
-      - sp-telenor-no
+      - sp-telefonica-es
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s

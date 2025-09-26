@@ -90,7 +90,7 @@ impl SpAuthentication {
             ("tmobile-de", "T-Mobile-DE", "tmobile_api_key_2024_secure"),
             ("vodafone-uk", "Vodafone-UK", "vodafone_api_key_2024_secure"),
             ("orange-fr", "Orange-FR", "orange_api_key_2024_secure"),
-            ("telenor-no", "Telenor-NO", "telenor_api_key_2024_secure"),
+            ("telefonica-es", "Telefónica-ES", "telefonica_api_key_2024_secure"),
             ("sfr-fr", "SFR-FR", "sfr_api_key_2024_secure"),
         ];
 
@@ -222,7 +222,7 @@ impl SpAuthentication {
             "tmobile-de" => "T-Mobile-DE",
             "vodafone-uk" => "Vodafone-UK",
             "orange-fr" => "Orange-FR",
-            "telenor-no" => "Telenor-NO",
+            "telefonica-es" => "Telefónica-ES",
             "sfr-fr" => "SFR-FR",
             _ => return Err(AuthenticationError::UnknownProvider(sp.provider_id.clone())),
         };

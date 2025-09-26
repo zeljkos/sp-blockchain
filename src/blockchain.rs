@@ -96,7 +96,7 @@ impl SPBlockchain {
             "tmobile-de".to_string(),
             "vodafone-uk".to_string(),
             "orange-fr".to_string(),
-            "telenor-no".to_string(),
+            "telefonica-es".to_string(),
             "sfr-fr".to_string(),
         ];
 

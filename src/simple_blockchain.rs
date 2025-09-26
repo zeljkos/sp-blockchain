@@ -46,6 +46,9 @@ pub struct SimpleBlockchain {
 
     // New Settlement Proof System for privacy-preserving proofs
     pub settlement_proof_system: Option<Arc<SettlementProofSystem>>,
+
+    // Settlement threshold in EUR
+    pub settlement_threshold_eur: f64,
 }
 
 /// Settlement status for BCE records to prevent double billing
@@ -227,6 +230,7 @@ impl SimpleBlockchain {
         data_dir: &str,
         node_id: String,
         _p2p_port: u16,
+        settlement_threshold_eur: f64,
     ) -> Result<(Self, tokio::sync::mpsc::UnboundedReceiver<NetworkMessage>), BlockchainError> {
         println!("🔗 Initializing Simple Blockchain: {}", node_id);
 
@@ -279,6 +283,9 @@ impl SimpleBlockchain {
 
             // Settlement proof system - will be set by main.rs after initialization
             settlement_proof_system: None,
+
+            // Settlement threshold
+            settlement_threshold_eur,
         }, network_rx))
     }
 
@@ -399,15 +406,18 @@ impl SimpleBlockchain {
         Ok(record.record_id)
     }
 
-    /// Try to create settlement block when bilateral threshold reached
+    /// Try to create settlement block when EUR threshold reached
     async fn try_create_settlement_block(&self) -> Result<(), BlockchainError> {
-        let pending_count = {
+        let total_pending_eur = {
             let pending = self.pending_records.read().await;
-            pending.len()
+            pending.values()
+                .map(|record| record.wholesale_charge_cents as f64 / 100.0)
+                .sum::<f64>()
         };
 
-        // Create block when we have 10+ records or after timeout
-        if pending_count >= 10 {
+        // Create block when total pending amount reaches EUR threshold
+        if total_pending_eur >= self.settlement_threshold_eur {
+            println!("💰 Settlement threshold reached: €{:.2} >= €{:.2}", total_pending_eur, self.settlement_threshold_eur);
             self.create_settlement_block().await?;
         }
 

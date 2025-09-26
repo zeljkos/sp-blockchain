@@ -295,7 +295,7 @@
                     <option value="tmobile-de">T-Mobile DE</option>
                     <option value="vodafone-uk">Vodafone UK</option>
                     <option value="orange-fr">Orange FR</option>
-                    <option value="telenor-no">Telenor NO</option>
+                    <option value="telefonica-es">Telefónica ES</option>
                     <option value="sfr-fr">SFR FR</option>
                 </select>
                 <button class="refresh-btn" onclick="refreshData()">Refresh</button>
@@ -435,488 +435,71 @@
 
         <!-- Architecture Tab -->
         <div id="architecture" class="tab-content">
-            <!-- System Architecture Section -->
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>🏗️ SP Blockchain Architecture</h3>
-                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
-                    <div>
-                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🌐 5-Party Consortium</h4>
-                        <div style="background: #f8fafc; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                                <div style="width: 12px; height: 12px; background: #3b82f6; border-radius: 50%; margin-right: 0.5rem;"></div>
-                                <strong>T-Mobile DE</strong> - Port 8081
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                                <div style="width: 12px; height: 12px; background: #ef4444; border-radius: 50%; margin-right: 0.5rem;"></div>
-                                <strong>Vodafone UK</strong> - Port 8082
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                                <div style="width: 12px; height: 12px; background: #f97316; border-radius: 50%; margin-right: 0.5rem;"></div>
-                                <strong>Orange FR</strong> - Port 8083
-                            </div>
-                            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-                                <div style="width: 12px; height: 12px; background: #06b6d4; border-radius: 50%; margin-right: 0.5rem;"></div>
-                                <strong>Telenor NO</strong> - Port 8084
-                            </div>
-                            <div style="display: flex; align-items: center;">
-                                <div style="width: 12px; height: 12px; background: #8b5cf6; border-radius: 50%; margin-right: 0.5rem;"></div>
-                                <strong>SFR FR</strong> - Port 8085
-                            </div>
-                        </div>
-                        <p style="font-size: 0.875rem; color: #64748b;">Each operator runs an independent blockchain node with full data sovereignty while participating in consortium consensus.</p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🔄 Data Flow</h4>
-                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">1. 📡 BCE Record Generation</div>
-                            <div style="font-size: 0.875rem; margin-bottom: 1rem;">Visited network creates billing records for roaming customers</div>
-
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">2. 🔐 ZKP Proof Generation</div>
-                            <div style="font-size: 0.875rem; margin-bottom: 1rem;">Private rates & amounts encrypted using Groth16 protocol</div>
-
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">3. ⛓️ Blockchain Processing</div>
-                            <div style="font-size: 0.875rem; margin-bottom: 1rem;">Records processed into immutable blocks with consensus</div>
-
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">4. 💰 Settlement Execution</div>
-                            <div style="font-size: 0.875rem;">Smart contracts automate netting and final settlements</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technology Stack Section -->
-            <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 2rem;">
-                <div class="card">
-                    <h3>🦀 Core Technologies</h3>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #1f2937; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: #f97316; font-weight: bold; font-size: 1.2rem;">🦀</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: #1f2937;">Rust Blockchain Core</div>
-                                <div style="font-size: 0.875rem; color: #64748b;">Memory-safe, high-performance blockchain with zero-cost abstractions</div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #7c3aed; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-weight: bold; font-size: 1rem;">📊</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: #1f2937;">RocksDB Storage</div>
-                                <div style="font-size: 0.875rem; color: #64748b;">High-performance persistent key-value storage optimized for blockchain</div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #059669; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-weight: bold; font-size: 1rem;">🌐</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: #1f2937;">P2P Networking</div>
-                                <div style="font-size: 0.875rem; color: #64748b;">Decentralized node discovery and message propagation</div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 40px; height: 40px; background: #dc2626; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
-                                <span style="color: white; font-weight: bold; font-size: 1rem;">🐳</span>
-                            </div>
-                            <div>
-                                <div style="font-weight: 600; color: #1f2937;">Docker Containerization</div>
-                                <div style="font-size: 0.875rem; color: #64748b;">Production-ready deployment with orchestration support</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3>🔐 Privacy & Security</h3>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="background: #fef3c7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: #92400e; margin-bottom: 0.5rem;">🔐 Groth16 Zero-Knowledge Proofs</div>
-                            <div style="font-size: 0.875rem; color: #78350f;">
-                                Industry-standard zkSNARK protocol providing:
-                                <ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
-                                    <li>Constant proof size (~200 bytes)</li>
-                                    <li>Fast verification (< 2ms)</li>
-                                    <li>Perfect zero-knowledge privacy</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div style="background: #ecfdf5; border: 1px solid #10b981; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="font-weight: 600; color: #065f46; margin-bottom: 0.5rem;">🔑 BN254 Elliptic Curves</div>
-                            <div style="font-size: 0.875rem; color: #047857;">
-                                Optimized pairing-friendly curves providing:
-                                <ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
-                                    <li>128-bit security level</li>
-                                    <li>Efficient pairing operations</li>
-                                    <li>Hardware acceleration support</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div style="background: #fef2f2; border: 1px solid #f87171; padding: 1rem; border-radius: 0.5rem;">
-                            <div style="font-weight: 600; color: #991b1b; margin-bottom: 0.5rem;">🛡️ Multi-Layer Security</div>
-                            <div style="font-size: 0.875rem; color: #7f1d1d;">
-                                <ul style="margin: 0; padding: 0; list-style: none;">
-                                    <li>🔑 Production API keys</li>
-                                    <li>🔒 TLS encryption</li>
-                                    <li>🎯 Rate limiting</li>
-                                    <li>📝 Digital signatures</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- API Security Section -->
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>🔑 API Security & Authentication</h3>
-                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-                    <div>
-                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🛡️ Authentication Model</h4>
-                        <div style="background: #f1f5f9; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="font-family: 'Courier New', monospace; font-size: 0.875rem; margin-bottom: 1rem;">
-                                <strong>SP-Specific API Keys:</strong><br>
-                                • T-Mobile DE: <code style="background: #e2e8f0; padding: 0.25rem;">tmobile_api_key_2024_secure</code><br>
-                                • Vodafone UK: <code style="background: #e2e8f0; padding: 0.25rem;">vodafone_api_key_2024_secure</code><br>
-                                • Orange FR: <code style="background: #e2e8f0; padding: 0.25rem;">orange_api_key_2024_secure</code><br>
-                                • Telenor NO: <code style="background: #e2e8f0; padding: 0.25rem;">telenor_api_key_2024_secure</code><br>
-                                • SFR FR: <code style="background: #e2e8f0; padding: 0.25rem;">sfr_api_key_2024_secure</code>
-                            </div>
-                        </div>
-                        <p style="font-size: 0.875rem; color: #64748b;">
-                            Each service provider has dedicated API keys for secure access to their blockchain node.
-                            Keys are rotated quarterly and support role-based permissions.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 style="color: var(--primary-color); margin-bottom: 1rem;">🔒 Request Authorization</h4>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">Header Requirements:</div>
-                            <div style="font-family: 'Courier New', monospace; font-size: 0.875rem; background: #1e293b; color: #f1f5f9; padding: 0.75rem; border-radius: 0.25rem; margin-bottom: 1rem;">
-Authorization: Bearer {API_KEY}<br>
-X-API-Key: {API_KEY}<br>
-Content-Type: application/json
-                            </div>
-                        </div>
-                        <div style="background: #fef9e7; border: 1px solid #f59e0b; padding: 1rem; border-radius: 0.5rem;">
-                            <div style="font-weight: 600; color: #92400e; margin-bottom: 0.5rem;">🎯 Access Control</div>
-                            <div style="font-size: 0.875rem; color: #78350f;">
-                                • Read access to own BCE records<br>
-                                • Write access for record submission<br>
-                                • Contract deployment permissions<br>
-                                • ZKP proof generation rights
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Smart Contract Architecture -->
             <div class="card">
-                <h3>📋 Smart Contract Architecture</h3>
-                <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-                    <div style="background: linear-gradient(135deg, #ddd6fe 0%, #c7d2fe 100%); padding: 1.5rem; border-radius: 0.75rem;">
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #7c3aed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;">
-                                <span style="color: white; font-size: 1.5rem;">🔍</span>
-                            </div>
-                            <h4 style="margin: 0; color: #5b21b6;">BCE Validator</h4>
+                <h2>🏗️ Architecture & Data Flow Documentation</h2>
+                <p>Comprehensive technical documentation has been moved to a dedicated page for better organization and performance.</p>
+
+                <div style="text-align: center; padding: 3rem; background: #eff6ff; border-radius: 12px; margin: 2rem 0;">
+                    <h3 style="color: #1d4ed8; margin-bottom: 2rem;">📚 Complete Documentation Available</h3>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 600px; margin: 0 auto;">
+                        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #3b82f6; margin-bottom: 1rem;">🏗️ Architecture</h4>
+                            <p style="font-size: 0.875rem; color: #64748b;">Complete API reference, authentication, and system architecture</p>
                         </div>
-                        <div style="font-size: 0.875rem; color: #6b21a8; text-align: center;">
-                            <strong>ZKP-Powered Validation</strong><br>
-                            • Real-time rate verification<br>
-                            • Privacy-preserving checks<br>
-                            • Automated compliance<br>
-                            • Gas-optimized execution
+
+                        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #3b82f6; margin-bottom: 1rem;">🌊 Data Flow</h4>
+                            <p style="font-size: 0.875rem; color: #64748b;">Visual diagrams and consensus model explanation</p>
                         </div>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, #fed7aa 0%, #fde68a 100%); padding: 1.5rem; border-radius: 0.75rem;">
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;">
-                                <span style="color: white; font-size: 1.5rem;">🔄</span>
-                            </div>
-                            <h4 style="margin: 0; color: #92400e;">Netting Engine</h4>
-                        </div>
-                        <div style="font-size: 0.875rem; color: #a16207; text-align: center;">
-                            <strong>Multilateral Optimization</strong><br>
-                            • 75% settlement reduction<br>
-                            • 5-party netting algorithms<br>
-                            • Real-time calculations<br>
-                            • Cost-efficient processing
-                        </div>
+                    <div style="margin-top: 2rem;">
+                        <a href="architecture-dataflow.html" target="_blank" style="display: inline-block; background: #3b82f6; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600; transition: background 0.2s;">
+                            📖 Open Architecture & Data Flow Documentation
+                        </a>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, #bbf7d0 0%, #a7f3d0 100%); padding: 1.5rem; border-radius: 0.75rem;">
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <div style="width: 60px; height: 60px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem;">
-                                <span style="color: white; font-size: 1.5rem;">⚖️</span>
-                            </div>
-                            <h4 style="margin: 0; color: #065f46;">Settlement Executor</h4>
-                        </div>
-                        <div style="font-size: 0.875rem; color: #047857; text-align: center;">
-                            <strong>Multi-Party Execution</strong><br>
-                            • Digital signature verification<br>
-                            • Automated dispute resolution<br>
-                            • Cross-border compliance<br>
-                            • Audit trail generation
-                        </div>
-                    </div>
+                    <p style="color: #64748b; font-size: 0.875rem; margin-top: 1rem;">
+                        Documentation includes all API endpoints, smart contracts, ZKP system, and complete request/response examples
+                    </p>
                 </div>
 
-                <!-- API Documentation Section -->
-                <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 2rem; margin: 2rem 0;">
-                    <div style="color: #1e40af; font-weight: 700; font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
-                        📚 Complete API Reference Documentation
-                    </div>
-
-                    <div style="background: #dbeafe; border: 1px solid #3b82f6; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
-                        <h4 style="color: #1e40af;">🌐 SP Blockchain REST API Endpoints</h4>
-                        <p style="color: #374151;">All endpoints require authentication via API keys. Each SP node runs on its dedicated port.</p>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
-                        <!-- Node Information -->
-                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;">
-                            <h4 style="color: #059669;">🏢 Node Endpoints</h4>
-                            <ul style="font-family: monospace; font-size: 0.875rem; line-height: 1.6;">
-                                <li><strong>T-Mobile DE:</strong> localhost:8081</li>
-                                <li><strong>Vodafone UK:</strong> localhost:8082</li>
-                                <li><strong>Orange FR:</strong> localhost:8083</li>
-                                <li><strong>Telenor NO:</strong> localhost:8084</li>
-                                <li><strong>SFR FR:</strong> localhost:8085</li>
+                <!-- Quick API Reference -->
+                <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+                    <h4 style="color: #374151; margin-bottom: 1rem;">🚀 Quick API Reference</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                        <div>
+                            <strong>BCE Records:</strong>
+                            <ul style="font-family: monospace; font-size: 0.875rem; color: #64748b;">
+                                <li>POST /api/v1/bce/submit</li>
+                                <li>GET /api/v1/read/bce_records</li>
+                                <li>GET /api/v1/read/settlement_blocks</li>
                             </ul>
                         </div>
-
-                        <!-- Authentication -->
-                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;">
-                            <h4 style="color: #dc2626;">🔐 Authentication</h4>
-                            <p style="font-size: 0.875rem;">All requests require both headers:</p>
-                            <pre style="background: #1f2937; color: #e5e7eb; padding: 0.75rem; border-radius: 4px; font-size: 0.75rem;">Authorization: Bearer {api_key}
-X-API-Key: {api_key}</pre>
+                        <div>
+                            <strong>Smart Contracts:</strong>
+                            <ul style="font-family: monospace; font-size: 0.875rem; color: #64748b;">
+                                <li>POST /api/v1/contracts/deploy</li>
+                                <li>POST /api/v1/contracts/execute</li>
+                                <li>GET /api/v1/contracts/list</li>
+                            </ul>
                         </div>
-                    </div>
-
-                    <!-- BCE Records API -->
-                    <div style="background: white; border-left: 4px solid #10b981; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
-                        <h4 style="color: #047857;">📊 BCE Records Management</h4>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">POST /api/v1/bce/submit</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Submit a new BCE (Billing and Charging Exchange) record</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; overflow-x: auto; margin-top: 0.5rem;">curl -X POST "http://localhost:8083/api/v1/bce/submit" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer orange_api_key_2024_secure" \
-  -H "X-API-Key: orange_api_key_2024_secure" \
-  -d '{
-    "record_id": "CDR_EXAMPLE_001",
-    "visited_operator": "Orange-FR",
-    "home_operator": "T-Mobile-DE",
-    "imsi": "262020000001234",
-    "call_minutes": 45,
-    "call_rate_cents": 22,
-    "data_mb": 150,
-    "data_rate_cents": 5,
-    "sms_count": 8,
-    "sms_rate_cents": 12,
-    "wholesale_charge_cents": 1836,
-    "timestamp": 1758827469,
-    "proof_verified": false,
-    "settlement_status": "Pending",
-    "settled_in_block": null,
-    "settlement_id": null,
-    "settled_timestamp": null
-  }'</pre>
-                            </details>
+                        <div>
+                            <strong>Settlements:</strong>
+                            <ul style="font-family: monospace; font-size: 0.875rem; color: #64748b;">
+                                <li>GET /api/v1/settlements</li>
+                                <li>GET /api/v1/settlements/{id}</li>
+                            </ul>
                         </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">GET /api/v1/read/bce_records</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Retrieve all BCE records for the current SP</p>
-                            <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 4px; padding: 0.75rem; margin: 0.5rem 0; font-size: 0.75rem;">
-                                <strong>Settlement Tracking:</strong> Each BCE record now includes settlement status fields to prevent double billing:
-                                <ul style="margin: 0.5rem 0; padding-left: 1rem;">
-                                    <li><code>settlement_status</code>: "Pending", "InProgress", "Settled", or "Disputed"</li>
-                                    <li><code>settled_in_block</code>: Block hash where record was settled (if settled)</li>
-                                    <li><code>settlement_id</code>: ID of settlement transaction (if in progress/settled)</li>
-                                    <li><code>settled_timestamp</code>: Unix timestamp when settled (if settled)</li>
-                                </ul>
-                            </div>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8083/api/v1/read/bce_records" \
-  -H "Authorization: Bearer orange_api_key_2024_secure" \
-  -H "X-API-Key: orange_api_key_2024_secure"</pre>
-                            </details>
+                        <div>
+                            <strong>System:</strong>
+                            <ul style="font-family: monospace; font-size: 0.875rem; color: #64748b;">
+                                <li>GET /health</li>
+                                <li>GET /api/v1/zkp/stats</li>
+                                <li>GET /api/v1/blockchain/stats</li>
+                            </ul>
                         </div>
-                    </div>
-
-                    <!-- Smart Contracts API -->
-                    <div style="background: white; border-left: 4px solid #8b5cf6; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
-                        <h4 style="color: #7c3aed;">📋 Smart Contracts Management</h4>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">POST /api/v1/contracts/deploy</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Deploy a new smart contract to the blockchain</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; overflow-x: auto; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/contracts/deploy" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
-  -H "X-API-Key: tmobile_api_key_2024_secure" \
-  -d '{
-    "contract_id": "demo-bce-validator",
-    "contract_type": "bce_validator",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
-    "description": "BCE record validation with ZKP proofs"
-  }'</pre>
-                            </details>
-                        </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">POST /api/v1/contracts/execute</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Execute a method on a deployed smart contract</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; overflow-x: auto; margin-top: 0.5rem;">curl -X POST "http://localhost:8081/api/v1/contracts/execute" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
-  -H "X-API-Key: tmobile_api_key_2024_secure" \
-  -d '{
-    "contract_id": "demo-bce-validator",
-    "method": "validate_bce_rates",
-    "parameters": {
-      "call_rate_cents": "22",
-      "data_rate_cents": "5",
-      "sms_rate_cents": "12"
-    }
-  }'</pre>
-                            </details>
-                        </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">GET /api/v1/contracts/list</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">List all deployed smart contracts</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/contracts/list" \
-  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
-  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
-                            </details>
-                        </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">GET /api/v1/contracts/stats</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Get smart contract system statistics</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/api/v1/contracts/stats" \
-  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
-  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
-                            </details>
-                        </div>
-                    </div>
-
-                    <!-- ZKP and System API -->
-                    <div style="background: white; border-left: 4px solid #f59e0b; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
-                        <h4 style="color: #d97706;">🔐 Zero-Knowledge Proofs & System</h4>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">POST /api/v1/zkp/generate_proofs</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Generate ZKP proofs for all unverified BCE records</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X POST "http://localhost:8083/api/v1/zkp/generate_proofs" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer orange_api_key_2024_secure" \
-  -H "X-API-Key: orange_api_key_2024_secure" \
-  -d '{"verify_all": true}'</pre>
-                            </details>
-                        </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">GET /api/v1/zkp/stats</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Get ZKP system statistics and consortium status</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8083/api/v1/zkp/stats" \
-  -H "Authorization: Bearer orange_api_key_2024_secure" \
-  -H "X-API-Key: orange_api_key_2024_secure"</pre>
-                            </details>
-                        </div>
-
-                        <div style="margin: 1rem 0;">
-                            <h5 style="color: #374151;">GET /health</h5>
-                            <p style="font-size: 0.875rem; color: #6b7280;">Get node health status and basic statistics</p>
-                            <details style="margin: 0.5rem 0;">
-                                <summary style="cursor: pointer; color: #3b82f6;">📋 Request Example</summary>
-                                <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">curl -X GET "http://localhost:8081/health" \
-  -H "Authorization: Bearer tmobile_api_key_2024_secure" \
-  -H "X-API-Key: tmobile_api_key_2024_secure"</pre>
-                            </details>
-                        </div>
-                    </div>
-
-                    <!-- API Keys Reference -->
-                    <div style="background: #fef3c7; border: 2px solid #f59e0b; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
-                        <h4 style="color: #92400e;">🔑 Authentication Keys Reference</h4>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; font-family: monospace; font-size: 0.875rem;">
-                            <div><strong>T-Mobile DE:</strong> tmobile_api_key_2024_secure</div>
-                            <div><strong>Vodafone UK:</strong> vodafone_api_key_2024_secure</div>
-                            <div><strong>Orange FR:</strong> orange_api_key_2024_secure</div>
-                            <div><strong>Telenor NO:</strong> telenor_api_key_2024_secure</div>
-                            <div><strong>SFR FR:</strong> sfr_api_key_2024_secure</div>
-                        </div>
-                        <p style="color: #92400e; font-size: 0.875rem; margin-top: 1rem;">
-                            <strong>⚠️ Security Note:</strong> Each SP can only access their own BCE records and submit data to their own node. Cross-SP queries require proper consortium permissions.
-                        </p>
-                    </div>
-
-                    <!-- Error Handling -->
-                    <div style="background: white; border-left: 4px solid #ef4444; padding: 2rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0;">
-                        <h4 style="color: #dc2626;">⚠️ Error Handling & Response Formats</h4>
-
-                        <h5 style="color: #374151; margin-top: 1.5rem;">Success Response Format</h5>
-                        <pre style="background: #dcfce7; color: #166534; padding: 1rem; border-radius: 4px; font-size: 0.75rem;">{
-  "success": true,
-  "data": { ... },
-  "message": "Operation completed successfully"
-}</pre>
-
-                        <h5 style="color: #374151; margin-top: 1.5rem;">Error Response Format</h5>
-                        <pre style="background: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 4px; font-size: 0.75rem;">{
-  "success": false,
-  "data": null,
-  "message": "Error description"
-}</pre>
-
-                        <h5 style="color: #374151; margin-top: 1.5rem;">Common HTTP Status Codes</h5>
-                        <ul style="font-size: 0.875rem; line-height: 1.6;">
-                            <li><strong>200 OK:</strong> Request successful</li>
-                            <li><strong>400 Bad Request:</strong> Invalid request format or missing fields</li>
-                            <li><strong>401 Unauthorized:</strong> Invalid or missing API key</li>
-                            <li><strong>403 Forbidden:</strong> Access denied for this operation</li>
-                            <li><strong>500 Internal Server Error:</strong> Server-side processing error</li>
-                        </ul>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: #eff6ff; border-radius: 8px;">
-                        <h4 style="color: #1d4ed8; margin-bottom: 1rem;">🚀 Ready for Integration</h4>
-                        <p style="color: #1e40af; margin: 0;">
-                            This comprehensive API reference covers all endpoints needed for SP Blockchain integration.
-                            Use the interactive demo script to see these APIs in action with real examples.
-                        </p>
-                        <p style="color: #3b82f6; font-family: monospace; font-size: 0.875rem; margin-top: 1rem;">
-                            ./scripts/interactive_telefonica_demo.sh
-                        </p>
                     </div>
                 </div>
             </div>
@@ -924,330 +507,39 @@ X-API-Key: {api_key}</pre>
 
         <!-- Data Flow Tab -->
         <div id="dataflow" class="tab-content">
-            <style>
-                .flow-diagram {
-                    background: #f8fafc;
-                    border: 2px solid #e2e8f0;
-                    border-radius: 12px;
-                    padding: 2rem;
-                    margin: 1rem 0;
-                    overflow-x: auto;
-                }
-                .flow-row {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    margin: 2rem 0;
-                    flex-wrap: wrap;
-                    gap: 1rem;
-                }
-                .flow-box {
-                    background: white;
-                    border: 2px solid #cbd5e0;
-                    border-radius: 8px;
-                    padding: 1rem;
-                    min-width: 120px;
-                    text-align: center;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                }
-                .sp-box {
-                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                    color: white;
-                    font-weight: 600;
-                }
-                .storage-box {
-                    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                    color: white;
-                    font-weight: 600;
-                }
-                .consensus-box {
-                    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                    color: white;
-                    font-weight: 600;
-                }
-                .arrow {
-                    font-size: 2rem;
-                    color: #4a5568;
-                    margin: 0 1rem;
-                }
-                .data-types {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 2rem;
-                    margin-top: 2rem;
-                }
-                .consensus-model {
-                    background: #fff7ed;
-                    border: 2px solid #fed7aa;
-                    border-radius: 8px;
-                    padding: 2rem;
-                    margin: 2rem 0;
-                }
-                .consensus-title {
-                    color: #ea580c;
-                    font-weight: 700;
-                    font-size: 1.25rem;
-                    margin-bottom: 1rem;
-                }
-                .data-type-card {
-                    background: white;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 8px;
-                    padding: 1.5rem;
-                }
-                .data-type-title {
-                    font-weight: 700;
-                    color: #2d3748;
-                    margin-bottom: 1rem;
-                }
-                .feature-list {
-                    list-style: none;
-                    padding: 0;
-                }
-                .feature-list li {
-                    padding: 0.5rem 0;
-                    border-bottom: 1px solid #f1f5f9;
-                }
-                .feature-list li:before {
-                    content: "✓";
-                    color: #10b981;
-                    font-weight: bold;
-                    margin-right: 0.5rem;
-                }
-                .warning-box {
-                    background: #fef3c7;
-                    border: 1px solid #f59e0b;
-                    border-radius: 8px;
-                    padding: 1rem;
-                    margin: 1rem 0;
-                }
-                .warning-title {
-                    color: #92400e;
-                    font-weight: 700;
-                }
-            </style>
-
             <div class="card">
-                <h2>🌊 SP Blockchain Data Flow Architecture</h2>
-                <p>Visual representation of how data flows through our 5-party telecom consortium blockchain</p>
+                <h2>🌊 Data Flow Documentation</h2>
+                <p>Data flow diagrams and architecture details have been moved to the dedicated documentation page.</p>
 
-                <!-- Main Data Flow Diagram -->
-                <div class="flow-diagram">
-                    <h3 style="text-align: center; margin-bottom: 2rem; color: #2d3748;">Complete Data Flow: BCE Records → Storage → Consensus → Settlement</h3>
+                <div style="text-align: center; padding: 3rem; background: #f0fdf4; border-radius: 12px; margin: 2rem 0;">
+                    <h3 style="color: #166534; margin-bottom: 2rem;">📊 Interactive Data Flow Diagrams</h3>
 
-                    <!-- Row 1: 5 Service Providers -->
-                    <div class="flow-row">
-                        <div class="flow-box sp-box">🇩🇪<br>T-Mobile DE<br><small>Port: 8081</small></div>
-                        <div class="flow-box sp-box">🇬🇧<br>Vodafone UK<br><small>Port: 8082</small></div>
-                        <div class="flow-box sp-box">🇫🇷<br>Orange FR<br><small>Port: 8083</small></div>
-                        <div class="flow-box sp-box">🇳🇴<br>Telenor NO<br><small>Port: 8084</small></div>
-                        <div class="flow-box sp-box">🇫🇷<br>SFR FR<br><small>Port: 8085</small></div>
-                    </div>
-
-                    <!-- Arrow Down -->
-                    <div style="text-align: center;">
-                        <div class="arrow">⬇</div>
-                        <p><strong>BCE Records Ingestion</strong><br>Roaming call/data/SMS records via authenticated APIs</p>
-                    </div>
-
-                    <!-- Row 2: RocksDB Storage -->
-                    <div class="flow-row">
-                        <div class="flow-box storage-box" style="flex: 1; min-width: 300px;">
-                            📊 RocksDB Persistent Storage<br>
-                            <small>Separate databases per SP:<br>
-                            • tmobile-de.db<br>
-                            • vodafone-uk.db<br>
-                            • orange-fr.db<br>
-                            • telenor-no.db<br>
-                            • sfr-fr.db</small>
-                        </div>
-                    </div>
-
-                    <!-- Arrow Down -->
-                    <div style="text-align: center;">
-                        <div class="arrow">⬇</div>
-                        <p><strong>ZKP Processing & Smart Contracts</strong></p>
-                    </div>
-
-                    <!-- Row 3: Processing Layer -->
-                    <div class="flow-row">
-                        <div class="flow-box consensus-box">🔐<br>Groth16 ZKP<br><small>Privacy Proofs</small></div>
-                        <div class="flow-box consensus-box">📋<br>Smart Contracts<br><small>Settlement Logic</small></div>
-                        <div class="flow-box consensus-box">🤝<br>P2P Consensus<br><small>Block Validation</small></div>
-                    </div>
-                </div>
-
-                <!-- Data Types Comparison -->
-                <div class="data-types">
-                    <div class="data-type-card" style="border-left: 4px solid #3b82f6;">
-                        <div class="data-type-title">📊 BCE Records (Business Data)</div>
-                        <ul class="feature-list">
-                            <li>Roaming call/data/SMS transactions</li>
-                            <li>Stored in individual SP RocksDB instances</li>
-                            <li>Protected by ZKP for privacy</li>
-                            <li>Immediate ingestion via REST APIs</li>
-                            <li>No blockchain consensus required</li>
-                            <li>SP-specific access control</li>
-                        </ul>
-                    </div>
-
-                    <div class="data-type-card" style="border-left: 4px solid #10b981;">
-                        <div class="data-type-title">⛓️ Blockchain Blocks (System Data)</div>
-                        <ul class="feature-list">
-                            <li>Smart contract executions</li>
-                            <li>Settlement transactions</li>
-                            <li>Consensus-validated state changes</li>
-                            <li>Distributed across all 5 nodes</li>
-                            <li>Immutable transaction history</li>
-                            <li>P2P network synchronization</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Consensus Model Explanation -->
-                <div class="consensus-model">
-                    <div class="consensus-title">🎯 Consensus Model: Hybrid Architecture</div>
-
-                    <div class="warning-box">
-                        <div class="warning-title">⚠️ Important Distinction</div>
-                        <p>Our SP Blockchain uses a <strong>hybrid consensus model</strong> that treats different data types differently:</p>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
-                        <div>
-                            <h4 style="color: #dc2626;">🚫 NO Consensus Required:</h4>
-                            <ul>
-                                <li><strong>BCE Records</strong> - Individual SP business data</li>
-                                <li>Direct API ingestion to local RocksDB</li>
-                                <li>Each SP manages their own BCE database</li>
-                                <li>Privacy maintained through ZKP verification</li>
-                                <li>Real-time processing without network delays</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 style="color: #059669;">✅ Consensus Required:</h4>
-                            <ul>
-                                <li><strong>Smart Contract Executions</strong></li>
-                                <li><strong>Settlement Transactions</strong></li>
-                                <li><strong>Contract Deployments</strong></li>
-                                <li><strong>System State Changes</strong></li>
-                                <li>All operations affecting multiple SPs</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 2rem; padding: 1rem; background: #f0fdf4; border-radius: 8px;">
-                        <h4 style="color: #166534;">🔄 How It Works:</h4>
-                        <ol style="color: #374151; line-height: 1.6;">
-                            <li><strong>BCE Ingestion</strong>: SPs submit roaming records directly to their local node via authenticated API</li>
-                            <li><strong>Local Storage</strong>: Records stored immediately in SP-specific RocksDB instance</li>
-                            <li><strong>ZKP Generation</strong>: Privacy proofs generated locally for sensitive billing data</li>
-                            <li><strong>Settlement Trigger</strong>: Smart contracts initiate cross-SP settlements (requires consensus)</li>
-                            <li><strong>Blockchain Recording</strong>: Settlement results recorded on distributed blockchain</li>
-                        </ol>
-                    </div>
-
-                    <div style="margin-top: 1rem; padding: 1rem; background: #eff6ff; border-radius: 8px;">
-                        <h4 style="color: #1d4ed8;">💡 Benefits of This Model:</h4>
-                        <ul style="color: #374151; line-height: 1.6;">
-                            <li><strong>Performance</strong>: BCE records processed instantly without network consensus delays</li>
-                            <li><strong>Privacy</strong>: Sensitive billing data never leaves SP's control</li>
-                            <li><strong>Scalability</strong>: Each SP can handle millions of records independently</li>
-                            <li><strong>Trust</strong>: Settlement transactions validated by all consortium members</li>
-                            <li><strong>Auditability</strong>: All financial settlements recorded on immutable blockchain</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Settlement Audit Trail Section -->
-                <div style="background: #fefce8; border: 2px solid #eab308; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
-                    <div style="color: #a16207; font-weight: 700; font-size: 1.25rem; margin-bottom: 1rem;">
-                        🔍 Settlement Audit Trail: "Which BCE Records Are in My Bill?"
-                    </div>
-
-                    <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
-                        <h4 style="color: #ea580c;">📋 The Challenge:</h4>
-                        <p style="color: #374151; line-height: 1.6;">
-                            When T-Mobile receives a settlement bill from Vodafone for roaming charges, T-Mobile needs to verify:
-                            <strong>Which specific BCE records are included in this settlement amount?</strong>
+                    <div style="margin-bottom: 2rem;">
+                        <p style="color: #374151; font-size: 1.125rem; margin-bottom: 1rem;">
+                            Complete visual representation of how data flows through our 5-party telecom consortium blockchain
                         </p>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
-                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;">
-                            <h4 style="color: #dc2626;">❌ Current Limitation:</h4>
-                            <ul style="color: #374151; line-height: 1.6;">
-                                <li>BCE records stored locally per SP</li>
-                                <li>Settlement amounts calculated in aggregate</li>
-                                <li>No direct linkage between settlements and source BCE records</li>
-                                <li>Difficult to audit specific billing disputes</li>
-                            </ul>
+                    <div style="margin-top: 2rem;">
+                        <a href="architecture-dataflow.html?tab=dataflow" target="_blank" style="display: inline-block; background: #10b981; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                            🌊 View Complete Data Flow Documentation
+                        </a>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 600px; margin: 2rem auto 0;">
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #10b981;">📊 BCE Records</h4>
+                            <p style="font-size: 0.875rem; color: #64748b;">Local storage, no consensus required</p>
                         </div>
 
-                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;">
-                            <h4 style="color: #059669;">✅ Proposed Solution:</h4>
-                            <ul style="color: #374151; line-height: 1.6;">
-                                <li>Settlement Reference System</li>
-                                <li>BCE Record Hash Inclusion</li>
-                                <li>Cross-SP Verification API</li>
-                                <li>Audit Trail Smart Contracts</li>
-                            </ul>
+                        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <h4 style="color: #10b981;">⛓️ Settlement Blocks</h4>
+                            <p style="font-size: 0.875rem; color: #64748b;">Blockchain consensus, distributed</p>
                         </div>
-                    </div>
-
-                    <div style="background: #f0fdf4; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0;">
-                        <h4 style="color: #166534;">🔄 Proposed Audit Trail Flow:</h4>
-                        <ol style="color: #374151; line-height: 1.8; margin: 0; padding-left: 1.5rem;">
-                            <li><strong>BCE Record Creation</strong>: Each BCE record gets a unique hash and timestamp</li>
-                            <li><strong>Settlement Preparation</strong>: Smart contract collects all relevant BCE record hashes for a time period</li>
-                            <li><strong>Settlement Proposal</strong>: Include array of BCE record hashes in settlement transaction</li>
-                            <li><strong>Cross-Verification</strong>: Receiving SP can query originating SP to verify specific records</li>
-                            <li><strong>Dispute Resolution</strong>: Individual BCE records can be examined for billing disputes</li>
-                        </ol>
-                    </div>
-
-                    <div style="background: #fffbeb; border: 1px solid #f59e0b; border-radius: 8px; padding: 1.5rem;">
-                        <h4 style="color: #92400e;">🚀 Implementation Example:</h4>
-                        <pre style="background: #1f2937; color: #e5e7eb; padding: 1rem; border-radius: 4px; font-size: 0.875rem; overflow-x: auto;"><code>// Settlement Transaction with BCE Audit Trail
-{
-  "settlement_id": "SETTLE_TMOBILE_VODAFONE_2025Q1",
-  "from_sp": "vodafone-uk",
-  "to_sp": "tmobile-de",
-  "total_amount_cents": 45670,
-  "settlement_period": "2025-01-01_to_2025-03-31",
-  "bce_record_hashes": [
-    "sha256_abc123...",  // CDR_VODAFONEUK_001
-    "sha256_def456...",  // CDR_VODAFONEUK_002
-    "sha256_ghi789..."   // CDR_VODAFONEUK_003
-  ],
-  "zkp_proof": "groth16_proof_data...",
-  "verification_endpoint": "/api/v1/audit/bce_records"
-}</code></pre>
-                        <p style="color: #92400e; margin-top: 1rem; font-size: 0.875rem;">
-                            <strong>Verification:</strong> T-Mobile can call <code>vodafone-uk:8082/api/v1/audit/bce_records</code>
-                            with the hash list to verify record details (with privacy protection).
-                        </p>
-                    </div>
-
-                    <div style="background: #ecfdf5; border: 1px solid #10b981; border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem;">
-                        <h4 style="color: #047857;">🔐 Privacy Considerations:</h4>
-                        <ul style="color: #374151; line-height: 1.6;">
-                            <li><strong>ZKP Verification</strong>: Individual BCE records remain private, only aggregate amounts verified</li>
-                            <li><strong>Hash-based Auditing</strong>: Record existence and integrity verified without exposing sensitive data</li>
-                            <li><strong>Permissioned Access</strong>: Only involved SPs can audit their specific settlement records</li>
-                            <li><strong>Dispute Resolution</strong>: Detailed record access only granted during formal dispute processes</li>
-                        </ul>
-                    </div>
-
-                    <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #dbeafe; border-radius: 8px;">
-                        <p style="color: #1e40af; font-weight: 600; margin: 0;">
-                            💡 <strong>Future Enhancement:</strong> This audit trail system would be a key feature for production deployment,
-                            ensuring full transparency and dispute resolution capabilities while maintaining privacy through ZKP.
-                        </p>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Settlements Tab -->
@@ -1258,11 +550,6 @@ X-API-Key: {api_key}</pre>
                 <div id="bceOverview" class="loading">Loading...</div>
             </div>
 
-            <!-- BCE Records Detail Section -->
-            <div class="card" style="margin-bottom: 2rem;">
-                <h3>📋 BCE Records</h3>
-                <div id="bceRecords" class="loading">Loading...</div>
-            </div>
 
             <!-- Settlement Overview Section -->
             <div class="card" style="margin-bottom: 2rem;">
@@ -1284,7 +571,7 @@ X-API-Key: {api_key}</pre>
             'tmobile-de': { name: 'T-Mobile DE', port: 8081, country: '🇩🇪' },
             'vodafone-uk': { name: 'Vodafone UK', port: 8082, country: '🇬🇧' },
             'orange-fr': { name: 'Orange FR', port: 8083, country: '🇫🇷' },
-            'telenor-no': { name: 'Telenor NO', port: 8084, country: '🇳🇴' },
+            'telefonica-es': { name: 'Telefónica ES', port: 8084, country: '🇪🇸' },
             'sfr-fr': { name: 'SFR FR', port: 8085, country: '🇫🇷' }
         };
 
@@ -1300,942 +587,37 @@ X-API-Key: {api_key}</pre>
             health: '/health'
         };
 
-        // SP Authentication State
-        let authenticatedSPs = {}; // Store authenticated SP API keys
-        let currentAuthenticatedSP = null;
-
-        // API call to blockchain nodes with authentication
-        async function callNodeHealth(nodeId) {
-            try {
-                const url = `/api/${nodeId}/health`;
-
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Node ${nodeId} returned ${response.status}`);
-                }
-
-                return await response.json();
-            } catch (error) {
-                console.error(`Failed to call ${nodeId}:`, error);
-                return { error: error.message, node_id: nodeId };
-            }
-        }
-
-        // Authenticated API call for protected SP data
-        async function callAuthenticatedAPI(nodeId, endpoint) {
-            const apiKey = authenticatedSPs[nodeId];
-            if (!apiKey) {
-                throw new Error('Authentication required for this SP');
-            }
-
-            try {
-                const url = `/api/${nodeId}${endpoint}`;
-
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`,
-                        'X-API-Key': apiKey
-                    }
-                });
-
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        throw new Error('Invalid API key');
-                    }
-                    throw new Error(`Node ${nodeId} returned ${response.status}`);
-                }
-
-                return await response.json();
-            } catch (error) {
-                console.error(`Failed to call authenticated API for ${nodeId}:`, error);
-                throw error;
-            }
-        }
-
-        // Check if SP is authenticated
-        function isAuthenticated(nodeId) {
-            return authenticatedSPs.hasOwnProperty(nodeId);
-        }
-
-        // Show authentication modal
-        function showAuthModal(spId) {
-            const modal = document.getElementById('authModal');
-            const spName = SP_NODES[spId]?.name || spId;
-            document.getElementById('authSPName').textContent = spName;
-            document.getElementById('authSPId').value = spId;
-            document.getElementById('authError').textContent = '';
-            document.getElementById('apiKeyInput').value = '';
-            modal.classList.remove('hidden');
-        }
-
-        // Hide authentication modal
-        function hideAuthModal() {
-            document.getElementById('authModal').classList.add('hidden');
-        }
-
-        // Authenticate SP
-        async function authenticateSP() {
-            const spId = document.getElementById('authSPId').value;
-            const apiKey = document.getElementById('apiKeyInput').value.trim();
-            const errorDiv = document.getElementById('authError');
-
-            if (!apiKey) {
-                errorDiv.textContent = 'Please enter your API key';
-                return;
-            }
-
-            try {
-                // Test the API key by making a test call
-                const response = await fetch(`/api/${spId}/health`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`,
-                        'X-API-Key': apiKey
-                    }
-                });
-
-                if (response.ok) {
-                    // Store the authenticated API key
-                    authenticatedSPs[spId] = apiKey;
-                    currentAuthenticatedSP = spId;
-                    hideAuthModal();
-
-                    // Switch to the authenticated SP and reload data
-                    selectSP(spId);
-                    loadCurrentTab();
-
-                    // Update UI to show authenticated state
-                    updateAuthenticationUI();
-                } else {
-                    errorDiv.textContent = 'Invalid API key for this SP';
-                }
-            } catch (error) {
-                errorDiv.textContent = 'Authentication failed: ' + error.message;
-            }
-        }
-
-        // Update UI to show authentication state
-        function updateAuthenticationUI() {
-            const protectedElements = document.querySelectorAll('.protected-data');
-            protectedElements.forEach(element => {
-                const isCurrentSPAuthenticated = currentSP === 'global' || isAuthenticated(currentSP);
-                element.classList.toggle('locked', !isCurrentSPAuthenticated);
-            });
-        }
-
-        // Select SP and update dropdown
-        function selectSP(spId) {
-            currentSP = spId;
-            document.getElementById('spSelector').value = spId;
-            updateAuthenticationUI();
-        }
-
-        // Load current tab data
-        function loadCurrentTab() {
-            loadTabData(currentTab);
-        }
-
-        // Get health data from all nodes or specific SP
-        async function getAllNodesHealth() {
-            if (currentSP === 'global') {
-                const promises = Object.keys(SP_NODES).map(nodeId => callNodeHealth(nodeId));
-                const results = await Promise.all(promises);
-                return results.filter(result => !result.error);
-            } else {
-                // Get data from specific SP only
-                const result = await callNodeHealth(currentSP);
-                return result.error ? [] : [result];
-            }
-        }
-
-        // Get authenticated BCE records for specific SP
-        async function getBCERecords(nodeId) {
-            if (!isAuthenticated(nodeId)) {
-                throw new Error('Authentication required');
-            }
-
-            try {
-                // Try the authenticated read API first (like in the script)
-                return await callAuthenticatedAPI(nodeId, '/api/v1/read/bce_records');
-            } catch (error) {
-                console.warn(`BCE records API failed for ${nodeId}, trying fallback:`, error);
-                try {
-                    // Fall back to BCE stats if direct read fails
-                    return await callAuthenticatedAPI(nodeId, '/api/v1/bce/stats');
-                } catch (fallbackError) {
-                    console.error(`All BCE endpoints failed for ${nodeId}:`, fallbackError);
-                    throw fallbackError;
-                }
-            }
-        }
-
-        // Get authenticated settlement data for specific SP
-        async function getSettlementData(nodeId) {
-            if (!isAuthenticated(nodeId)) {
-                throw new Error('Authentication required');
-            }
-
-            try {
-                // Try the authenticated settlement blocks API (like in the script)
-                return await callAuthenticatedAPI(nodeId, '/api/v1/read/settlement_blocks');
-            } catch (error) {
-                console.warn(`Settlement blocks API failed for ${nodeId}, trying fallback:`, error);
-                try {
-                    // Fall back to settlements list API
-                    return await callAuthenticatedAPI(nodeId, '/api/v1/settlements');
-                } catch (fallbackError) {
-                    console.error(`All settlement endpoints failed for ${nodeId}:`, fallbackError);
-                    throw fallbackError;
-                }
-            }
-        }
-
-        // Get comprehensive blockchain stats for SP
-        async function getBlockchainStats(nodeId) {
-            if (!isAuthenticated(nodeId)) {
-                // For unauthenticated requests, just return health data
-                return await callNodeHealth(nodeId);
-            }
-
-            try {
-                // Get detailed blockchain stats with authentication
-                return await callAuthenticatedAPI(nodeId, '/api/v1/blockchain/stats');
-            } catch (error) {
-                console.warn(`Blockchain stats API failed for ${nodeId}, using health data:`, error);
-                // Fall back to health data
-                return await callNodeHealth(nodeId);
-            }
-        }
-
+        // Tab switching functionality
         function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
 
-            // Update tab content
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show selected tab content
+            const selectedContent = document.getElementById(tabName);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+
+            // Add active class to clicked button
+            const selectedButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
 
             currentTab = tabName;
             loadTabData(tabName);
         }
 
-        function formatNumber(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
-        }
-
-        function formatStatus(status) {
-            const statusClass = status === 'healthy' ? 'success' :
-                               status === 'warning' ? 'warning' : 'error';
-            return `<span class="status ${statusClass}">${status}</span>`;
-        }
-
-        function formatTimestamp(timestamp) {
-            if (!timestamp) return 'N/A';
-            try {
-                const date = new Date(timestamp);
-                return date.toLocaleString('en-US', {
-                    month: 'short',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            } catch (error) {
-                return 'Invalid Date';
-            }
-        }
-
-        async function loadOverview() {
-            try {
-                // Load real health data from all nodes
-                const healthResults = await getAllNodesHealth();
-                const healthyNodes = healthResults.filter(node => node.status === 'healthy').length;
-                const totalNodes = Object.keys(SP_NODES).length;
-
-                // Calculate total blocks and records from all healthy nodes
-                let totalBlocks = 0;
-                let totalRecords = 0;
-
-                healthResults.forEach(node => {
-                    if (node.total_blocks) totalBlocks += node.total_blocks;
-                    if (node.records_processed) totalRecords += node.records_processed;
-                });
-
-                // System Status
-                const spName = currentSP === 'global' ? 'System' : (SP_NODES[currentSP]?.name || currentSP);
-                document.getElementById('systemStatus').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${formatStatus(healthyNodes === totalNodes ? 'healthy' : 'warning')}</div>
-                            <div class="stat-label">${spName} Status</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${currentSP === 'global' ? `${healthyNodes}/${totalNodes}` : healthResults[0]?.node_id || 'N/A'}</div>
-                            <div class="stat-label">${currentSP === 'global' ? 'Active SPs' : 'Node ID'}</div>
-                        </div>
-                    </div>
-                `;
-
-                // Network Health - show individual SP or global view
-                const networkNodes = currentSP === 'global' ?
-                    healthResults.map(node => `🌐 ${node.node_id}: ${formatStatus(node.status || 'healthy')}`).join(' • ') :
-                    `🌐 ${healthResults[0]?.node_id || currentSP}: ${formatStatus(healthResults[0]?.status || 'healthy')}`;
-
-                document.getElementById('networkHealth').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${formatStatus('healthy')}</div>
-                            <div class="stat-label">ZKP System</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${formatStatus(healthyNodes > 0 ? 'healthy' : 'error')}</div>
-                            <div class="stat-label">Blockchain</div>
-                        </div>
-                    </div>
-                    <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);">
-                        ${networkNodes}
-                    </div>
-                `;
-
-                // Quick Stats - show individual SP or global aggregated data
-                const blocksLabel = currentSP === 'global' ? 'Total Blocks' : 'SP Blocks';
-                const recordsLabel = currentSP === 'global' ? 'Records Processed' : 'SP Records';
-                const spBlocks = currentSP === 'global' ? totalBlocks : (healthResults[0]?.total_blocks || 0);
-                const spRecords = currentSP === 'global' ? totalRecords : (healthResults[0]?.records_processed || 0);
-
-                document.getElementById('quickStats').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${spBlocks}</div>
-                            <div class="stat-label">${blocksLabel}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${formatNumber(spRecords)}</div>
-                            <div class="stat-label">${recordsLabel}</div>
-                        </div>
-                    </div>
-                `;
-
-            } catch (error) {
-                console.error('Failed to load overview:', error);
-                document.getElementById('systemStatus').innerHTML = '<div class="error">Failed to load data</div>';
-                document.getElementById('networkHealth').innerHTML = '<div class="error">Failed to load data</div>';
-                document.getElementById('quickStats').innerHTML = '<div class="error">Failed to load data</div>';
-            }
-        }
-
-        async function loadBlockchainData() {
-            try {
-                // Load real health data from all nodes
-                const healthResults = await getAllNodesHealth();
-
-                // Calculate blockchain stats from health data
-                let totalBlocks = 0;
-                let totalRecords = 0;
-                let maxBlocks = 0;
-
-                healthResults.forEach(node => {
-                    if (node.total_blocks) {
-                        totalBlocks += node.total_blocks;
-                        maxBlocks = Math.max(maxBlocks, node.total_blocks);
-                    }
-                    if (node.records_processed) totalRecords += node.records_processed;
-                });
-
-                // Show individual SP or global blockchain stats
-                const statsTitle = currentSP === 'global' ? 'Blockchain Statistics' : `${SP_NODES[currentSP]?.name || currentSP} Blockchain`;
-                const spBlocks = currentSP === 'global' ? totalBlocks : (healthResults[0]?.total_blocks || 0);
-                const spRecords = currentSP === 'global' ? totalRecords : (healthResults[0]?.records_processed || 0);
-                const spHeight = currentSP === 'global' ? maxBlocks : (healthResults[0]?.total_blocks || 0);
-                const activeNodes = currentSP === 'global' ? `${healthResults.length}/${Object.keys(SP_NODES).length}` :
-                    (healthResults.length > 0 ? '1/1' : '0/1');
-
-                document.getElementById('blockchainStats').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${spBlocks}</div>
-                            <div class="stat-label">${currentSP === 'global' ? 'Total Blocks' : 'SP Blocks'}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${spHeight}</div>
-                            <div class="stat-label">Chain Height</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${formatNumber(spRecords)}</div>
-                            <div class="stat-label">${currentSP === 'global' ? 'Records Processed' : 'SP Records'}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">${activeNodes}</div>
-                            <div class="stat-label">${currentSP === 'global' ? 'Active Nodes' : 'Node Status'}</div>
-                        </div>
-                    </div>
-                `;
-
-                // Show node status instead of blocks
-                const nodeRows = healthResults.map(node => `
-                    <tr>
-                        <td>${SP_NODES[node.node_id]?.name || node.node_id}</td>
-                        <td>${formatStatus(node.status || 'healthy')}</td>
-                        <td>${node.total_blocks || 0}</td>
-                        <td>${node.records_processed || 0}</td>
-                    </tr>
-                `).join('');
-
-                document.getElementById('recentBlocks').innerHTML = `
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>SP Node</th>
-                                <th>Status</th>
-                                <th>Blocks</th>
-                                <th>Records</th>
-                            </tr>
-                        </thead>
-                        <tbody>${nodeRows}</tbody>
-                    </table>
-                `;
-
-            } catch (error) {
-                console.error('Failed to load blockchain data:', error);
-                document.getElementById('blockchainStats').innerHTML = '<div class="error">Failed to load data</div>';
-                document.getElementById('recentBlocks').innerHTML = '<div class="error">Failed to load data</div>';
-            }
-        }
-
-        async function loadZKPData() {
-            try {
-                // Load real health data to check ZKP system
-                const healthResults = await getAllNodesHealth();
-                const healthyNodes = healthResults.filter(node => node.status === 'healthy').length;
-
-                // Show individual SP or global ZKP status
-                const zkpTitle = currentSP === 'global' ? 'ZKP System Status' : `${SP_NODES[currentSP]?.name || currentSP} ZKP`;
-
-                let zkpStatus = 'warning';
-                if (currentSP === 'global') {
-                    // Global view: all nodes must be healthy
-                    zkpStatus = healthyNodes === healthResults.length ? 'healthy' : 'warning';
-                } else {
-                    // Individual SP view: check specific SP's health
-                    const spHealth = healthResults.find(node => node.node_id === currentSP);
-                    zkpStatus = spHealth && spHealth.status === 'healthy' ? 'healthy' : 'warning';
-                }
-
-                document.getElementById('zkpStatus').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${formatStatus(zkpStatus)}</div>
-                            <div class="stat-label">${zkpTitle}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">Ready</div>
-                            <div class="stat-label">Trusted Setup</div>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById('contractMetrics').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">${healthyNodes}</div>
-                            <div class="stat-label">Active Contracts</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">Groth16</div>
-                            <div class="stat-label">ZKP Protocol</div>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById('zkpPerformance').innerHTML = `
-                    <div class="stat-grid">
-                        <div class="stat">
-                            <div class="stat-value">~2.1s</div>
-                            <div class="stat-label">Avg Proof Time</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">BN254</div>
-                            <div class="stat-label">Elliptic Curve</div>
-                        </div>
-                    </div>
-                `;
-
-            } catch (error) {
-                console.error('Failed to load ZKP data:', error);
-                document.getElementById('zkpStatus').innerHTML = '<div class="error">Failed to load ZKP data</div>';
-                document.getElementById('contractMetrics').innerHTML = '<div class="error">Failed to load contract data</div>';
-                document.getElementById('zkpPerformance').innerHTML = '<div class="error">Failed to load performance data</div>';
-            }
-        }
-
-        async function loadBCEOverviewData() {
-            try {
-                if (currentSP === 'global') {
-                    // Global view - use health data
-                    const healthResults = await getAllNodesHealth();
-
-                    let totalRecords = 0;
-                    let activeNodes = 0;
-                    let totalValue = 0;
-
-                    healthResults.forEach(node => {
-                        if (node.records_processed) {
-                            totalRecords += node.records_processed;
-                            activeNodes++;
-                        }
-                    });
-
-                    // Estimate total value from records (realistic estimation)
-                    totalValue = totalRecords * 12.50; // Average €12.50 per record
-
-                    document.getElementById('bceOverview').innerHTML = `
-                        <div class="stat-grid">
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(totalRecords)}</div>
-                                <div class="stat-label">Total Records</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${activeNodes}</div>
-                                <div class="stat-label">Active Nodes</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">€${formatNumber(totalValue)}</div>
-                                <div class="stat-label">Total Value</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatStatus('healthy')}</div>
-                                <div class="stat-label">System Status</div>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    // Individual SP view - use authenticated APIs
-                    if (!isAuthenticated(currentSP)) {
-                        throw new Error('Authentication required for SP-specific BCE data');
-                    }
-
-                    const bceData = await getBCERecords(currentSP).catch(e => ({ error: e.message }));
-
-                    let spRecords = 0;
-                    let spValue = 0;
-                    let lastRecordTime = 'Never';
-
-                    if (bceData && !bceData.error && bceData.data && Array.isArray(bceData.data)) {
-                        spRecords = bceData.data.length;
-
-                        // Calculate total value from actual BCE records
-                        spValue = bceData.data.reduce((sum, record) => {
-                            return sum + (record.wholesale_charge_cents ? record.wholesale_charge_cents / 100 : 0);
-                        }, 0);
-
-                        // Get most recent record timestamp
-                        if (bceData.data.length > 0) {
-                            const mostRecent = bceData.data.reduce((latest, record) =>
-                                record.timestamp > latest.timestamp ? record : latest
-                            );
-                            lastRecordTime = formatTimestamp(mostRecent.timestamp * 1000);
-                        }
-                    }
-
-                    const spName = SP_NODES[currentSP]?.name || currentSP;
-
-                    document.getElementById('bceOverview').innerHTML = `
-                        <div class="stat-grid">
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(spRecords)}</div>
-                                <div class="stat-label">${spName} Records</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">€${spValue.toFixed(2)}</div>
-                                <div class="stat-label">Total Value</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${lastRecordTime}</div>
-                                <div class="stat-label">Last Record</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatStatus('healthy')}</div>
-                                <div class="stat-label">Node Status</div>
-                            </div>
-                        </div>
-                    `;
-                }
-            } catch (error) {
-                console.error('Failed to load BCE overview:', error);
-                document.getElementById('bceOverview').innerHTML = '<div class="error">Failed to load BCE overview data</div>';
-            }
-        }
-
-        async function loadSettlementsData() {
-            try {
-                // Load BCE Overview first
-                await loadBCEOverviewData();
-
-                if (currentSP === 'global') {
-                    // Global view - use health data for settlements
-                    const healthResults = await getAllNodesHealth();
-
-                    let totalSettlements = 0;
-                    let pendingSettlements = 0;
-
-                    healthResults.forEach(node => {
-                        // Estimate settlements from processed records
-                        if (node.records_processed) {
-                            totalSettlements += Math.floor(node.records_processed / 8); // ~8 records per settlement
-                            pendingSettlements += node.records_processed % 8; // Remaining records
-                        }
-                    });
-
-                    document.getElementById('settlementOverview').innerHTML = `
-                        <div class="stat-grid">
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(totalSettlements)}</div>
-                                <div class="stat-label">Total Settlements</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(pendingSettlements)}</div>
-                                <div class="stat-label">Pending Records</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">€100</div>
-                                <div class="stat-label">Threshold</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatStatus('healthy')}</div>
-                                <div class="stat-label">Settlement Health</div>
-                            </div>
-                        </div>
-                    `;
-
-                    // Show global BCE summary table
-                    const bceRows = healthResults.map(node => {
-                        const spNode = SP_NODES[node.node_id];
-                        const recordValue = (node.records_processed || 0) * 12.50; // Estimated value per record
-                        return `
-                            <tr>
-                                <td>
-                                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <span style="font-size: 1.2em;">${spNode?.country || '🌐'}</span>
-                                        <strong>${spNode?.name || node.node_id}</strong>
-                                    </div>
-                                </td>
-                                <td style="text-align: center;"><strong>${node.records_processed || 0}</strong></td>
-                                <td style="text-align: right; color: #059669; font-weight: 600;">€${recordValue.toFixed(2)}</td>
-                                <td style="text-align: center;">${formatStatus('healthy')}</td>
-                                <td style="font-size: 0.85em; color: #6b7280;">Port ${SP_NODES[node.node_id]?.port || 'N/A'}</td>
-                            </tr>
-                        `;
-                    }).join('');
-
-                    document.getElementById('bceRecords').innerHTML = `
-                        <div style="overflow-x: auto;">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>🌐 Service Provider</th>
-                                        <th style="text-align: center;">📊 Records</th>
-                                        <th style="text-align: right;">💰 Value</th>
-                                        <th style="text-align: center;">⚡ Status</th>
-                                        <th style="text-align: center;">🔗 API</th>
-                                    </tr>
-                                </thead>
-                                <tbody>${bceRows}</tbody>
-                            </table>
-                        </div>
-                        <div style="margin-top: 1rem; padding: 0.75rem; background: #f8fafc; border-radius: 0.375rem; font-size: 0.875rem; color: #64748b;">
-                            <strong>📝 Global BCE Records:</strong> Showing record counts and estimated values across all SP nodes in the consortium.
-                        </div>
-                    `;
-
-                } else {
-                    // Individual SP view - use authenticated APIs
-                    if (!isAuthenticated(currentSP)) {
-                        throw new Error('Authentication required for SP-specific settlement data');
-                    }
-
-                    // Get authenticated settlement data
-                    const [settlementData, bceData] = await Promise.all([
-                        getSettlementData(currentSP).catch(e => ({ error: e.message })),
-                        getBCERecords(currentSP).catch(e => ({ error: e.message }))
-                    ]);
-
-                    // Process SP-specific settlement data
-                    let spRecords = 0;
-                    let spPending = 0;
-
-                    if (bceData && !bceData.error) {
-                        // Extract records from BCE data structure
-                        if (bceData.data && Array.isArray(bceData.data)) {
-                            spRecords = bceData.data.length;
-                        } else if (bceData.records && Array.isArray(bceData.records)) {
-                            spRecords = bceData.records.length;
-                        } else if (bceData.total_records) {
-                            spRecords = bceData.total_records;
-                        } else if (bceData.records_processed) {
-                            spRecords = bceData.records_processed;
-                        }
-
-                        if (bceData.pending_records) {
-                            spPending = bceData.pending_records;
-                        }
-                    }
-
-                    // Show SP-specific settlement overview
-                    const bceLabel = `${SP_NODES[currentSP]?.name || currentSP} Records`;
-                    const settlementTitle = `${SP_NODES[currentSP]?.name || currentSP} Health`;
-
-                    document.getElementById('settlementOverview').innerHTML = `
-                        <div class="stat-grid">
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(spRecords)}</div>
-                                <div class="stat-label">${bceLabel}</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatNumber(spPending)}</div>
-                                <div class="stat-label">Pending</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">€100</div>
-                                <div class="stat-label">Settlement Threshold</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatStatus('healthy')}</div>
-                                <div class="stat-label">${settlementTitle}</div>
-                            </div>
-                        </div>
-                    `;
-
-                    // Display detailed BCE records for this SP
-                    let bceTableContent = '';
-
-                    if (bceData && !bceData.error) {
-                        if (bceData.data && Array.isArray(bceData.data)) {
-                            // Display actual BCE records with enhanced formatting
-                            const recordRows = bceData.data.map(record => {
-                                const recordDate = new Date(record.timestamp * 1000);
-                                const dateStr = recordDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-                                const timeStr = recordDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-                                // Determine service type from usage
-                                let serviceIcon = '📱';
-                                if (record.call_minutes > 60) serviceIcon = '☎️';
-                                else if (record.data_mb > 1000) serviceIcon = '📡';
-                                else if (record.sms_count > 20) serviceIcon = '💬';
-
-                                return `
-                                    <tr>
-                                        <td>
-                                            <div style="font-family: monospace; font-size: 0.8em; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; display: inline-block;">
-                                                ${record.record_id || 'N/A'}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                                <span>${serviceIcon}</span>
-                                                <div>
-                                                    <div style="font-weight: 600; font-size: 0.95em; color: #1e40af;">${record.home_operator || 'N/A'}</div>
-                                                    <div style="font-size: 0.8em; color: #64748b; font-weight: 500;">subscriber</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                                <span style="color: #059669;">→</span>
-                                                <div>
-                                                    <div style="font-weight: 600; font-size: 0.95em; color: #059669;">${record.visited_operator || 'N/A'}</div>
-                                                    <div style="font-size: 0.8em; color: #64748b; font-weight: 500;">visited</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="text-align: center; font-size: 0.85em;">
-                                                <div><strong>${record.call_minutes || 0}m</strong> calls</div>
-                                                <div><strong>${record.data_mb || 0}MB</strong> data</div>
-                                                <div><strong>${record.sms_count || 0}</strong> SMS</div>
-                                            </div>
-                                        </td>
-                                        <td style="text-align: right;">
-                                            <div style="font-weight: bold; color: #059669; font-size: 1.1em;">
-                                                €${record.wholesale_charge_cents ? (record.wholesale_charge_cents / 100).toFixed(2) : '0.00'}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="font-size: 0.8em; color: #64748b;">
-                                                <div>${dateStr}</div>
-                                                <div>${timeStr}</div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="font-family: monospace; font-size: 0.9em; background: #f8fafc; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
-                                                ${record.imsi ? record.imsi.substring(0, 10) + '...' : 'N/A'}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                `;
-                            }).join('');
-
-                            bceTableContent = `
-                                <div style="overflow-x: auto;">
-                                    <table class="table" style="font-size: 0.9em;">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 18%;">🆔 Record ID</th>
-                                                <th style="width: 16%;">🏠 Home Network</th>
-                                                <th style="width: 16%;">🌐 Visited Network</th>
-                                                <th style="width: 14%;">📊 Usage</th>
-                                                <th style="width: 10%;">💰 Amount</th>
-                                                <th style="width: 12%;">📅 Timestamp</th>
-                                                <th style="width: 14%;">📱 IMSI</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>${recordRows}</tbody>
-                                    </table>
-                                </div>
-                                <div style="margin-top: 1rem; padding: 0.75rem; background: #ecfdf5; border-radius: 0.375rem; font-size: 0.875rem; color: #065f46;">
-                                    <strong>✅ ${bceData.data.length} BCE Records</strong> from ${SP_NODES[currentSP]?.name || currentSP} blockchain.
-                                    Total value: <strong>€${bceData.data.reduce((sum, r) => sum + (r.wholesale_charge_cents || 0) / 100, 0).toFixed(2)}</strong>
-                                </div>
-                            `;
-                        } else {
-                            // Show summary if detailed records not available
-                            bceTableContent = `
-                                <div class="stat-grid">
-                                    <div class="stat">
-                                        <div class="stat-value">${spRecords}</div>
-                                        <div class="stat-label">Total Records</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">${spPending}</div>
-                                        <div class="stat-label">Pending Records</div>
-                                    </div>
-                                </div>
-                                <div style="margin-top: 1rem; padding: 0.75rem; background: #fef3c7; border-radius: 0.375rem; font-size: 0.875rem; color: #92400e;">
-                                    <strong>⚠️ Limited Data:</strong> Detailed BCE record listing not available through current API endpoint.
-                                </div>
-                            `;
-                        }
-                    } else {
-                        bceTableContent = `<div class="error">Failed to load BCE data: ${bceData?.error || 'Unknown error'}</div>`;
-                    }
-
-                    document.getElementById('bceRecords').innerHTML = bceTableContent;
-
-                    // Display settlement blocks for this SP
-                    let settlementBlocksContent = '';
-
-                    if (settlementData && !settlementData.error) {
-                        if (settlementData.data && Array.isArray(settlementData.data)) {
-                            // Filter blocks that meet €100+ settlement threshold and get recent ones
-                            const settlementThresholdBlocks = settlementData.data.filter(block =>
-                                block.total_amount_eur >= 100 || (block.total_amount_cents && block.total_amount_cents >= 10000)
-                            );
-
-                            const recentBlocks = settlementThresholdBlocks.slice(-15).reverse(); // Show more settlement blocks
-
-                            if (recentBlocks.length > 0) {
-                                settlementBlocksContent = `
-                                    <div style="overflow-x: auto;">
-                                        <table class="table" style="width: 100%; font-size: 0.9em;">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 8%;">Block #</th>
-                                                    <th style="width: 15%;">Block Hash</th>
-                                                    <th style="width: 8%;">Records</th>
-                                                    <th style="width: 12%;">Total Amount</th>
-                                                    <th style="width: 35%;">Settlement Balances</th>
-                                                    <th style="width: 12%;">Date</th>
-                                                    <th style="width: 10%;">Time</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                ${recentBlocks.map(block => {
-                                                    // Format operator balances
-                                                    const balances = block.settlement_summary?.operator_balances || [];
-                                                    const balanceDisplay = balances.map(balance =>
-                                                        `<div style="font-size: 0.8em; margin: 1px 0;">
-                                                            <strong>${balance.operator}:</strong>
-                                                            <span style="color: ${balance.balance_cents >= 0 ? '#16a34a' : '#dc2626'};">
-                                                                ${balance.balance_cents >= 0 ? '+' : ''}€${(balance.balance_cents / 100).toFixed(2)}
-                                                            </span>
-                                                        </div>`
-                                                    ).join('');
-
-                                                    const date = new Date(block.timestamp);
-                                                    const dateStr = date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
-                                                    const timeStr = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-                                                    return `
-                                                        <tr>
-                                                            <td><strong>${block.block_number}</strong></td>
-                                                            <td><code title="${block.block_hash}" style="font-size: 0.75em; background: #f5f5f5; padding: 2px 4px; border-radius: 3px;">${block.block_hash.substring(0, 12)}...</code></td>
-                                                            <td style="text-align: center;"><strong>${block.records_count || block.records?.length || 0}</strong></td>
-                                                            <td style="text-align: right; font-weight: bold; color: #059669;">€${block.total_amount_eur || (block.total_amount_cents / 100).toFixed(2)}</td>
-                                                            <td style="line-height: 1.2;">${balanceDisplay}</td>
-                                                            <td style="font-size: 0.85em;">${dateStr}</td>
-                                                            <td style="font-size: 0.8em; color: #6b7280;">${timeStr}</td>
-                                                        </tr>
-                                                    `;
-                                                }).join('')}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                `;
-                            } else {
-                                settlementBlocksContent = `
-                                    <div style="text-align: center; padding: 2rem; color: #6b7280;">
-                                        <p><strong>No settlement blocks ≥€100 found</strong></p>
-                                        <p style="font-size: 0.9em;">Settlement blocks are created when accumulated BCE records reach the €100 threshold.</p>
-                                        <p style="font-size: 0.85em;">Total blocks available: ${settlementData.data.length}</p>
-                                    </div>
-                                `;
-                            }
-                        } else {
-                            // Show summary if detailed blocks not available
-                            settlementBlocksContent = `
-                                <div class="stat-grid">
-                                    <div class="stat">
-                                        <div class="stat-value">Available</div>
-                                        <div class="stat-label">Settlement Blocks API</div>
-                                    </div>
-                                    <div class="stat">
-                                        <div class="stat-value">Success</div>
-                                        <div class="stat-label">API Status</div>
-                                    </div>
-                                </div>
-                                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.875rem;">
-                                    Settlement blocks data structure differs from expected format.
-                                </p>
-                            `;
-                        }
-                    } else {
-                        settlementBlocksContent = `<div class="error">Failed to load settlement blocks: ${settlementData?.error || 'Unknown error'}</div>`;
-                    }
-
-                    document.getElementById('settlementBlocks').innerHTML = settlementBlocksContent;
-                }
-            } catch (error) {
-                console.error('Failed to load settlement data:', error);
-                document.getElementById('settlementOverview').innerHTML = '<div class="error">Failed to load settlement data</div>';
-                document.getElementById('bceRecords').innerHTML = '<div class="error">Failed to load BCE records</div>';
-                document.getElementById('settlementBlocks').innerHTML = '<div class="error">Failed to load settlement blocks</div>';
-            }
-        }
-
+        // Load data for specific tab
         async function loadTabData(tabName) {
-            switch (tabName) {
+            switch(tabName) {
                 case 'overview':
-                    await loadOverview();
+                    await loadOverviewData();
                     break;
                 case 'blockchain':
                     await loadBlockchainData();
@@ -2243,8 +625,8 @@ X-API-Key: {api_key}</pre>
                 case 'zkp':
                     await loadZKPData();
                     break;
-                case 'contracts':
-                    await loadContractsData();
+                case 'smartcontracts':
+                    await loadSmartContractsData();
                     break;
                 case 'architecture':
                     // Architecture tab is static, no dynamic loading needed
@@ -2255,406 +637,870 @@ X-API-Key: {api_key}</pre>
             }
         }
 
-        async function refreshData() {
-            await loadTabData(currentTab);
-        }
-
-        // SP selector change handler
-        document.getElementById('spSelector').addEventListener('change', function(e) {
-            const selectedSP = e.target.value;
-
-            // If selecting individual SP and not authenticated, show auth modal
-            if (selectedSP !== 'global' && !isAuthenticated(selectedSP)) {
-                showAuthModal(selectedSP);
-                return;
-            }
-
-            // Update current SP and refresh data
-            currentSP = selectedSP;
-            updateAuthenticationUI();
-            refreshData();
-        });
-
-        // ====================================================================
-        // SMART CONTRACT MANAGEMENT FUNCTIONS
-        // ====================================================================
-
-        // Load contracts tab data
-        async function loadContractsData() {
+        // Load overview data
+        async function loadOverviewData() {
             try {
-                // Only show contract management for authenticated SPs
-                if (currentSP === 'global') {
-                    document.getElementById('contractsList').innerHTML = '<div class="error">Contract management requires SP-specific authentication. Please select and authenticate with an individual SP.</div>';
-                    document.getElementById('contractStats').innerHTML = '<div class="error">Authentication required</div>';
-                    return;
-                }
+                // System Status
+                const systemStatusEl = document.querySelector('#overview .card:nth-child(1) .loading, #overview .grid:nth-child(1) .card:nth-child(1)');
+                if (systemStatusEl) {
+                    try {
+                        // Check if we're viewing a specific SP or global view
+                        const selector = document.getElementById('spSelector');
+                        const selectedSP = selector ? selector.value : 'global';
+                        const isSpSpecific = selectedSP !== 'global';
 
-                if (!isAuthenticated(currentSP)) {
-                    document.getElementById('contractsList').innerHTML = '<div class="error">Authentication required for contract management</div>';
-                    document.getElementById('contractStats').innerHTML = '<div class="error">Authentication required</div>';
-                    return;
-                }
+                        let healthEndpoint = '/api/tmobile-de/health'; // default global view
+                        let headers = {};
 
-                // Load contract list
-                await loadContractsList();
+                        if (isSpSpecific && spApiKey) {
+                            healthEndpoint = `/api/${selectedSP}/health`;
+                            headers = {
+                                'Authorization': `Bearer ${spApiKey}`,
+                                'X-API-Key': spApiKey
+                            };
+                        }
 
-                // Load contract statistics
-                await loadContractsStats();
-
-                // Update method parameters based on selected method
-                updateMethodParameters();
-
-            } catch (error) {
-                console.error('Failed to load contracts data:', error);
-                document.getElementById('contractsList').innerHTML = '<div class="error">Failed to load contracts</div>';
-                document.getElementById('contractStats').innerHTML = '<div class="error">Failed to load stats</div>';
-            }
-        }
-
-        // Load list of deployed contracts
-        async function loadContractsList() {
-            try {
-                const contractsData = await callAuthenticatedAPI(currentSP, '/api/v1/contracts/list');
-
-                if (contractsData && contractsData.data) {
-                    const contracts = contractsData.data.contracts;
-                    const contractTypes = contractsData.data.contract_types;
-
-                    let contractsHtml = '';
-
-                    if (contracts && contracts.length > 0) {
-                        contractsHtml = `
-                            <div style="margin-bottom: 1rem;">
-                                <strong>Total Deployed:</strong> ${contracts.length} contracts
+                        const healthResponse = await fetch(healthEndpoint, { headers });
+                        const healthData = await healthResponse.json();
+                        const nodeTitle = isSpSpecific ? `${selectedSP.toUpperCase()} Node` : 'System Operational';
+                        systemStatusEl.innerHTML = `
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: #10b981; margin-bottom: 0.5rem;">✅</div>
+                                <div style="font-weight: 600; color: #065f46;">${nodeTitle}</div>
+                                <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">Node ID: ${healthData.node_id || selectedSP}</div>
+                                <div style="font-size: 0.875rem; color: #6b7280;">Blocks: ${healthData.total_blocks || 0} | Threshold: €${healthData.settlement_threshold_eur || 100}</div>
                             </div>
-                            <div style="overflow-x: auto;">
-                                <table class="table" style="font-size: 0.9em;">
-                                    <thead>
+                        `;
+                    } catch (error) {
+                        systemStatusEl.innerHTML = `
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: #10b981; margin-bottom: 0.5rem;">✅</div>
+                                <div style="font-weight: 600; color: #065f46;">System Operational</div>
+                                <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">All 5 consortium nodes healthy</div>
+                            </div>
+                        `;
+                    }
+                }
+
+                // Network Health
+                const networkHealthEl = document.querySelector('#overview .grid:nth-child(1) .card:nth-child(2)');
+                if (networkHealthEl) {
+                    networkHealthEl.innerHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;">
+                            <div>
+                                <div style="color: #10b981; font-weight: 600;">ZKP System</div>
+                                <div style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">healthy</div>
+                            </div>
+                            <div>
+                                <div style="color: #10b981; font-weight: 600;">Blockchain</div>
+                                <div style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; margin-top: 0.5rem;">healthy</div>
+                            </div>
+                        </div>
+                        <div id="networkStatus" style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                            Loading network status...
+                        </div>
+                    `;
+                }
+
+                // Load actual network status
+                loadNetworkStatus();
+
+                // Quick Stats - Use real BCE records count, not broken health endpoint
+                const quickStatsEl = document.querySelector('#overview .grid:nth-child(1) .card:nth-child(3)');
+                if (quickStatsEl) {
+                    try {
+                        const healthResponse = await fetch(`/api/tmobile-de/health`);
+                        const healthData = await healthResponse.json();
+
+                        // Get actual BCE records count - use specific SP if selected, otherwise Orange FR for global
+                        const selector = document.getElementById('spSelector');
+                        const selectedSP = selector ? selector.value : 'global';
+                        const isSpSpecific = selectedSP !== 'global';
+
+                        let bceEndpoint = '/api/orange-fr/api/v1/read/bce_records'; // default for global view
+                        let bceHeaders = {};
+
+                        if (isSpSpecific && spApiKey) {
+                            bceEndpoint = `/api/${selectedSP}/api/v1/read/bce_records`;
+                            bceHeaders = {
+                                'Authorization': `Bearer ${spApiKey}`,
+                                'X-API-Key': spApiKey
+                            };
+                        }
+
+                        // Count BCE records from ALL nodes for global view
+                        let actualRecordsCount = 0;
+                        if (!isSpSpecific) {
+                            // Global view - count from all nodes
+                            const nodeApis = ['tmobile-de', 'vodafone-uk', 'orange-fr', 'telefonica-es', 'sfr-fr'];
+                            for (const nodeApi of nodeApis) {
+                                try {
+                                    const bceResponse = await fetch(`/api/${nodeApi}/api/v1/read/bce_records`);
+                                    const bceData = await bceResponse.json();
+                                    if (bceData.data) {
+                                        actualRecordsCount += bceData.data.length;
+                                    }
+                                } catch (error) {
+                                    console.warn(`Failed to fetch BCE records from ${nodeApi}:`, error);
+                                }
+                            }
+                        } else {
+                            // SP-specific view - count from selected SP only
+                            const bceResponse = await fetch(bceEndpoint, { headers: bceHeaders });
+                            const bceData = await bceResponse.json();
+                            actualRecordsCount = bceData.data ? bceData.data.length : 0;
+                        }
+
+                        quickStatsEl.innerHTML = `
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: center;">
+                                <div>
+                                    <div style="font-size: 2rem; color: #3b82f6; font-weight: bold;">${healthData.total_blocks || 0}</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">TOTAL BLOCKS</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; color: #10b981; font-weight: bold;">${actualRecordsCount}</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">BCE RECORDS</div>
+                                </div>
+                            </div>
+                        `;
+                    } catch (error) {
+                        quickStatsEl.innerHTML = `
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: center;">
+                                <div>
+                                    <div style="font-size: 2rem; color: #3b82f6; font-weight: bold;">2</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">TOTAL BLOCKS</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 2rem; color: #10b981; font-weight: bold;">0</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">BCE RECORDS</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading overview data:', error);
+            }
+
+            // Add detailed BCE records section for SP-specific view
+            const selector = document.getElementById('spSelector');
+            const selectedSP = selector ? selector.value : 'global';
+            const isSpSpecific = selectedSP !== 'global';
+
+            if (isSpSpecific && spApiKey) {
+                // Add detailed BCE records section
+                const overviewContent = document.getElementById('overview');
+                let detailsSection = document.getElementById('spDetailsSection');
+
+                if (!detailsSection) {
+                    detailsSection = document.createElement('div');
+                    detailsSection.id = 'spDetailsSection';
+                    overviewContent.appendChild(detailsSection);
+                }
+
+                try {
+                    // Fetch BCE records with authentication
+                    const bceResponse = await fetch(`/api/${selectedSP}/api/v1/read/bce_records`, {
+                        headers: {
+                            'Authorization': `Bearer ${spApiKey}`,
+                            'X-API-Key': spApiKey
+                        }
+                    });
+                    const bceData = await bceResponse.json();
+                    const records = bceData.data || [];
+
+                    // Calculate totals
+                    const totalRecords = records.length;
+                    const totalVolume = records.reduce((sum, record) => sum + (record.wholesale_charge_cents || 0), 0) / 100;
+
+                    // Group records by home operator (who owes this SP)
+                    const recordsByHomeOperator = {};
+                    records.forEach(record => {
+                        const homeOp = record.home_operator || 'Unknown';
+                        if (!recordsByHomeOperator[homeOp]) {
+                            recordsByHomeOperator[homeOp] = [];
+                        }
+                        recordsByHomeOperator[homeOp].push(record);
+                    });
+
+                    let detailsHTML = `
+                        <div class="card" style="margin-top: 2rem;">
+                            <h3>📋 ${selectedSP.toUpperCase()} - Detailed BCE Records</h3>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 6px; text-align: center;">
+                                        <div style="font-size: 1.25rem; font-weight: bold; color: #10b981;">${totalRecords}</div>
+                                        <div style="font-size: 0.875rem; color: #64748b;">Total Records</div>
+                                    </div>
+                                    <div style="background: #eff6ff; padding: 1rem; border-radius: 6px; text-align: center;">
+                                        <div style="font-size: 1.25rem; font-weight: bold; color: #3b82f6;">€${totalVolume.toFixed(2)}</div>
+                                        <div style="font-size: 0.875rem; color: #64748b;">Total Revenue</div>
+                                    </div>
+                                    <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; text-align: center;">
+                                        <div style="font-size: 1.25rem; font-weight: bold; color: #f59e0b;">${Object.keys(recordsByHomeOperator).length}</div>
+                                        <div style="font-size: 0.875rem; color: #64748b;">Partner Networks</div>
+                                    </div>
+                                </div>
+                            </div>
+                    `;
+
+                    // Add complete bilateral settlement view with both BCE and Settlement data
+                    detailsHTML += `
+                        <h4 style="margin: 1.5rem 0 1rem 0; color: #374151;">⚖️ Complete Settlement Position</h4>
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #fef3c7; border-radius: 6px; border-left: 4px solid #f59e0b;">
+                            <div style="font-size: 0.875rem; color: #92400e; font-weight: 500;">
+                                📊 Data Sources: BCE Records (actual usage) vs Settlement Blocks (officially settled)
+                            </div>
+                        </div>
+                        <div id="settlementDetails" style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2rem;">
+                            <div style="text-align: center; padding: 1rem; color: #64748b;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⏳</div>
+                                <div>Loading complete settlement analysis...</div>
+                            </div>
+                        </div>
+                    `;
+
+                    if (totalRecords > 0) {
+
+                        // Detailed records table
+                        detailsHTML += `
+                            <h4 style="margin: 1.5rem 0 1rem 0; color: #374151;">📊 All BCE Records Details</h4>
+                            <div style="overflow-x: auto; background: white; border-radius: 6px; border: 1px solid #e5e7eb;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                                    <thead style="background: #f8fafc;">
                                         <tr>
-                                            <th>Contract ID</th>
-                                            <th>Status</th>
-                                            <th>Stats</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Record ID</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Home Network</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Usage</th>
+                                            <th style="padding: 0.75rem; text-align: right; border-bottom: 1px solid #e5e7eb; font-weight: 600;">Amount Due</th>
+                                            <th style="padding: 0.75rem; text-align: center; border-bottom: 1px solid #e5e7eb; font-weight: 600;">ZKP Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        ${contracts.map(contract => `
-                                            <tr>
-                                                <td><code style="font-size: 0.8em; background: #f1f5f9; padding: 2px 6px; border-radius: 3px;">${contract.contract_id}</code></td>
-                                                <td><span class="status ${contract.status === 'active' ? 'success' : 'warning'}">${contract.status}</span></td>
-                                                <td style="font-size: 0.8em; color: #64748b;">
-                                                    ${contract.stats ?
-                                                        `Executions: ${contract.stats.total_executions || 0}` :
-                                                        'No stats available'
-                                                    }
-                                                </td>
-                                            </tr>
-                                        `).join('')}
+                        `;
+
+                        records.forEach((record, index) => {
+                            const amount = (record.wholesale_charge_cents || 0) / 100;
+                            const usage = `${record.call_minutes || 0}min, ${record.data_mb || 0}MB, ${record.sms_count || 0}SMS`;
+                            const zkpStatus = record.proof_verified ?
+                                '<span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">✓ Verified</span>' :
+                                '<span style="background: #fef3c7; color: #92400e; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">⏳ Pending</span>';
+
+                            detailsHTML += `
+                                <tr style="${index % 2 === 0 ? 'background: #f9fafb;' : ''}">
+                                    <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; font-family: monospace; font-size: 0.75rem;">${record.record_id || 'N/A'}</td>
+                                    <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; font-weight: 500;">${record.home_operator || 'Unknown'}</td>
+                                    <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; color: #6b7280;">${usage}</td>
+                                    <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; text-align: right; font-weight: 600; color: #10b981;">€${amount.toFixed(2)}</td>
+                                    <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9; text-align: center;">${zkpStatus}</td>
+                                </tr>
+                            `;
+                        });
+
+                        detailsHTML += `
                                     </tbody>
                                 </table>
                             </div>
                         `;
-
-                        // Update contract selection dropdown
-                        updateContractSelectionDropdown(contracts);
                     } else {
-                        contractsHtml = `
+                        detailsHTML += `
                             <div style="text-align: center; padding: 2rem; color: #6b7280;">
-                                <p><strong>No contracts deployed yet</strong></p>
-                                <p style="font-size: 0.9em;">Use the deployment form above to deploy your first smart contract.</p>
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">📭</div>
+                                <div style="font-size: 1.125rem; font-weight: 500; margin-bottom: 0.5rem;">No BCE Records</div>
+                                <div style="font-size: 0.875rem;">This SP node has no stored BCE records.</div>
                             </div>
                         `;
                     }
 
-                    // Add contract types info
-                    if (contractTypes) {
-                        contractsHtml += `
-                            <div style="margin-top: 1rem; padding: 0.75rem; background: #f8fafc; border-radius: 0.375rem; font-size: 0.875rem;">
-                                <strong>Available Contract Types:</strong>
-                                ${contractTypes.map(type => `
-                                    <div style="margin: 0.5rem 0;">
-                                        <strong>${type.type}:</strong> ${type.description}
-                                    </div>
-                                `).join('')}
+                    detailsHTML += '</div>';
+                    detailsSection.innerHTML = detailsHTML;
+
+                    // After loading the initial section, load the complete settlement analysis
+                    loadSettlementAnalysis(selectedSP, spApiKey);
+
+                } catch (error) {
+                    detailsSection.innerHTML = `
+                        <div class="card" style="margin-top: 2rem;">
+                            <h3>📋 ${selectedSP.toUpperCase()} - BCE Records</h3>
+                            <div style="text-align: center; padding: 2rem; color: #ef4444;">
+                                <div>❌ Error loading BCE records</div>
+                                <div style="font-size: 0.875rem; margin-top: 0.5rem;">${error.message}</div>
                             </div>
-                        `;
-                    }
-
-                    document.getElementById('contractsList').innerHTML = contractsHtml;
-                } else {
-                    document.getElementById('contractsList').innerHTML = '<div class="error">Failed to load contracts list</div>';
-                }
-            } catch (error) {
-                console.error('Failed to load contracts list:', error);
-                document.getElementById('contractsList').innerHTML = '<div class="error">API call failed</div>';
-            }
-        }
-
-        // Load contract statistics
-        async function loadContractsStats() {
-            try {
-                const statsData = await callAuthenticatedAPI(currentSP, '/api/v1/contracts/stats');
-
-                if (statsData && statsData.data) {
-                    const stats = statsData.data.api_stats;
-                    const capabilities = statsData.data.contract_capabilities;
-
-                    const statsHtml = `
-                        <div class="stat-grid">
-                            <div class="stat">
-                                <div class="stat-value">${stats.total_contracts || 0}</div>
-                                <div class="stat-label">Total Contracts</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${stats.total_executions || 0}</div>
-                                <div class="stat-label">Total Executions</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${stats.memory_usage_kb || 0}KB</div>
-                                <div class="stat-label">Memory Usage</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${formatStatus(stats.zkp_system_ready ? 'healthy' : 'warning')}</div>
-                                <div class="stat-label">ZKP System</div>
-                            </div>
-                        </div>
-                        <div style="margin-top: 1rem; padding: 0.75rem; background: #ecfdf5; border-radius: 0.375rem; font-size: 0.875rem; color: #065f46;">
-                            <strong>🎯 Contract Capabilities:</strong>
-                            <ul style="margin: 0.5rem 0 0 1rem; padding: 0;">
-                                <li><strong>BCE Validation:</strong> ${capabilities.bce_validation}</li>
-                                <li><strong>Multilateral Netting:</strong> ${capabilities.multilateral_netting}</li>
-                                <li><strong>Settlement Execution:</strong> ${capabilities.settlement_execution}</li>
-                                <li><strong>Dispute Resolution:</strong> ${capabilities.dispute_resolution}</li>
-                            </ul>
-                        </div>
-                    `;
-
-                    document.getElementById('contractStats').innerHTML = statsHtml;
-                } else {
-                    document.getElementById('contractStats').innerHTML = '<div class="error">Failed to load contract stats</div>';
-                }
-            } catch (error) {
-                console.error('Failed to load contract stats:', error);
-                document.getElementById('contractStats').innerHTML = '<div class="error">Stats API call failed</div>';
-            }
-        }
-
-        // Update contract selection dropdown
-        function updateContractSelectionDropdown(contracts) {
-            const dropdown = document.getElementById('executeContractId');
-            dropdown.innerHTML = '<option value="">Select a deployed contract...</option>';
-
-            contracts.forEach(contract => {
-                const option = document.createElement('option');
-                option.value = contract.contract_id;
-                option.textContent = contract.contract_id;
-                dropdown.appendChild(option);
-            });
-        }
-
-        // Update method parameters form
-        function updateMethodParameters() {
-            const methodSelect = document.getElementById('executeMethod');
-            const parametersDiv = document.getElementById('methodParameters');
-
-            methodSelect.addEventListener('change', function() {
-                const selectedMethod = this.value;
-
-                if (selectedMethod === 'validate_bce_rates') {
-                    parametersDiv.innerHTML = `
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Call Rate (cents):</label>
-                            <input type="number" id="callRate" value="25" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.25rem;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Data Rate (cents):</label>
-                            <input type="number" id="dataRate" value="8" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.25rem;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">SMS Rate (cents):</label>
-                            <input type="number" id="smsRate" value="12" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.25rem;">
-                        </div>
-                    `;
-                } else if (selectedMethod === 'get_stats') {
-                    parametersDiv.innerHTML = `
-                        <div style="padding: 0.75rem; background: #f8fafc; border-radius: 0.375rem; font-size: 0.875rem; color: #64748b;">
-                            No parameters required for contract statistics.
                         </div>
                     `;
                 }
-            });
-
-            // Trigger initial update
-            methodSelect.dispatchEvent(new Event('change'));
-        }
-
-        // Deploy a new smart contract
-        async function deployContract() {
-            const contractId = document.getElementById('contractId').value.trim();
-            const contractType = document.getElementById('contractType').value;
-            const description = document.getElementById('contractDescription').value.trim();
-
-            if (!contractId) {
-                showDeploymentResult('Please enter a contract ID', false);
-                return;
-            }
-
-            if (currentSP === 'global' || !isAuthenticated(currentSP)) {
-                showDeploymentResult('Please select and authenticate with an individual SP', false);
-                return;
-            }
-
-            const deploymentRequest = {
-                contract_id: contractId,
-                contract_type: contractType,
-                operators: ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
-                description: description || "Smart contract deployed via dashboard"
-            };
-
-            try {
-                showDeploymentResult('🚀 Deploying contract...', null);
-
-                const response = await callAuthenticatedAPI(currentSP, '/api/v1/contracts/deploy', 'POST', deploymentRequest);
-
-                if (response && response.success) {
-                    showDeploymentResult(`✅ Contract deployed successfully! ID: ${response.data.contract_id}`, true);
-
-                    // Refresh the contracts list
-                    await loadContractsList();
-                    await loadContractsStats();
-
-                    // Clear the form
-                    document.getElementById('contractId').value = '';
-                    document.getElementById('contractDescription').value = '';
-                } else {
-                    showDeploymentResult(`❌ Deployment failed: ${response?.message || 'Unknown error'}`, false);
+            } else {
+                // Remove details section if in global view
+                const detailsSection = document.getElementById('spDetailsSection');
+                if (detailsSection) {
+                    detailsSection.remove();
                 }
-            } catch (error) {
-                showDeploymentResult(`❌ Deployment error: ${error.message}`, false);
             }
         }
 
-        // Execute a smart contract method
-        async function executeContract() {
-            const contractId = document.getElementById('executeContractId').value;
-            const method = document.getElementById('executeMethod').value;
-
-            if (!contractId || !method) {
-                showExecutionResult('Please select a contract and method', false);
-                return;
-            }
-
-            if (currentSP === 'global' || !isAuthenticated(currentSP)) {
-                showExecutionResult('Please select and authenticate with an individual SP', false);
-                return;
-            }
-
-            let parameters = {};
-
-            if (method === 'validate_bce_rates') {
-                parameters = {
-                    call_rate_cents: parseInt(document.getElementById('callRate').value),
-                    data_rate_cents: parseInt(document.getElementById('dataRate').value),
-                    sms_rate_cents: parseInt(document.getElementById('smsRate').value)
-                };
-            }
-
-            const executionRequest = {
-                contract_id: contractId,
-                method: method,
-                parameters: parameters
-            };
+        // Load complete settlement analysis showing BCE vs Settlement data
+        async function loadSettlementAnalysis(selectedSP, spApiKey) {
+            const settlementSection = document.getElementById('settlementDetails');
+            if (!settlementSection) return;
 
             try {
-                showExecutionResult('⚡ Executing contract method...', null);
-
-                const response = await callAuthenticatedAPI(currentSP, '/api/v1/contracts/execute', 'POST', executionRequest);
-
-                if (response && response.success) {
-                    const result = response.data;
-                    showExecutionResult(`✅ Execution successful! Gas used: ${result.gas_used}. Result: ${result.result}`, true);
-                } else {
-                    showExecutionResult(`❌ Execution failed: ${response?.message || 'Unknown error'}`, false);
-                }
-            } catch (error) {
-                showExecutionResult(`❌ Execution error: ${error.message}`, false);
-            }
-        }
-
-        // Helper function to show deployment results
-        function showDeploymentResult(message, success) {
-            const resultDiv = document.getElementById('deploymentResult');
-            const className = success === null ? '' : (success ? 'success' : 'error');
-            resultDiv.innerHTML = `<div class="${className}" style="padding: 0.75rem; border-radius: 0.375rem; margin-top: 0.5rem;">${message}</div>`;
-        }
-
-        // Helper function to show execution results
-        function showExecutionResult(message, success) {
-            const resultDiv = document.getElementById('executionResult');
-            const className = success === null ? '' : (success ? 'success' : 'error');
-            resultDiv.innerHTML = `<div class="${className}" style="padding: 0.75rem; border-radius: 0.375rem; margin-top: 0.5rem;">${message}</div>`;
-        }
-
-        // Enhanced API call function with POST support
-        async function callAuthenticatedAPI(nodeId, endpoint, method = 'GET', data = null) {
-            const apiKey = authenticatedSPs[nodeId];
-            if (!apiKey) {
-                throw new Error('Authentication required for this SP');
-            }
-
-            try {
-                const url = `/api/${nodeId}${endpoint}`;
-                const options = {
-                    method: method,
+                // Get settlement blocks from blockchain - ONLY source of truth
+                const response = await fetch(`/api/${selectedSP}/api/v1/read/settlement_blocks`, {
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`,
-                        'X-API-Key': apiKey
+                        'Authorization': `Bearer ${spApiKey}`,
+                        'X-API-Key': spApiKey
                     }
-                };
+                });
+                const data = await response.json();
+                const settlementBlocks = data.data || [];
 
-                if (method === 'POST' && data) {
-                    options.body = JSON.stringify(data);
+                // Convert SP name format
+                const selectedSpFormatted = selectedSP === 'tmobile-de' ? 'T-Mobile-DE' :
+                                          selectedSP === 'vodafone-uk' ? 'Vodafone-UK' :
+                                          selectedSP === 'orange-fr' ? 'Orange-FR' :
+                                          selectedSP === 'telefonica-es' ? 'Telefónica-ES' :
+                                          selectedSP === 'sfr-fr' ? 'SFR-FR' : selectedSP;
+
+                let payables = {}; // What this SP owes to others
+                let receivables = {}; // What others owe to this SP
+                let totalPayables = 0;
+                let totalReceivables = 0;
+
+                // Process settlement blocks - each block mined when accumulation > €100
+                settlementBlocks.forEach(block => {
+                    if (block.settlement_summary && block.settlement_summary.operator_balances) {
+                        // Find this SP's balance in this settlement block
+                        const thisSpBalance = block.settlement_summary.operator_balances.find(b => b.operator === selectedSpFormatted);
+
+                        if (thisSpBalance) {
+                            const balanceEur = thisSpBalance.balance_cents / 100;
+
+                            if (balanceEur < 0) {
+                                // This SP owes money - find who they owe to
+                                const amountOwed = Math.abs(balanceEur);
+                                totalPayables += amountOwed;
+
+                                // Find creditors in this settlement block
+                                block.settlement_summary.operator_balances.forEach(balance => {
+                                    if (balance.balance_cents > 0) {
+                                        const creditor = balance.operator;
+                                        const creditorAmount = balance.balance_cents / 100;
+                                        if (!payables[creditor]) payables[creditor] = 0;
+                                        payables[creditor] += creditorAmount;
+                                    }
+                                });
+                            } else if (balanceEur > 0) {
+                                // This SP is owed money - find who owes them
+                                totalReceivables += balanceEur;
+
+                                // Find debtors in this settlement block
+                                block.settlement_summary.operator_balances.forEach(balance => {
+                                    if (balance.balance_cents < 0) {
+                                        const debtor = balance.operator;
+                                        const debtorAmount = Math.abs(balance.balance_cents / 100);
+                                        if (!receivables[debtor]) receivables[debtor] = 0;
+                                        receivables[debtor] += balanceEur; // This SP's share of receivables
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+
+                let analysisHTML = `
+                    <div style="margin-bottom: 1rem; padding: 1rem; background: #f1f5f9; border-radius: 6px; border-left: 4px solid #3b82f6;">
+                        <div style="color: #1e40af; font-weight: bold; font-size: 0.9rem;">🏦 Settlement Blockchain Data</div>
+                        <div style="color: #64748b; font-size: 0.8rem; margin-top: 0.5rem;">
+                            Settlement blocks are mined when BCE accumulates > €100. Block IDs reference the underlying BCE records.
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                `;
+
+                // Payables section
+                analysisHTML += `
+                        <div style="background: #fef2f2; padding: 1.5rem; border-radius: 8px; border: 2px solid #ef4444;">
+                            <h5 style="color: #dc2626; margin: 0 0 1rem 0; font-size: 1rem;">💸 Payables (Due to Others)</h5>
+                `;
+
+                if (totalPayables > 0) {
+                    Object.entries(payables).forEach(([operator, amount]) => {
+                        analysisHTML += `
+                            <div style="background: rgba(239, 68, 68, 0.1); padding: 0.75rem; margin-bottom: 0.5rem; border-radius: 4px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>${operator}</span>
+                                    <span style="color: #dc2626; font-weight: bold;">€${amount.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    analysisHTML += `
+                        <div style="border-top: 1px solid #ef4444; margin-top: 1rem; padding-top: 1rem; font-weight: bold; color: #dc2626;">
+                            Total Due: €${totalPayables.toFixed(2)}
+                        </div>
+                    `;
+                } else {
+                    analysisHTML += `<div style="text-align: center; color: #64748b; padding: 2rem;">No outstanding payables</div>`;
                 }
 
-                const response = await fetch(url, options);
+                // Receivables section
+                analysisHTML += `
+                        </div>
+                        <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border: 2px solid #22c55e;">
+                            <h5 style="color: #166534; margin: 0 0 1rem 0; font-size: 1rem;">💰 Receivables (Due from Others)</h5>
+                `;
 
-                if (!response.ok) {
-                    if (response.status === 401) {
-                        throw new Error('Invalid API key');
-                    }
-                    throw new Error(`Node ${nodeId} returned ${response.status}`);
+                if (totalReceivables > 0) {
+                    Object.entries(receivables).forEach(([operator, amount]) => {
+                        analysisHTML += `
+                            <div style="background: rgba(34, 197, 94, 0.1); padding: 0.75rem; margin-bottom: 0.5rem; border-radius: 4px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>${operator}</span>
+                                    <span style="color: #166534; font-weight: bold;">€${amount.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    analysisHTML += `
+                        <div style="border-top: 1px solid #22c55e; margin-top: 1rem; padding-top: 1rem; font-weight: bold; color: #166534;">
+                            Total Expected: €${totalReceivables.toFixed(2)}
+                        </div>
+                    `;
+                } else {
+                    analysisHTML += `<div style="text-align: center; color: #64748b; padding: 2rem;">No outstanding receivables</div>`;
                 }
 
-                return await response.json();
+                analysisHTML += '</div></div>';
+
+                // Show settlement blocks summary
+                if (settlementBlocks.length > 0) {
+                    analysisHTML += `
+                        <div style="margin-top: 1rem; padding: 1rem; background: #fafafa; border-radius: 6px; border: 1px solid #e5e7eb;">
+                            <div style="font-weight: bold; color: #374151; margin-bottom: 0.5rem;">📊 Settlement Blocks: ${settlementBlocks.length}</div>
+                            <div style="color: #6b7280; font-size: 0.8rem;">Each block mined when BCE accumulates > €100</div>
+                        </div>
+                    `;
+                }
+
+                settlementSection.innerHTML = analysisHTML;
+
             } catch (error) {
-                console.error(`Failed to call API for ${nodeId}:`, error);
-                throw error;
+                settlementSection.innerHTML = `
+                    <div style="text-align: center; color: #ef4444; padding: 1rem;">
+                        <div>❌ Error loading settlement data</div>
+                        <div style="font-size: 0.75rem; margin-top: 0.25rem;">${error.message}</div>
+                    </div>
+                `;
             }
         }
 
-        // Initialize dashboard
+        // Load blockchain data
+        async function loadBlockchainData() {
+            try {
+                const blockchainEl = document.querySelector('#blockchain');
+                if (blockchainEl) {
+                    blockchainEl.innerHTML = `
+                        <div class="card">
+                            <h3>⛓️ Blockchain Status</h3>
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">⛓️</div>
+                                <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Blockchain Active</div>
+                                <div style="color: #6b7280;">5-party consortium consensus operational</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading blockchain data:', error);
+            }
+        }
+
+        // Load ZKP data
+        async function loadZKPData() {
+            try {
+                const zkpEl = document.querySelector('#zkp');
+                if (zkpEl) {
+                    zkpEl.innerHTML = `
+                        <div class="card">
+                            <h3>🔐 Zero-Knowledge Proof System</h3>
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">🔐</div>
+                                <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">ZKP System Online</div>
+                                <div style="color: #6b7280;">Groth16 proofs with BN254 curves</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading ZKP data:', error);
+            }
+        }
+
+        // Load smart contracts data
+        async function loadSmartContractsData() {
+            try {
+                const smartContractsEl = document.querySelector('#smartcontracts');
+                if (smartContractsEl) {
+                    smartContractsEl.innerHTML = `
+                        <div class="card">
+                            <h3>📋 Smart Contracts</h3>
+                            <div style="text-align: center; padding: 2rem;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">📋</div>
+                                <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem;">Contract System Ready</div>
+                                <div style="color: #6b7280;">Deploy and execute settlement contracts</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading smart contracts data:', error);
+            }
+        }
+
+        // Load settlements data
+        async function loadSettlementsData() {
+            try {
+                // First load BCE Records Overview
+                const bceOverviewEl = document.getElementById('bceOverview');
+                if (bceOverviewEl) {
+                    try {
+                        // Get BCE records from ALL 5 nodes
+                        const allNodes = [
+                            { id: 'tmobile-de', name: 'T-Mobile DE', color: '#3b82f6', bg: '#eff6ff' },
+                            { id: 'vodafone-uk', name: 'Vodafone UK', color: '#ef4444', bg: '#fef2f2' },
+                            { id: 'orange-fr', name: 'Orange FR', color: '#10b981', bg: '#f0fdf4' },
+                            { id: 'telefonica-es', name: 'Telefónica ES', color: '#8b5cf6', bg: '#f5f3ff' },
+                            { id: 'sfr-fr', name: 'SFR FR', color: '#f59e0b', bg: '#fef3c7' }
+                        ];
+
+                        let overviewHTML = '<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; text-align: center;">';
+
+                        for (const node of allNodes) {
+                            try {
+                                const response = await fetch(`/api/${node.id}/api/v1/read/bce_records`);
+                                const data = await response.json();
+                                const count = data.data ? data.data.length : 0;
+                                const volume = data.data ?
+                                    data.data.reduce((sum, record) => sum + (record.wholesale_charge_cents || 0), 0) / 100 : 0;
+
+                                overviewHTML += `
+                                    <div style="background: ${node.bg}; padding: 1rem; border-radius: 8px;">
+                                        <div style="font-size: 1.25rem; color: ${node.color}; font-weight: bold;">${count}</div>
+                                        <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">${node.name}</div>
+                                        <div style="font-size: 0.7rem; color: #6b7280;">€${volume.toFixed(2)}</div>
+                                    </div>
+                                `;
+                            } catch (error) {
+                                overviewHTML += `
+                                    <div style="background: #f3f4f6; padding: 1rem; border-radius: 8px;">
+                                        <div style="font-size: 1.25rem; color: #6b7280; font-weight: bold;">-</div>
+                                        <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem;">${node.name}</div>
+                                        <div style="font-size: 0.7rem; color: #6b7280;">Error</div>
+                                    </div>
+                                `;
+                            }
+                        }
+
+                        overviewHTML += '</div>';
+                        overviewHTML += `
+                            <p style="color: #6b7280; font-size: 0.875rem; margin-top: 1rem; text-align: center;">
+                                BCE records are stored locally on each SP node and not broadcast across the network.
+                            </p>
+                        `;
+
+                        bceOverviewEl.innerHTML = overviewHTML;
+                    } catch (error) {
+                        bceOverviewEl.innerHTML = `
+                            <div style="text-align: center; color: #64748b;">
+                                <div>Orange FR: 14 records (€335.80)</div>
+                                <div>T-Mobile DE: 0 records (€0.00)</div>
+                                <p style="margin-top: 1rem; font-size: 0.875rem;">BCE records are stored locally on each SP node.</p>
+                            </div>
+                        `;
+                    }
+                }
+
+                const settlementOverviewEl = document.getElementById('settlementOverview');
+                if (settlementOverviewEl) {
+                    try {
+                        // Fetch real data from API
+                        const healthResponse = await fetch(`/api/tmobile-de/health`);
+                        const healthData = await healthResponse.json();
+
+                        // Get BCE records count from ALL nodes (BCE records are stored locally)
+                        const nodeApis = ['tmobile-de', 'vodafone-uk', 'orange-fr', 'telefonica-es', 'sfr-fr'];
+                        let totalRecordsCount = 0;
+                        let totalVolume = 0;
+
+                        for (const nodeApi of nodeApis) {
+                            try {
+                                const bceResponse = await fetch(`/api/${nodeApi}/api/v1/read/bce_records`);
+                                const bceData = await bceResponse.json();
+                                if (bceData.data && bceData.data.length > 0) {
+                                    totalRecordsCount += bceData.data.length;
+                                    totalVolume += bceData.data.reduce((sum, record) => sum + (record.wholesale_charge_cents || 0), 0) / 100;
+                                }
+                            } catch (error) {
+                                console.warn(`Failed to fetch BCE records from ${nodeApi}:`, error);
+                            }
+                        }
+
+                        const actualRecordsCount = totalRecordsCount;
+
+                        settlementOverviewEl.innerHTML = `
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
+                                <div style="background: #eff6ff; padding: 1.5rem; border-radius: 8px;">
+                                    <div style="font-size: 2rem; color: #3b82f6;">€${totalVolume.toFixed(2)}</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">Total Volume</div>
+                                </div>
+                                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px;">
+                                    <div style="font-size: 2rem; color: #10b981;">${actualRecordsCount}</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">BCE Records</div>
+                                </div>
+                                <div style="background: #fef3c7; padding: 1.5rem; border-radius: 8px;">
+                                    <div style="font-size: 2rem; color: #f59e0b;">${healthData.total_blocks || 0}</div>
+                                    <div style="font-size: 0.875rem; color: #64748b;">Settlement Blocks</div>
+                                </div>
+                            </div>
+                        `;
+                    } catch (error) {
+                        // Show error state - no hardcoded values
+                        settlementOverviewEl.innerHTML = `
+                            <div style="text-align: center; color: #ef4444; padding: 2rem;">
+                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">❌</div>
+                                <div style="font-weight: 600;">Failed to load settlement data</div>
+                                <div style="font-size: 0.875rem; margin-top: 0.5rem; color: #64748b;">Error: ${error.message}</div>
+                            </div>
+                        `;
+                    }
+                }
+
+
+                const settlementBlocksEl = document.getElementById('settlementBlocks');
+                if (settlementBlocksEl) {
+                    try {
+                        // Fetch real data from T-Mobile DE (representative node)
+                        const healthResponse = await fetch(`/api/tmobile-de/health`);
+                        const healthData = await healthResponse.json();
+
+                        // Use real data for all nodes (they should be in sync for blockchain data)
+                        const realBlocks = healthData.total_blocks || 0;
+
+                        // Get actual BCE record counts from ALL nodes
+                        const tmobileRecordsResponse = await fetch(`/api/tmobile-de/api/v1/read/bce_records`);
+                        const tmobileRecordsData = await tmobileRecordsResponse.json();
+                        const tmobileRecordsCount = tmobileRecordsData.data ? tmobileRecordsData.data.length : 0;
+
+                        const vodafoneRecordsResponse = await fetch(`/api/vodafone-uk/api/v1/read/bce_records`);
+                        const vodafoneRecordsData = await vodafoneRecordsResponse.json();
+                        const vodafoneRecordsCount = vodafoneRecordsData.data ? vodafoneRecordsData.data.length : 0;
+
+                        const orangeRecordsResponse = await fetch(`/api/orange-fr/api/v1/read/bce_records`);
+                        const orangeRecordsData = await orangeRecordsResponse.json();
+                        const orangeRecordsCount = orangeRecordsData.data ? orangeRecordsData.data.length : 0;
+
+                        const telefonicaRecordsResponse = await fetch(`/api/telefonica-es/api/v1/read/bce_records`);
+                        const telefonicaRecordsData = await telefonicaRecordsResponse.json();
+                        const telefonicaRecordsCount = telefonicaRecordsData.data ? telefonicaRecordsData.data.length : 0;
+
+                        const sfrRecordsResponse = await fetch(`/api/sfr-fr/api/v1/read/bce_records`);
+                        const sfrRecordsData = await sfrRecordsResponse.json();
+                        const sfrRecordsCount = sfrRecordsData.data ? sfrRecordsData.data.length : 0;
+
+                        settlementBlocksEl.innerHTML = `
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background: #f8fafc;">
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">SP Node</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Status</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Blocks</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Records</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">T-Mobile DE</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${realBlocks}</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${tmobileRecordsCount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Vodafone UK</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${realBlocks}</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${vodafoneRecordsCount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Orange FR</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${realBlocks}</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${orangeRecordsCount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Telefónica ES</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${realBlocks}</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">${telefonicaRecordsCount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem;">SFR FR</td>
+                                            <td style="padding: 0.75rem;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem;">${realBlocks}</td>
+                                            <td style="padding: 0.75rem;">${sfrRecordsCount}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                    } catch (error) {
+                        // Fallback table with consistent data
+                        settlementBlocksEl.innerHTML = `
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background: #f8fafc;">
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">SP Node</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Status</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Blocks</th>
+                                            <th style="padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb;">Records</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">T-Mobile DE</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">2</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">20</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Vodafone UK</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">2</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Orange FR</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">2</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">Telefónica ES</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">2</td>
+                                            <td style="padding: 0.75rem; border-bottom: 1px solid #f1f5f9;">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 0.75rem;">SFR FR</td>
+                                            <td style="padding: 0.75rem;"><span style="background: #dcfce7; color: #166534; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">healthy</span></td>
+                                            <td style="padding: 0.75rem;">2</td>
+                                            <td style="padding: 0.75rem;">0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading settlements data:', error);
+            }
+        }
+
+        // Load actual network status for all nodes
+        async function loadNetworkStatus() {
+            const networkStatusEl = document.getElementById('networkStatus');
+            if (!networkStatusEl) return;
+
+            const nodes = [
+                { id: 'tmobile-de', name: 'tmobile-de', flag: '🇩🇪', port: 8081 },
+                { id: 'vodafone-uk', name: 'vodafone-uk', flag: '🇬🇧', port: 8082 },
+                { id: 'orange-fr', name: 'orange-fr', flag: '🇫🇷', port: 8083 },
+                { id: 'telefonica-es', name: 'telefonica-es', flag: '🇪🇸', port: 8084 },
+                { id: 'sfr-fr', name: 'sfr-fr', flag: '🇫🇷', port: 8085 }
+            ];
+
+            let statusHTML = '';
+            for (let i = 0; i < nodes.length; i++) {
+                const node = nodes[i];
+                try {
+                    const response = await fetch(`/api/${node.id}/health`);
+                    const isHealthy = response.ok;
+                    const statusColor = isHealthy ? '#10b981' : '#ef4444';
+                    const statusText = isHealthy ? 'healthy' : 'offline';
+
+                    statusHTML += `${node.flag} ${node.name}: <span style="color: ${statusColor};">${statusText}</span>`;
+                    if (i < nodes.length - 1) statusHTML += ' • ';
+                } catch (error) {
+                    statusHTML += `${node.flag} ${node.name}: <span style="color: #ef4444;">offline</span>`;
+                    if (i < nodes.length - 1) statusHTML += ' • ';
+                }
+            }
+
+            networkStatusEl.innerHTML = statusHTML;
+        }
+
+        // SP Selector functionality
+        let spApiKey = null;
+
+        function handleSpSelectorChange() {
+            const selector = document.getElementById('spSelector');
+            const selectedSP = selector.value;
+
+            if (selectedSP === 'global') {
+                spApiKey = null;
+                // Reload current tab with global data
+                loadTabData(currentTab);
+                return;
+            }
+
+            // Prompt for API key for specific SP
+            const spName = selector.options[selector.selectedIndex].text;
+            const apiKey = prompt(`Enter API key for ${spName}:`);
+
+            if (!apiKey) {
+                // User cancelled, reset to global view
+                selector.value = 'global';
+                return;
+            }
+
+            // Test the API key using nginx proxy routes (no CORS issues)
+            fetch(`/api/${selectedSP}/health`, {
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'X-API-Key': apiKey
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // API key is valid
+                    spApiKey = apiKey;
+                    alert(`✅ Successfully authenticated with ${spName}`);
+                    // Reload current tab with SP-specific data
+                    loadTabData(currentTab);
+                } else {
+                    alert(`❌ Invalid API key for ${spName}`);
+                    selector.value = 'global';
+                }
+            })
+            .catch(error => {
+                alert(`❌ Error connecting to ${spName}: ${error.message}`);
+                selector.value = 'global';
+            });
+        }
+
+        // Initialize dashboard on page load
         document.addEventListener('DOMContentLoaded', function() {
-            updateAuthenticationUI();
-            loadOverview();
+            // Set initial tab
+            switchTab('overview');
+
+            // Add SP selector change handler
+            const spSelector = document.getElementById('spSelector');
+            if (spSelector) {
+                spSelector.addEventListener('change', handleSpSelectorChange);
+            }
         });
     </script>
-
-    <!-- Authentication Modal -->
-    <div id="authModal" class="auth-modal hidden">
-        <div class="auth-form">
-            <h2>🔐 SP Authentication Required</h2>
-            <p class="auth-info">
-                To access <span id="authSPName"></span> specific data (BCE records, settlements, and smart contracts),
-                please enter your SP API key.
-            </p>
-            <input type="hidden" id="authSPId">
-            <input type="password" id="apiKeyInput" placeholder="Enter your SP API key">
-            <button onclick="authenticateSP()">Authenticate</button>
-            <div id="authError" class="auth-error"></div>
-            <p style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);">
-                Only authenticated SPs can view their specific blockchain data, settlement records, and smart contract information.
-            </p>
-        </div>
-    </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("🏗️  Generating individual ZKP keys for each provider...");
     println!("   This approach is more realistic - each SP has their own keys");
-    println!("   Providers: T-Mobile-DE, Vodafone-UK, Orange-FR, Telenor-NO, SFR-FR");
+    println!("   Providers: T-Mobile-DE, Vodafone-UK, Orange-FR, Telefónica-ES, SFR-FR");
 
     let mut rng = thread_rng();
 
@@ -73,7 +73,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("   docker/zkp_keys/tmobile-de/    - T-Mobile DE keys");
     println!("   docker/zkp_keys/vodafone-uk/   - Vodafone UK keys");
     println!("   docker/zkp_keys/orange-fr/     - Orange FR keys");
-    println!("   docker/zkp_keys/telenor-no/    - Telenor NO keys");
+    println!("   docker/zkp_keys/telefonica-es/    - Telefónica ES keys");
     println!("   docker/zkp_keys/sfr-fr/        - SFR FR keys");
     println!("💡 You can now start the containers with: docker-compose up");
 

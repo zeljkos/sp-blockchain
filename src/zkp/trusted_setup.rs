@@ -140,7 +140,7 @@ impl TrustedSetupCeremony {
                 "T-Mobile-DE".to_string(),
                 "Vodafone-UK".to_string(),
                 "Orange-FR".to_string(),
-                "Telenor-NO".to_string(),
+                "Telefónica-ES".to_string(),
                 "SFR-FR".to_string(),
             ],
 
@@ -169,7 +169,7 @@ impl TrustedSetupCeremony {
             ("tmobile-de", "T-Mobile-DE"),
             ("vodafone-uk", "Vodafone-UK"),
             ("orange-fr", "Orange-FR"),
-            ("telenor-no", "Telenor-NO"),
+            ("telefonica-es", "Telefónica-ES"),
             ("sfr-fr", "SFR-FR"),
         ];
 
@@ -573,7 +573,7 @@ mod tests {
 
         // Verify all 5 participants are included
         let expected_participants = [
-            "T-Mobile-DE", "Vodafone-UK", "Orange-FR", "Telenor-NO", "SFR-FR"
+            "T-Mobile-DE", "Vodafone-UK", "Orange-FR", "Telefónica-ES", "SFR-FR"
         ];
         for participant in &expected_participants {
             assert!(transcript.participants.contains(&participant.to_string()),
@@ -605,7 +605,7 @@ mod tests {
         assert_eq!(config.all_participants.len(), 5);
         assert_eq!(config.min_participants, 3);
         assert!(config.all_participants.contains(&"T-Mobile-DE".to_string()));
-        assert!(config.all_participants.contains(&"Telenor-NO".to_string()));
+        assert!(config.all_participants.contains(&"Telefónica-ES".to_string()));
         assert!(config.all_participants.contains(&"SFR-FR".to_string()));
     }
 }

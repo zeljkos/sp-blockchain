@@ -21,12 +21,12 @@ API_KEYS=(
     "tmobile_api_key_2024_secure"
     "vodafone_api_key_2024_secure"
     "orange_api_key_2024_secure"
-    "telenor_api_key_2024_secure"
+    "telefonica_api_key_2024_secure"
     "sfr_api_key_2024_secure"
 )
 
 PORTS=(8081 8082 8083 8084 8085)
-NODES=("tmobile-de" "vodafone-uk" "orange-fr" "telenor-no" "sfr-fr")
+NODES=("tmobile-de" "vodafone-uk" "orange-fr" "telefonica-es" "sfr-fr")
 
 print_header() {
     echo -e "${BLUE}============================================================================${NC}"
@@ -217,7 +217,7 @@ print_step "3.1" "Deploy 3 Smart Contracts for automated settlement"
 contract1_request='{
     "contract_id": "telefonica-demo-bce-validator",
     "contract_type": "bce_validator",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "ZKP-powered BCE record validation with privacy preservation"
 }'
 
@@ -232,7 +232,7 @@ wait_with_progress 2 "⏱️  Processing deployment"
 contract2_request='{
     "contract_id": "telefonica-demo-netting-engine",
     "contract_type": "netting_contract",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "5-party multilateral netting achieving ~75% settlement reduction"
 }'
 
@@ -245,7 +245,7 @@ print_success "✅ Netting Contract deployed"
 contract3_request='{
     "contract_id": "telefonica-demo-settlement-executor",
     "contract_type": "settlement_executor",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "Multi-party settlement execution with digital signatures and dispute resolution"
 }'
 
@@ -302,7 +302,7 @@ vodafone_bce='[
   {
     "record_id": "CDR_VODAFONEUK_TEL_DEMO_001",
     "visited_operator": "Vodafone-UK",
-    "home_operator": "Telenor-NO",
+    "home_operator": "Telefónica-NO",
     "imsi": "242010000004321",
     "call_minutes": 56,
     "call_rate_cents": 25,
@@ -423,16 +423,16 @@ echo
 # Vodafone UK Analysis (1 record, 32 EUR)
 echo -e "${PURPLE}🇬🇧 Vodafone UK Settlement Position:${NC}"
 echo "   • Provided roaming services worth: 32.12 EUR"
-echo "   • Telenor NO customers used: 1 × 32.12 EUR"
+echo "   • Telefónica NO customers used: 1 × 32.12 EUR"
 echo "   • Owes Orange FR for own customers: 41.94 EUR"
 echo "   → ${RED}Vodafone UK NET POSITION: -9.82 EUR (owes)${NC}"
 echo
 
-# Telenor NO Analysis
-echo -e "${PURPLE}🇳🇴 Telenor NO Settlement Position:${NC}"
+# Telefónica NO Analysis
+echo -e "${PURPLE}🇳🇴 Telefónica NO Settlement Position:${NC}"
 echo "   • Provided roaming services worth: 0.00 EUR"
 echo "   • Owes Vodafone UK for own customers: 32.12 EUR"
-echo "   → ${RED}Telenor NO NET POSITION: -32.12 EUR (owes)${NC}"
+echo "   → ${RED}Telefónica NO NET POSITION: -32.12 EUR (owes)${NC}"
 echo
 
 # SFR FR Analysis
@@ -447,7 +447,7 @@ echo "Without netting (bilateral settlements):"
 echo "   • Orange FR ← T-Mobile DE: 18.36 EUR (record 1)"
 echo "   • Orange FR ← Vodafone UK: 41.94 EUR (record 2)"
 echo "   • T-Mobile DE ← Orange FR: 10.87 EUR (record 3)"
-echo "   • Vodafone UK ← Telenor NO: 32.12 EUR (record 4)"
+echo "   • Vodafone UK ← Telefónica NO: 32.12 EUR (record 4)"
 echo "   Total transfers: 4 payments, 103.29 EUR volume"
 echo
 echo -e "${GREEN}With multilateral netting:${NC}"
@@ -455,12 +455,12 @@ echo "Net positions calculated:"
 echo "   • Orange FR: +18.36 +41.94 -10.87 = +49.43 EUR (receives)"
 echo "   • T-Mobile DE: -18.36 +10.87 = -7.49 EUR (pays)"
 echo "   • Vodafone UK: -41.94 +32.12 = -9.82 EUR (pays)"
-echo "   • Telenor NO: -32.12 EUR (pays)"
+echo "   • Telefónica NO: -32.12 EUR (pays)"
 echo
 echo "Optimized payments:"
 echo "   • T-Mobile DE → Orange FR: 7.49 EUR"
 echo "   • Vodafone UK → Orange FR: 9.82 EUR"
-echo "   • Telenor NO → Orange FR: 32.12 EUR"
+echo "   • Telefónica NO → Orange FR: 32.12 EUR"
 echo "   Total transfers: 3 payments, 49.43 EUR volume"
 echo
 echo -e "${CYAN}🎯 Netting Efficiency: $(echo "scale=1; (103.29 - 49.43) / 103.29 * 100" | bc)% reduction in settlement volume${NC}"

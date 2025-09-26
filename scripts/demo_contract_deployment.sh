@@ -110,7 +110,7 @@ print_info "Deploying Contract 1: BCE Validation Contract with ZKP Proofs"
 CONTRACT_1_REQUEST='{
     "contract_id": "telefonica-demo-bce-validator",
     "contract_type": "bce_validator",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "Validates BCE records using real Groth16 ZKP proofs for privacy-preserving settlement verification"
 }'
 
@@ -137,7 +137,7 @@ print_info "Deploying Contract 2: Multilateral Netting Contract"
 CONTRACT_2_REQUEST='{
     "contract_id": "telefonica-demo-netting-contract",
     "contract_type": "netting_contract",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "5-party multilateral netting achieving ~75% reduction in bilateral settlements"
 }'
 
@@ -164,7 +164,7 @@ print_info "Deploying Contract 3: Settlement Execution Contract"
 CONTRACT_3_REQUEST='{
     "contract_id": "telefonica-demo-settlement-executor",
     "contract_type": "settlement_executor",
-    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telenor-no", "sfr-fr"],
+    "operators": ["tmobile-de", "vodafone-uk", "orange-fr", "telefonica-es", "sfr-fr"],
     "description": "Executes final settlements with multi-party digital signatures and dispute resolution"
 }'
 
@@ -257,7 +257,7 @@ echo -e "${CYAN}🌐 5-Party Consortium Members:${NC}"
 echo "   🇩🇪 T-Mobile DE"
 echo "   🇬🇧 Vodafone UK"
 echo "   🇫🇷 Orange FR"
-echo "   🇳🇴 Telenor NO"
+echo "   🇳🇴 Telefónica NO"
 echo "   🇫🇷 SFR FR"
 echo
 echo -e "${YELLOW}💡 Next Steps for Telefonica:${NC}"

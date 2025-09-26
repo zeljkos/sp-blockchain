@@ -1,0 +1,23 @@
+ The Smart Contract VM has the following primitives/priorities:
+
+  Core VM Primitives
+
+  Stack Operations
+
+  - Push(value), Pop, Dup, Swap - Basic stack manipulation
+
+  Arithmetic Operations
+
+  - Add, Sub, Mul, Div, Mod - Basic math with overflow protection
+
+  Comparison Operations
+
+  - Eq, Lt, Gt - Boolean logic returning 1/0
+
+  Control Flow
+
+  - Jump(addr), JumpIf(addr), Halt - Program flow control
+
+  Storage Operations
+
+  - Load(hash), Store(hash) - Persistent key-value storage using Blake2b hashes
